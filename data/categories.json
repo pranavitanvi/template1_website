@@ -1,0 +1,38 @@
+[
+  {
+    "id": "rings",
+    "name": "Rings",
+    "image": "assets/images/categories/rings.jpg",
+    "url": "pages/rings.html"
+  },
+  {
+    "id": "earrings",
+    "name": "Earrings",
+    "image": "assets/images/categories/earrings.jpg",
+    "url": "pages/earrings.html"
+  },
+  {
+    "id": "necklaces",
+    "name": "Necklaces",
+    "image": "assets/images/categories/necklaces.jpg",
+    "url": "pages/necklaces.html"
+  },
+  {
+    "id": "bracelets",
+    "name": "Bracelets",
+    "image": "assets/images/categories/bracelets.jpg",
+    "url": "pages/bracelets.html"
+  },
+  {
+    "id": "bangles",
+    "name": "Bangles",
+    "image": "assets/images/categories/necklaces.jpg",
+    "url": "pages/bangles.html"
+  },
+  {
+    "id": "bridal",
+    "name": "Bridal Jewellery",
+    "image": "assets/images/bridal/bridal_main.jpg",
+    "url": "pages/bridal.html"
+  }
+]

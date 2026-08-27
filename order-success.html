@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed | Aura Fine Jewellery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
+    <link rel="stylesheet" href="assets/css/components_v4.css">
+    <style>
+        body {
+            background: #faf8f4;
+            font-family: 'Montserrat', sans-serif;
+            color: #2c2a29;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: #fff;
+            padding: 1.5rem 0;
+            text-align: center;
+            border-bottom: 1px solid #f0ece4;
+        }
+        .brand-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #1a1814;
+            text-decoration: none;
+            letter-spacing: 0.15em;
+        }
+        .success-wrap {
+            max-width: 700px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .check-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #eaf4e6;
+            color: #5a8a4e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: #1a1814;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #7a7068;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        .order-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 2.5rem;
+            border: 1px solid #f0ece4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        .order-meta {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0ece4;
+            margin-bottom: 1.5rem;
+        }
+        .meta-col .label {
+            font-size: 0.75rem;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.4rem;
+        }
+        .meta-col .val {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1814;
+            font-family: 'Cinzel', serif;
+        }
+        .items-list {
+            margin-bottom: 1.5rem;
+        }
+        .item-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .item-thumb {
+            width: 60px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #f0ece4;
+        }
+        .item-info {
+            flex: 1;
+        }
+        .item-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            color: #1a1814;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        .item-qty {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .item-price {
+            font-weight: 600;
+            color: #1a1814;
+            font-size: 0.95rem;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f0ece4;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #c0a062;
+        }
+        .action-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #c0a062, #a8873a);
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 16px rgba(192&#8377;60,98,0.25);
+        }
+        .btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-outline {
+            background: transparent;
+            color: #c0a062;
+            border: 1.5px solid #c0a062;
+        }
+        .btn-outline:hover { background: #c0a062; color: #fff; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="brand-logo">AURA</a>
+    </header>
+
+    <div class="success-wrap">
+        <div class="check-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <h1 class="title">Order Placed Successfully</h1>
+        <p class="subtitle">Thank you for shopping with AURA. Your beautifully crafted pieces will soon be on their way.</p>
+
+        <div class="order-box" id="order-box">
+            <!-- Injected by JS -->
+        </div>
+
+        <div class="action-btns">
+            <a href="cart.html" class="btn btn-outline" onclick="switchTab('orders')">View My Orders</a>
+            <a href="shop.html" class="btn btn-gold">Continue Shopping</a>
+        </div>
+    </div>
+
+    <script>
+        function fmt(n) { return '&#8377;' + Math.round(n).toLocaleString('en-IN'); }
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const orderId = params.get('order');
+            
+            const orders = JSON.parse(localStorage.getItem('aura_orders') || '[]');
+            const order = orders.find(o => o.orderId === orderId) || orders[orders.length - 1];
+
+            if (!order) {
+                document.getElementById('order-box').innerHTML = '<p style="text-align:center; color:#888;">Order details not found.</p>';
+                return;
+            }
+
+            const dateStr = new Date(order.timestamp).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+            let itemsHtml = '';
+            order.items.forEach(item => {
+                itemsHtml += `
+                <div class="item-row">
+                    <img src="${item.image}" alt="${item.name}" class="item-thumb">
+                    <div class="item-info">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-qty">Qty: ${item.quantity}</div>
+                    </div>
+                    <div class="item-price">${fmt(item.price * item.quantity)}</div>
+                </div>`;
+            });
+
+            document.getElementById('order-box').innerHTML = `
+                <div class="order-meta">
+                    <div class="meta-col">
+                        <div class="label">Order Number</div>
+                        <div class="val">${order.orderId}</div>
+                    </div>
+                    <div class="meta-col">
+                        <div class="label">Date</div>
+                        <div class="val" style="font-family:'Montserrat',sans-serif; font-weight:500;">${dateStr}</div>
+                    </div>
+                </div>
+                <div class="items-list">
+                    ${itemsHtml}
+                </div>
+                <div class="total-row">
+                    <span>Total Amount</span>
+                    <span>${fmt(order.total)}</span>
+                </div>
+            `;
+        });
+        
+        // This is a hack so the user's cart tab function actually fires when they click View My Orders.
+        // It's handled natively if they click it, it just takes them to cart.html and they can click Orders tab.
+        // Or we append ?tab=orders and handle it on cart.html, but let's keep it simple.
+    </script>
+</body>
+</html>

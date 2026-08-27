@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Aura Fine Jewellery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
+    <link rel="stylesheet" href="assets/css/components_v4.css?v=1787381408">
+    <link rel="stylesheet" href="assets/css/arc_carousel.css?v=1787380891">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=4">
+    <link rel="stylesheet" href="assets/css/editorial_pages.css">
+    <!-- Editorial Contact Styles below -->
+</head>
+<body class="editorial-layout ">
+<header class="header">
+        <div class="promo-bar">
+            Complimentary Shipping on Orders Above &#8377;50,000 | Book a Virtual Consultation
+        </div>
+        <div class="container main-nav">
+            <div class="nav-container">
+                <button class="mobile-menu-btn" aria-label="Open Menu">
+                    <i class="ph ph-list"></i>
+                </button>
+                
+                <a href="index.html" class="brand-logo">AURA</a>
+                
+                                                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    
+                    <div class="nav-item-dropdown">
+                        <a href="shop.html" class="nav-link" style="display: flex; align-items: center; gap: 5px;">Shop <i class="ph ph-caret-down" style="font-size: 0.8rem;"></i></a>
+                        
+                                                <div class="bluestone-mega-menu" style="width: 800px; grid-template-columns: 1fr 1fr 250px;">
+                            <!-- Column 1 -->
+                            <div class="mega-column">
+                                <div class="mega-group">
+                                    <h4>Shop By Category</h4>
+                                    <ul class="mega-list">
+                                        <li><a href="rings.html">Rings <span class="badge-new-orange">New</span></a></li>
+                                        <li><a href="earrings.html">Earrings</a></li>
+                                        <li><a href="necklaces.html">Necklaces</a></li>
+                                        <li><a href="bracelets.html">Bracelets</a></li>
+                                        <li><a href="bangles.html">Bangles</a></li>
+                                        <li><a href="mangalsutras.html">Mangalsutras</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 2 -->
+                            <div class="mega-column">
+                                <div class="mega-group">
+                                    <h4>By Collection</h4>
+                                    <ul class="mega-list">
+                                        <li><a href="shop.html?collection=everyday">Everyday Elegance</a></li>
+                                        <li><a href="shop.html?collection=bridal">The Bridal Edit</a></li>
+                                        <li><a href="shop.html?collection=festive">Festive Collection</a></li>
+                                        <li><a href="mens.html">Men's Jewellery</a></li>
+                                        <li><a href="shop.html?collection=gifting">The Gifting Hub</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 3 Image -->
+                            <div class="mega-column" style="padding-left: 1rem;">
+                                <img src="assets/images/categories/RING.png" alt="Featured Ring" class="mega-promo-img" style="border-radius: 8px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="collections.html" class="nav-link">Collections</a>
+                    <a href="new_arrivals.html" class="nav-link">New Arrivals</a>
+                    <a href="bridal.html" class="nav-link">Bridal</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                
+                <div class="nav-icons">
+                    <!-- Static Search Bar -->
+                    <form action="shop.html" method="GET" style="display: flex; align-items: center; background: #f5f5f5; border-radius: 20px; padding: 6px 15px; margin-right: 10px; border: 1px solid #e0e0e0; transition: all 0.3s ease;">
+                        <input type="text" name="q" placeholder="Search jewellery..." style="border: none; outline: none; background: transparent; font-size: 0.85rem; width: 180px; color: var(--text-primary);">
+                        <button type="submit" style="background: none; border: none; cursor: pointer; color: var(--text-secondary); padding: 0; display: flex; align-items: center; justify-content: center;"><i class="ph ph-magnifying-glass" style="font-size: 1.2rem;"></i></button>
+                    </form>
+                    <a href="login.html" class="icon-btn" aria-label="Account"><i class="ph ph-user"></i></a>
+                                        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+                        <i class="ph ph-heart"></i>
+                        <span class="wishlist-count" style="display: none;">0</span>
+                    </a>
+                    <a href="cart.html" class="icon-btn" aria-label="Shopping Bag">
+                        <i class="ph ph-handbag"></i>
+                        <span class="cart-count" style="display: none;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+<style>
+        .aura-contact-page {
+            background-color: #FAF8F4;
+            color: #1a1814;
+            padding-bottom: 80px;
+        }
+
+        /* Container */
+        .cont-container {
+            max-width: 1400px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        /* Typography */
+        .cont-serif { font-family: 'Cinzel', serif; }
+        .cont-sans { font-family: 'Montserrat', sans-serif; }
+        .cont-gold { color: #c0a062; }
+        
+        /* New Hero Layout */
+        .cont-hero-new {
+            position: relative;
+            height: 550px;
+            background-image: url('assets/images/hero/hero_main.jpg');
+            background-size: cover;
+            background-position: center top;
+            margin-top: 115px;
+        }
+        .cont-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(237, 232, 222, 0.98) 0%, rgba(237, 232, 222, 0.9) 45%, rgba(237, 232, 222, 0) 80%);
+            z-index: 1;
+        }
+        .cont-hero-content-new {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 5%;
+            color: #1a1814;
+        }
+        .cont-hero-inner {
+            max-width: 550px;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .cont-hero-text-wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        .cont-hero-inner .eyebrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #9c7f4c;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .cont-hero-inner .eyebrow-icon {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .cont-hero-inner .eyebrow-text {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .cont-hero-inner .eyebrow-text::before, .cont-hero-inner .eyebrow-text::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: rgba(156, 127, 76, 0.5);
+        }
+        .cont-hero-inner h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            color: #1a1814;
+        }
+        .cont-hero-inner .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+            color: #9c7f4c;
+        }
+        .cont-hero-inner .divider::before, .cont-hero-inner .divider::after {
+            content: '';
+            width: 80px;
+            height: 1px;
+            background: rgba(156, 127, 76, 0.5);
+        }
+        .cont-hero-inner p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .cont-hero-inner .script-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #9c7f4c;
+            margin-bottom: 1.5rem;
+        }
+        .cont-hero-icons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid rgba(156, 127, 76, 0.2);
+            padding-top: 1.5rem;
+            margin-top: auto; /* Pushes to bottom */
+        }
+        .cont-icon-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-right: 1px solid rgba(156, 127, 76, 0.2);
+            padding: 0 10px;
+        }
+        .cont-icon-box:last-child {
+            border-right: none;
+        }
+        .cont-icon-box i {
+            font-size: 1.3rem;
+            color: #9c7f4c;
+            margin-bottom: 0.5rem;
+        }
+        .cont-icon-box h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #1a1814;
+            margin-bottom: 0.3rem;
+        }
+        .cont-icon-box span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* Main Content Grid */
+        .cont-grid {
+            display: flex;
+            justify-content: center;
+            padding: 80px 0;
+        }
+
+        /* Right Column: Form */
+        .cont-form-wrap {
+            background: #fff;
+            padding: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        .cont-form-wrap h3 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #1a1814;
+        }
+        .cont-form-wrap > p {
+            color: #555;
+            margin-bottom: 3rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .cont-form-group {
+            margin-bottom: 2rem;
+        }
+        .cont-input, .cont-textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            padding: 0.8rem 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: #1a1814;
+            transition: border-color 0.3s ease;
+        }
+        .cont-input:focus, .cont-textarea:focus {
+            outline: none;
+            border-bottom-color: #c0a062;
+        }
+        .cont-btn {
+            background: #1a1814;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+        .cont-btn:hover {
+            background: #c0a062;
+        }
+
+        /* Appointment Section */
+        .cont-appointment {
+            background: #fff;
+            padding: 60px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .cont-appt-title {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #1a1814;
+        }
+        .cont-appt-desc {
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+        .cont-appt-btn {
+            display: inline-block;
+            background: #c0a062;
+            color: #fff;
+            padding: 1rem 2.5rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .cont-appt-btn:hover {
+            background: #1a1814;
+        }
+
+        @media (max-width: 900px) {
+            .cont-hero-overlay {
+                background: rgba(237, 232, 222, 0.9);
+            }
+            .cont-hero-inner {
+                margin: 0 auto;
+            }
+            .cont-hero-icons {
+                grid-template-columns: repeat(2, 1fr);
+                row-gap: 30px;
+                border-top: none;
+            }
+            .cont-icon-box:nth-child(1), .cont-icon-box:nth-child(2) {
+                border-bottom: 1px solid rgba(156, 127, 76, 0.2);
+                padding-bottom: 20px;
+            }
+            .cont-icon-box:nth-child(2) {
+                border-right: none;
+            }
+            .cont-form-wrap {
+                padding: 2rem;
+            }
+            .cont-appointment {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+
+    <main class="aura-contact-page">
+        <!-- New Hero Section -->
+        <section class="cont-hero-new">
+            <div class="cont-hero-overlay"></div>
+            <div class="cont-hero-content-new">
+                <div class="cont-hero-inner">
+                    <div class="cont-hero-text-wrap">
+                        <div class="eyebrow">
+                            <i class="ph ph-flower-lotus eyebrow-icon"></i>
+                            <div class="eyebrow-text">WE'RE HERE FOR YOU</div>
+                        </div>
+                        <h1>LET'S CONNECT</h1>
+                        <div class="divider">
+                            <i class="ph ph-diamond"></i>
+                        </div>
+                        <p>Have a question, need styling advice, or want to create something special?</p>
+                        <div class="script-text">Our team would love to hear from you.</div>
+                    </div>
+                    
+                    <div class="cont-hero-icons">
+                        <div class="cont-icon-box">
+                            <i class="ph ph-phone-call"></i>
+                            <h4>CALL US</h4>
+                            <span>+91 98765 43210</span>
+                        </div>
+                        <div class="cont-icon-box">
+                            <i class="ph ph-envelope-simple"></i>
+                            <h4>EMAIL US</h4>
+                            <span>care@aurajewellery.com</span>
+                        </div>
+                        <div class="cont-icon-box">
+                            <i class="ph ph-clock"></i>
+                            <h4>MON - SAT</h4>
+                            <span>10:00 AM - 7:00 PM</span>
+                        </div>
+                        <div class="cont-icon-box">
+                            <i class="ph ph-map-pin"></i>
+                            <h4>VISIT US</h4>
+                            <span>Pune, Maharashtra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="cont-container">
+            <!-- Grid (now just centered form) -->
+            <div class="cont-grid">
+                <!-- Form -->
+                <div class="cont-form-wrap">
+                    <h3 class="cont-serif">Send an Inquiry</h3>
+                    <p>Fill out the form below and a member of our concierge team will get back to you shortly.</p>
+                    <form>
+                        <div class="cont-form-group">
+                            <input type="text" class="cont-input" placeholder="Full Name" required>
+                        </div>
+                        <div class="cont-form-group">
+                            <input type="email" class="cont-input" placeholder="Email Address" required>
+                        </div>
+                        <div class="cont-form-group">
+                            <input type="text" class="cont-input" placeholder="Subject (Optional)">
+                        </div>
+                        <div class="cont-form-group">
+                            <textarea class="cont-textarea" rows="4" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="cont-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Appointment Section -->
+            <section class="cont-appointment">
+                <h2 class="cont-appt-title cont-serif">Book a Private Viewing</h2>
+                <p class="cont-appt-desc cont-sans">Experience our exquisite collections in person with a dedicated jewelry expert. We also offer virtual consultations for your convenience.</p>
+                <a href="#" class="cont-appt-btn cont-sans">Request Appointment</a>
+            </section>
+        </div>
+    </main>
+<style>
+.footer {
+    background-color: #2a2422;
+    color: #fff;
+    padding: 5rem 0 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+.footer h4 {
+    font-family: 'Cinzel', serif !important;
+    color: #C2A878 !important; /* FIXED VISIBILITY */
+    margin-bottom: 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.05em !important;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+.footer-links a {
+    color: #d1cbc7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: #C2A878;
+}
+.footer-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 168, 120, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- NEW COLUMN: Address & Number -->
+            <div class="footer-col">
+                <h4>CONTACT</h4>
+                <p style="color: #d1cbc7; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                    <strong>AURA Flagship Store</strong><br>
+                    Palladium Mall, Lower Parel<br>
+                    Mumbai, Maharashtra 400013
+                </p>
+                <p style="color: #d1cbc7; font-size: 0.95rem; line-height: 1.8;">
+                    <strong>Phone:</strong> +91 98765 43210<br>
+                    <strong>Email:</strong> concierge@aura.com
+                </p>
+            </div>
+
+            <!-- COLUMN 2: SHOP -->
+            <div class="footer-col">
+                <h4>SHOP</h4>
+                <ul class="footer-links">
+                    <li><a href="womens.html">Women's Jewellery</a></li>
+                    <li><a href="mens.html">Men's Jewellery</a></li>
+                    <li><a href="bridal.html">Bridal</a></li>
+                    <li><a href="new_arrivals.html">New Arrivals</a></li>
+                    <li><a href="collections.html">Collections</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 3: CUSTOMER CARE -->
+            <div class="footer-col">
+                <h4>CUSTOMER CARE</h4>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="shipping.html">Shipping & Delivery</a></li>
+                    <li><a href="returns.html">Returns & Exchanges</a></li>
+                    <li><a href="size-guide.html">Size Guide</a></li>
+                    <li><a href="jewellery-care.html">Jewellery Care</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 4: ABOUT AURA & SUBSCRIBE -->
+            <div class="footer-col">
+                <h4>ABOUT AURA</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="stores.html">Store Locator</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem;">
+                    <h4 style="font-size: 0.9rem !important; margin-bottom: 1rem !important;">SUBSCRIBE</h4>
+                    <div style="display: flex;">
+                        <input type="email" placeholder="Email Address" style="padding: 0.8rem; border: none; background: #fff; width: 100%; outline: none; font-family: inherit; font-size: 0.9rem;">
+                        <button style="padding: 0.8rem 1.2rem; background: #C2A878; border: none; color: #fff; cursor: pointer; font-family: inherit; font-weight: 500;">JOIN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>
+                <a href="#" style="color: #999; text-decoration: none; margin-right: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: #999; text-decoration: none; margin-right: 1.5rem;">Terms & Conditions</a>
+                <span>&copy; 2026 Aura Fine Jewellery. All rights reserved.</span>
+            </div>
+            <div style="display: flex; gap: 1.5rem; font-size: 1.2rem; color: #C2A878;">
+                <i class="ph-fill ph-instagram-logo"></i>
+                <i class="ph-fill ph-facebook-logo"></i>
+                <i class="ph-fill ph-pinterest-logo"></i>
+                <i class="ph-fill ph-youtube-logo"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="assets/js/main.js?v=4"></script>
+    <script src="assets/js/cart.js?v=4"></script>
+    <script src="assets/js/wishlist.js?v=4"></script>
+
+<script>
+(function() {
+    var stage = document.querySelector(".col-arc-stage");
+    if (!stage) return;
+
+    var cards       = Array.from(document.querySelectorAll(".col-arc-card"));
+    var dots        = Array.from(document.querySelectorAll(".col-arc-dot"));
+    var prevBtn     = document.querySelector(".col-arc-prev");
+    var nextBtn     = document.querySelector(".col-arc-next");
+    var total       = cards.length;
+    var current     = 0;
+    var autoTimer   = null;
+    var isAnimating = false;
+    var touchStartX = 0;
+
+    function mod(n, m) { return ((n % m) + m) % m; }
+
+    function apply(idx) {
+        var prev2 = mod(idx - 2, total);
+        var prev1 = mod(idx - 1, total);
+        var next1 = mod(idx + 1, total);
+        var next2 = mod(idx + 2, total);
+
+        cards.forEach(function(card, i) {
+            card.classList.remove("arc-active","arc-prev","arc-next","arc-prev2","arc-next2","arc-hidden");
+            if      (i === idx)   card.classList.add("arc-active");
+            else if (i === prev1) card.classList.add("arc-prev");
+            else if (i === next1) card.classList.add("arc-next");
+            else if (i === prev2) card.classList.add("arc-prev2");
+            else if (i === next2) card.classList.add("arc-next2");
+            else                  card.classList.add("arc-hidden");
+        });
+
+        dots.forEach(function(d, i) {
+            d.classList.toggle("active", i === idx);
+        });
+    }
+
+    function goTo(n, skipAnim) {
+        if (isAnimating && !skipAnim) return;
+        isAnimating = true;
+        current = mod(n, total);
+        apply(current);
+        setTimeout(function() { isAnimating = false; }, 820);
+    }
+
+    function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(function() { goTo(current + 1); }, 5000);
+    }
+
+    function stopAuto() {
+        clearInterval(autoTimer);
+    }
+
+    // Init
+    goTo(0, true);
+    startAuto();
+
+    prevBtn && prevBtn.addEventListener("click", function() { goTo(current - 1); startAuto(); });
+    nextBtn && nextBtn.addEventListener("click", function() { goTo(current + 1); startAuto(); });
+
+    dots.forEach(function(d) {
+        d.addEventListener("click", function() { goTo(+this.dataset.goto); startAuto(); });
+    });
+
+    // Pause on hover
+    stage.addEventListener("mouseenter", stopAuto);
+    stage.addEventListener("mouseleave", startAuto);
+
+    // Touch swipe
+    stage.addEventListener("touchstart", function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener("touchend", function(e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) {
+            diff > 0 ? goTo(current + 1) : goTo(current - 1);
+            startAuto();
+        }
+    }, { passive: true });
+
+    // Click on side cards
+    cards.forEach(function(card, i) {
+        card.addEventListener("click", function() {
+            if (i !== current) { goTo(i); startAuto(); }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+
+

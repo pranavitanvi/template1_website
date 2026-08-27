@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="description" content="Discover timeless luxury jewellery pieces crafted to celebrate every moment. Explore our elegant collections.">
+    <title>Aura Fine Jewellery | Luxury E-Commerce</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
+    <link rel="stylesheet" href="assets/css/components_v4.css?v=2">
+    <link rel="stylesheet" href="assets/css/arc_carousel.css?v=1787380891">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=4">
+    
+    <!-- Icons (Phosphor Icons or FontAwesome placeholder) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+        <!-- HEADER -->
+    <header class="header">
+        <div class="promo-bar">
+            Complimentary Shipping on Orders Above &#8377;50,000 | Book a Virtual Consultation
+        </div>
+        <div class="container main-nav">
+            <div class="nav-container">
+                <button class="mobile-menu-btn" aria-label="Open Menu">
+                    <i class="ph ph-list"></i>
+                </button>
+                
+                <a href="index.html" class="brand-logo">AURA</a>
+                
+                                                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    
+                    <div class="nav-item-dropdown">
+                        <a href="shop.html" class="nav-link" style="display: flex; align-items: center; gap: 5px;">Shop <i class="ph ph-caret-down" style="font-size: 0.8rem;"></i></a>
+                        
+                                                <div class="bluestone-mega-menu" style="width: 800px; grid-template-columns: 1fr 1fr 250px;">
+                            <!-- Column 1 -->
+                            <div class="mega-column">
+                                <div class="mega-group">
+                                    <h4>Shop By Category</h4>
+                                    <ul class="mega-list">
+                                        <li><a href="rings.html">Rings <span class="badge-new-orange">New</span></a></li>
+                                        <li><a href="earrings.html">Earrings</a></li>
+                                        <li><a href="necklaces.html">Necklaces</a></li>
+                                        <li><a href="bracelets.html">Bracelets</a></li>
+                                        <li><a href="bangles.html">Bangles</a></li>
+                                        <li><a href="mangalsutras.html">Mangalsutras</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 2 -->
+                            <div class="mega-column">
+                                <div class="mega-group">
+                                    <h4>By Collection</h4>
+                                    <ul class="mega-list">
+                                        <li><a href="shop.html?collection=everyday">Everyday Elegance</a></li>
+                                        <li><a href="shop.html?collection=bridal">The Bridal Edit</a></li>
+                                        <li><a href="shop.html?collection=festive">Festive Collection</a></li>
+                                        <li><a href="mens.html">Men's Jewellery</a></li>
+                                        <li><a href="shop.html?collection=gifting">The Gifting Hub</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 3 Image -->
+                            <div class="mega-column" style="padding-left: 1rem;">
+                                <img src="assets/images/categories/RING.png" alt="Featured Ring" class="mega-promo-img" style="border-radius: 8px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="collections.html" class="nav-link">Collections</a>
+                    <a href="new_arrivals.html" class="nav-link">New Arrivals</a>
+                    <a href="bridal.html" class="nav-link">Bridal</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                
+                <div class="nav-icons">
+                    <!-- Static Search Bar -->
+                    <form action="shop.html" method="GET" style="display: flex; align-items: center; background: #f5f5f5; border-radius: 20px; padding: 6px 15px; margin-right: 10px; border: 1px solid #e0e0e0; transition: all 0.3s ease;">
+                        <input type="text" name="q" placeholder="Search jewellery..." style="border: none; outline: none; background: transparent; font-size: 0.85rem; width: 180px; color: var(--text-primary);">
+                        <button type="submit" style="background: none; border: none; cursor: pointer; color: var(--text-secondary); padding: 0; display: flex; align-items: center; justify-content: center;"><i class="ph ph-magnifying-glass" style="font-size: 1.2rem;"></i></button>
+                    </form>
+                    <a href="login.html" class="icon-btn" aria-label="Account"><i class="ph ph-user"></i></a>
+                                        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+                        <i class="ph ph-heart"></i>
+                        <span class="wishlist-count" style="display: none;">0</span>
+                    </a>
+                    <a href="cart.html" class="icon-btn" aria-label="Shopping Bag">
+                        <i class="ph ph-handbag"></i>
+                        <span class="cart-count" style="display: none;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- TRUST BAR -->
+    <div class="trust-bar fade-in" style="margin-top: 110px;">
+        <div class="trust-item"><span class="trust-icon">ÃƒÂ¢Ã…â€œÃ‚Â§</span> 100% Certified Jewellery</div>
+        <div class="trust-item"><span class="trust-icon">ÃƒÂ¢Ã…â€œÃ‚Â§</span> Lifetime Exchange</div>
+        <div class="trust-item"><span class="trust-icon">ÃƒÂ¢Ã…â€œÃ‚Â§</span> Free Insured Shipping</div>
+        <div class="trust-item"><span class="trust-icon">ÃƒÂ¢Ã…â€œÃ‚Â¦</span> Secure Checkout</div>
+    </div>
+
+    <main>
+        <!-- WOMEN'S HERO -->
+        <section class="hero-slider" style="height: 70vh;">
+            <div class="hero-slide active" style="background-image: url('assets/images/hero/hero_main.jpg'); background-position: 70% 30%;">
+                <div class="hero-slide-overlay" style="background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%);"></div>
+                <div class="container hero-slide-content">
+                    <div style="max-width: 600px; color: var(--white);">
+                        <p style="font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; color: #e5d3b3;">The Women's Edit</p>
+                        <h1 class="slide-title" style="font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem;">Timeless jewellery, for every chapter of her life.</h1>
+                        <div class="slide-buttons">
+                            <a href="#new-arrivals" class="btn btn-primary">SHOP NEW ARRIVALS</a>
+                            <a href="#collections" class="btn btn-outline-light">EXPLORE COLLECTIONS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOP WOMEN'S JEWELLERY (8 CATEGORIES) -->
+        <section id="collections" class="section container" style="padding-top: 5rem; padding-bottom: 3rem;">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <h2 class="section-title" style="font-size: 2.5rem; text-transform: uppercase;">SHOP WOMEN'S JEWELLERY</h2>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 1.1rem;">Find your signature piece</p>
+            </div>
+            
+            <div class="grid responsive-product-grid">
+                <!-- Category 1 -->
+                <a href="rings.html" class="clean-cat-card">
+                    <div class="clean-cat-img"><img src="assets/images/categories/RING.png" alt="Rings"></div>
+                    <div class="clean-cat-title">RINGS</div>
+                </a>
+                <!-- Category 2 -->
+                <a href="earrings.html" class="clean-cat-card">
+                    <div class="clean-cat-img"><img src="assets/images/categories/earrings.jpg" alt="Earrings"></div>
+                    <div class="clean-cat-title">EARRINGS</div>
+                </a>
+                <!-- Category 3 -->
+                <a href="necklaces.html" class="clean-cat-card">
+                    <div class="clean-cat-img"><img src="assets/images/categories/necklaces.jpg" alt="Necklaces"></div>
+                    <div class="clean-cat-title">NECKLACES</div>
+                </a>
+                <!-- Category 4 -->
+                <a href="bracelets.html" class="clean-cat-card">
+                    <div class="clean-cat-img"><img src="assets/images/products/bangle_1.jpg" alt="Bracelets"></div>
+                    <div class="clean-cat-title">BRACELETS</div>
+                </a>
+                <!-- Category 5 -->
+                <a href="bangles.html" class="clean-cat-card">
+                    <div class="clean-cat-img"><img src="assets/images/products/bangle_2.jpg" alt="Bangles"></div>
+                    <div class="clean-cat-title">BANGLES</div>
+                </a>
+                <!-- Category 6 -->
+                <a href="shop.html?category=PAYALS" class="clean-cat-card">
+                    <div class="clean-cat-img"><img src="assets/images/products/anklet_1.jpg" alt="PAYALS"></div>
+                    <div class="clean-cat-title">PAYALS</div>
+                </a>
+                <!-- Category 7 -->
+                <a href="mangalsutras.html" class="clean-cat-card">
+                    <div class="clean-cat-img"><img src="assets/images/products/mangalsutra_1.jpg" alt="Mangalsutra"></div>
+                    <div class="clean-cat-title">MANGALSUTRA</div>
+                </a>
+                <!-- Category 8 -->
+                <a href="shop.html?category=sets" class="clean-cat-card">
+                    <div class="clean-cat-img"><img src="assets/images/categories/gift_for_her.png" alt="Jewellery Sets"></div>
+                    <div class="clean-cat-title">JEWELLERY SETS</div>
+                </a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="shop.html" style="color: var(--text-primary); text-decoration: none; font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">VIEW ALL CATEGORIES &rarr;</a>
+            </div>
+        </section>
+
+        <!-- NEW ARRIVALS -->
+        <section id="new-arrivals" class="section container" style="background-color: var(--bg-secondary); padding: 4rem 5%; border-radius: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                <div>
+                    <h2 class="section-title" style="margin-bottom: 0.5rem; font-size: 2rem;">NEW ARRIVALS</h2>
+                    <p style="color: var(--text-secondary);">Fresh designs, timeless AURA.</p>
+                </div>
+                <a href="shop.html?category=new" style="color: var(--text-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem; letter-spacing: 1px;">VIEW ALL &rarr;</a>
+            </div>
+            
+            <!-- We will use the existing product rendering logic here -->
+            <div class="grid responsive-product-grid" id="new-arrivals-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- EVERYDAY, ELEVATED -->
+        <section class="section container" style="margin-top: 3rem;">
+            <div style="border-radius: 16px; overflow: hidden; display: flex; background-color: #f6f3f0; min-height: 400px;">
+                <div style="flex: 1; padding: 4rem; display: flex; flex-direction: column; justify-content: center;">
+                    <h2 style="font-family: var(--font-secondary); font-size: 3rem; margin-bottom: 1rem; color: var(--text-primary);">EVERYDAY, ELEVATED</h2>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; max-width: 400px;">Delicate pieces made for mornings, evenings and everything in between.</p>
+                    <a href="shop.html?collection=everyday" class="btn btn-outline" style="align-self: flex-start;">SHOP EVERYDAY</a>
+                </div>
+                <div style="flex: 1; background-image: url('assets/images/hero/everyday.png'); background-size: cover; background-position: center;">
+                </div>
+            </div>
+        </section>
+
+    
+<!-- SHOP BY OCCASION SECTION -->
+        <section class="section container fade-in" style="margin-top: 4rem;">
+            <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+                <div class="section-subtitle-fancy" style="margin-bottom: 1rem; color: #c0a062; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;">
+                    <span style="margin: 0 10px;">ÃƒÂ¢Ã…â€œÃ‚Â§</span> SHOP BY OCCASION <span style="margin: 0 10px;">ÃƒÂ¢Ã…â€œÃ‚Â§</span>
+                </div>
+                <h2 class="section-title" style="font-size: 3rem; text-transform: uppercase;">JEWELLERY FOR EVERY MOMENT</h2>
+                <p class="occasion-header-subtitle">Find the perfect piece for life's most memorable moments.</p>
+            </div>
+            
+            <div class="occasion-grid">
+                <!-- Engagement -->
+                <a href="shop.html?collection=engagement" class="occasion-card">
+                    <div class="occasion-card-img-wrap">
+                        <img src="assets/images/hero/Engagement.png" alt="Engagement Jewellery">
+                    </div>
+                    <div class="occasion-card-content">
+                        <i class="ph ph-sketch-logo occasion-icon"></i>
+                        <h3 class="occasion-title">ENGAGEMENT</h3>
+                        <span class="occasion-link">SHOP NOW &rarr;</span>
+                    </div>
+                </a>
+                
+                <!-- Wedding -->
+                <a href="shop.html?collection=bridal" class="occasion-card">
+                    <div class="occasion-card-img-wrap">
+                        <img src="assets/images/hero/weeding.png" alt="Wedding Jewellery">
+                    </div>
+                    <div class="occasion-card-content">
+                        <i class="ph ph-crown occasion-icon"></i>
+                        <h3 class="occasion-title">WEDDING</h3>
+                        <span class="occasion-link">SHOP NOW &rarr;</span>
+                    </div>
+                </a>
+                
+                <!-- Gifting -->
+                <a href="shop.html?collection=gifting" class="occasion-card">
+                    <div class="occasion-card-img-wrap">
+                        <img src="assets/images/hero/Gifting.png" alt="Gifting">
+                    </div>
+                    <div class="occasion-card-content">
+                        <i class="ph ph-gift occasion-icon"></i>
+                        <h3 class="occasion-title">GIFTING</h3>
+                        <span class="occasion-link">SHOP NOW &rarr;</span>
+                    </div>
+                </a>
+                
+                <!-- Everyday -->
+                <a href="shop.html?collection=everyday" class="occasion-card">
+                    <div class="occasion-card-img-wrap">
+                        <img src="assets/images/hero/everyday.png" alt="Everyday Jewellery">
+                    </div>
+                    <div class="occasion-card-content">
+                        <i class="ph ph-sparkle occasion-icon"></i>
+                        <h3 class="occasion-title">EVERYDAY</h3>
+                        <span class="occasion-link">SHOP NOW &rarr;</span>
+                    </div>
+                </a>
+                
+                <!-- Festive -->
+                <a href="shop.html?collection=festive" class="occasion-card">
+                    <div class="occasion-card-img-wrap">
+                        <img src="assets/images/hero/festive.png" alt="Festive Jewellery">
+                    </div>
+                    <div class="occasion-card-content">
+                        <i class="ph ph-moon-stars occasion-icon"></i>
+                        <h3 class="occasion-title">FESTIVE</h3>
+                        <span class="occasion-link">SHOP NOW &rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- BRIDAL & DIAMOND EDIT BANNERS -->
+        <section class="section container" style="margin-top: 2rem;">
+            <div class="grid responsive-product-grid">
+                
+                <!-- Bridal Edit -->
+                <div style="border-radius: 12px; overflow: hidden; background-color: #f8f5f1; display: flex; flex-direction: column;">
+                    <div style="padding: 3rem; text-align: center; flex: 1;">
+                        <h2 style="font-family: var(--font-secondary); font-size: 2rem; color: var(--text-primary); margin-bottom: 1rem;">THE BRIDAL EDIT</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Heirloom-inspired jewellery for the beginning of forever.</p>
+                        <a href="shop.html?collection=bridal" class="btn btn-outline" style="font-size: 0.85rem;">SHOP BRIDAL</a>
+                    </div>
+                    <div style="height: 250px; background-image: url('assets/images/hero/weeding.png'); background-size: cover; background-position: center;"></div>
+                </div>
+
+                <!-- Diamond Edit -->
+                <div style="border-radius: 12px; overflow: hidden; background-color: #f1f0ee; display: flex; flex-direction: column;">
+                    <div style="padding: 3rem; text-align: center; flex: 1;">
+                        <h2 style="font-family: var(--font-secondary); font-size: 2rem; color: var(--text-primary); margin-bottom: 1rem;">THE DIAMOND EDIT</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Designed to catch the light. Crafted to last a lifetime.</p>
+                        <a href="rings.html" class="btn btn-outline" style="font-size: 0.85rem;">EXPLORE DIAMONDS</a>
+                    </div>
+                    <div style="height: 250px; background-image: url('assets/images/hero/Engagement.png'); background-size: cover; background-position: center;"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MOST LOVED BY HER -->
+        <section id="bestsellers" class="section container" style="margin-top: 4rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                <div>
+                    <h2 class="section-title" style="margin-bottom: 0.5rem; font-size: 2rem;">MOST LOVED BY HER</h2>
+                    <p style="color: var(--text-secondary);">The pieces everyone is wearing right now.</p>
+                </div>
+                <a href="shop.html" style="color: var(--text-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem; letter-spacing: 1px;">VIEW ALL &rarr;</a>
+            </div>
+            
+            <div class="grid responsive-product-grid" id="bestsellers-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- A GIFT SHE'LL NEVER FORGET -->
+        <section class="section container" style="margin-top: 4rem; padding-bottom: 4rem;">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <h2 class="section-title" style="font-size: 2.5rem; text-transform: uppercase;">A GIFT SHE'LL NEVER FORGET</h2>
+            </div>
+            
+            <div class="grid responsive-product-grid">
+                <!-- For Her -->
+                <a href="shop.html?collection=engagement" class="gift-banner-card" style="display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background-color: #fcfaf8; border: 1px solid #f0ebe1; padding: 2.5rem; display: flex; align-items: center;">
+                    <div style="flex: 1;">
+                        <h3 style="font-family: var(--font-secondary); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">FOR HER</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Celebrate her special moments.</p>
+                    </div>
+                    <div style="width: 100px; height: 100px;"><img src="assets/images/hero/Gifting.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"></div>
+                </a>
+                
+                <!-- For Mom -->
+                <a href="shop.html?collection=festive" class="gift-banner-card" style="display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background-color: #fcfaf8; border: 1px solid #f0ebe1; padding: 2.5rem; display: flex; align-items: center;">
+                    <div style="flex: 1;">
+                        <h3 style="font-family: var(--font-secondary); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">FOR MOM</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Thank her for everything she is.</p>
+                    </div>
+                    <div style="width: 100px; height: 100px;"><img src="assets/images/products/neckless.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"></div>
+                </a>
+
+                <!-- For Yourself -->
+                <a href="shop.html?collection=everyday" class="gift-banner-card" style="display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background-color: #fcfaf8; border: 1px solid #f0ebe1; padding: 2.5rem; display: flex; align-items: center;">
+                    <div style="flex: 1;">
+                        <h3 style="font-family: var(--font-secondary); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">FOR YOURSELF</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Because you deserve a little sparkle.</p>
+                    </div>
+                    <div style="width: 100px; height: 100px;"><img src="assets/images/products/ring3.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"></div>
+                </a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="shop.html" style="color: var(--text-primary); text-decoration: none; font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">EXPLORE GIFTS &rarr;</a>
+            </div>
+        </section>
+
+    </main>
+
+<!-- FOOTER -->
+        <style>
+.footer {
+    background-color: #2a2422;
+    color: #fff;
+    padding: 5rem 0 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+.footer h4 {
+    font-family: 'Cinzel', serif;
+    color: #C2A878;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+.footer-links a {
+    color: #d1cbc7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: #C2A878;
+}
+.footer-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 168, 120, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+<style>
+.footer {
+    background-color: #2a2422;
+    color: #fff;
+    padding: 5rem 0 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+.footer h4 {
+    font-family: 'Cinzel', serif !important;
+    color: #C2A878 !important; /* FIXED VISIBILITY */
+    margin-bottom: 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.05em !important;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+.footer-links a {
+    color: #d1cbc7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: #C2A878;
+}
+.footer-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 168, 120, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+<style>
+.footer {
+    background-color: #2a2422;
+    color: #fff;
+    padding: 5rem 0 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+.footer h4 {
+    font-family: 'Cinzel', serif !important;
+    color: #C2A878 !important; /* FIXED VISIBILITY */
+    margin-bottom: 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.05em !important;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+.footer-links a {
+    color: #d1cbc7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: #C2A878;
+}
+.footer-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 168, 120, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- NEW COLUMN: Address & Number -->
+            <div class="footer-col">
+                <h4>CONTACT</h4>
+                <p style="color: #d1cbc7; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                    <strong>AURA Flagship Store</strong><br>
+                    Palladium Mall, Lower Parel<br>
+                    Mumbai, Maharashtra 400013
+                </p>
+                <p style="color: #d1cbc7; font-size: 0.95rem; line-height: 1.8;">
+                    <strong>Phone:</strong> +91 98765 43210<br>
+                    <strong>Email:</strong> concierge@aura.com
+                </p>
+            </div>
+
+            <!-- COLUMN 2: SHOP -->
+            <div class="footer-col">
+                <h4>SHOP</h4>
+                <ul class="footer-links">
+                    <li><a href="womens.html">Women's Jewellery</a></li>
+                    <li><a href="mens.html">Men's Jewellery</a></li>
+                    <li><a href="bridal.html">Bridal</a></li>
+                    <li><a href="new_arrivals.html">New Arrivals</a></li>
+                    <li><a href="collections.html">Collections</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 3: CUSTOMER CARE -->
+            <div class="footer-col">
+                <h4>CUSTOMER CARE</h4>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="shipping.html">Shipping & Delivery</a></li>
+                    <li><a href="returns.html">Returns & Exchanges</a></li>
+                    <li><a href="size-guide.html">Size Guide</a></li>
+                    <li><a href="jewellery-care.html">Jewellery Care</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 4: ABOUT AURA & SUBSCRIBE -->
+            <div class="footer-col">
+                <h4>ABOUT AURA</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="stores.html">Store Locator</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem;">
+                    <h4 style="font-size: 0.9rem !important; margin-bottom: 1rem !important;">SUBSCRIBE</h4>
+                    <div style="display: flex;">
+                        <input type="email" placeholder="Email Address" style="padding: 0.8rem; border: none; background: #fff; width: 100%; outline: none; font-family: inherit; font-size: 0.9rem;">
+                        <button style="padding: 0.8rem 1.2rem; background: #C2A878; border: none; color: #fff; cursor: pointer; font-family: inherit; font-weight: 500;">JOIN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>
+                <a href="#" style="color: #999; text-decoration: none; margin-right: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: #999; text-decoration: none; margin-right: 1.5rem;">Terms & Conditions</a>
+                <span>&copy; 2026 Aura Fine Jewellery. All rights reserved.</span>
+            </div>
+            <div style="display: flex; gap: 1.5rem; font-size: 1.2rem; color: #C2A878;">
+                <i class="ph-fill ph-instagram-logo"></i>
+                <i class="ph-fill ph-facebook-logo"></i>
+                <i class="ph-fill ph-pinterest-logo"></i>
+                <i class="ph-fill ph-youtube-logo"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- JS -->
+    <script src="assets/js/main.js?v=4"></script>
+    <script src="assets/js/products_v4.js"></script>
+    <script src="assets/js/cart.js?v=4"></script>
+    <script src="assets/js/wishlist.js?v=4"></script>
+
+<script>
+(function() {
+    var stage = document.querySelector(".col-arc-stage");
+    if (!stage) return;
+
+    var cards       = Array.from(document.querySelectorAll(".col-arc-card"));
+    var dots        = Array.from(document.querySelectorAll(".col-arc-dot"));
+    var prevBtn     = document.querySelector(".col-arc-prev");
+    var nextBtn     = document.querySelector(".col-arc-next");
+    var total       = cards.length;
+    var current     = 0;
+    var autoTimer   = null;
+    var isAnimating = false;
+    var touchStartX = 0;
+
+    function mod(n, m) { return ((n % m) + m) % m; }
+
+    function apply(idx) {
+        var prev2 = mod(idx - 2, total);
+        var prev1 = mod(idx - 1, total);
+        var next1 = mod(idx + 1, total);
+        var next2 = mod(idx + 2, total);
+
+        cards.forEach(function(card, i) {
+            card.classList.remove("arc-active","arc-prev","arc-next","arc-prev2","arc-next2","arc-hidden");
+            if      (i === idx)   card.classList.add("arc-active");
+            else if (i === prev1) card.classList.add("arc-prev");
+            else if (i === next1) card.classList.add("arc-next");
+            else if (i === prev2) card.classList.add("arc-prev2");
+            else if (i === next2) card.classList.add("arc-next2");
+            else                  card.classList.add("arc-hidden");
+        });
+
+        dots.forEach(function(d, i) {
+            d.classList.toggle("active", i === idx);
+        });
+    }
+
+    function goTo(n, skipAnim) {
+        if (isAnimating && !skipAnim) return;
+        isAnimating = true;
+        current = mod(n, total);
+        apply(current);
+        setTimeout(function() { isAnimating = false; }, 820);
+    }
+
+    function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(function() { goTo(current + 1); }, 5000);
+    }
+
+    function stopAuto() {
+        clearInterval(autoTimer);
+    }
+
+    // Init
+    goTo(0, true);
+    startAuto();
+
+    prevBtn && prevBtn.addEventListener("click", function() { goTo(current - 1); startAuto(); });
+    nextBtn && nextBtn.addEventListener("click", function() { goTo(current + 1); startAuto(); });
+
+    dots.forEach(function(d) {
+        d.addEventListener("click", function() { goTo(+this.dataset.goto); startAuto(); });
+    });
+
+    // Pause on hover
+    stage.addEventListener("mouseenter", stopAuto);
+    stage.addEventListener("mouseleave", startAuto);
+
+    // Touch swipe
+    stage.addEventListener("touchstart", function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener("touchend", function(e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) {
+            diff > 0 ? goTo(current + 1) : goTo(current - 1);
+            startAuto();
+        }
+    }, { passive: true });
+
+    // Click on side cards
+    cards.forEach(function(card, i) {
+        card.addEventListener("click", function() {
+            if (i !== current) { goTo(i); startAuto(); }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

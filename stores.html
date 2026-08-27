@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutiques - Aura Fine Jewellery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
+    <link rel="stylesheet" href="assets/css/components_v4.css?v=1787381408">
+    <link rel="stylesheet" href="assets/css/arc_carousel.css?v=1787380891">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=4">
+    <link rel="stylesheet" href="assets/css/editorial_pages.css">
+    <style>
+.stores-map {
+    height: 500px;
+    background-image: url('assets/images/hero/hero_banner.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.stores-map::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(42, 36, 34, 0.6);
+}
+.stores-map-text {
+    position: relative;
+    z-index: 10;
+    color: #fff;
+    text-align: center;
+}
+.stores-map-text h1 {
+    font-size: 3rem;
+    color: var(--ed-accent-gold);
+    margin-bottom: 1rem;
+}
+.stores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.store-grid-item {
+    background: #fff;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 4px solid var(--ed-accent-gold);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+.store-grid-item:hover {
+    transform: translateY(-10px);
+}
+.store-grid-item i {
+    font-size: 3rem;
+    color: var(--ed-accent-gold);
+    margin-bottom: 1.5rem;
+}
+.store-grid-item h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+@media (max-width: 900px) {
+    .stores-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body class="editorial-layout ">
+<header class="header">
+        <div class="promo-bar">
+            Complimentary Shipping on Orders Above &#8377;50,000 | Book a Virtual Consultation
+        </div>
+        <div class="container main-nav">
+            <div class="nav-container">
+                <button class="mobile-menu-btn" aria-label="Open Menu">
+                    <i class="ph ph-list"></i>
+                </button>
+                
+                <a href="index.html" class="brand-logo">AURA</a>
+                
+                                                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    
+                    <div class="nav-item-dropdown">
+                        <a href="shop.html" class="nav-link" style="display: flex; align-items: center; gap: 5px;">Shop <i class="ph ph-caret-down" style="font-size: 0.8rem;"></i></a>
+                        
+                                                <div class="bluestone-mega-menu" style="width: 800px; grid-template-columns: 1fr 1fr 250px;">
+                            <!-- Column 1 -->
+                            <div class="mega-column">
+                                <div class="mega-group">
+                                    <h4>Shop By Category</h4>
+                                    <ul class="mega-list">
+                                        <li><a href="rings.html">Rings <span class="badge-new-orange">New</span></a></li>
+                                        <li><a href="earrings.html">Earrings</a></li>
+                                        <li><a href="necklaces.html">Necklaces</a></li>
+                                        <li><a href="bracelets.html">Bracelets</a></li>
+                                        <li><a href="bangles.html">Bangles</a></li>
+                                        <li><a href="mangalsutras.html">Mangalsutras</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 2 -->
+                            <div class="mega-column">
+                                <div class="mega-group">
+                                    <h4>By Collection</h4>
+                                    <ul class="mega-list">
+                                        <li><a href="shop.html?collection=everyday">Everyday Elegance</a></li>
+                                        <li><a href="shop.html?collection=bridal">The Bridal Edit</a></li>
+                                        <li><a href="shop.html?collection=festive">Festive Collection</a></li>
+                                        <li><a href="mens.html">Men's Jewellery</a></li>
+                                        <li><a href="shop.html?collection=gifting">The Gifting Hub</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 3 Image -->
+                            <div class="mega-column" style="padding-left: 1rem;">
+                                <img src="assets/images/categories/RING.png" alt="Featured Ring" class="mega-promo-img" style="border-radius: 8px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="collections.html" class="nav-link">Collections</a>
+                    <a href="new_arrivals.html" class="nav-link">New Arrivals</a>
+                    <a href="bridal.html" class="nav-link">Bridal</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                
+                <div class="nav-icons">
+                    <!-- Static Search Bar -->
+                    <form action="shop.html" method="GET" style="display: flex; align-items: center; background: #f5f5f5; border-radius: 20px; padding: 6px 15px; margin-right: 10px; border: 1px solid #e0e0e0; transition: all 0.3s ease;">
+                        <input type="text" name="q" placeholder="Search jewellery..." style="border: none; outline: none; background: transparent; font-size: 0.85rem; width: 180px; color: var(--text-primary);">
+                        <button type="submit" style="background: none; border: none; cursor: pointer; color: var(--text-secondary); padding: 0; display: flex; align-items: center; justify-content: center;"><i class="ph ph-magnifying-glass" style="font-size: 1.2rem;"></i></button>
+                    </form>
+                    <a href="login.html" class="icon-btn" aria-label="Account"><i class="ph ph-user"></i></a>
+                                        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+                        <i class="ph ph-heart"></i>
+                        <span class="wishlist-count" style="display: none;">0</span>
+                    </a>
+                    <a href="cart.html" class="icon-btn" aria-label="Shopping Bag">
+                        <i class="ph ph-handbag"></i>
+                        <span class="cart-count" style="display: none;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+<div class="stores-map">
+    <div class="stores-map-text">
+        <h1>Global Boutiques</h1>
+        <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">Experience the luxury of Aura in person.</p>
+    </div>
+</div>
+<div class="stores-grid">
+    <div class="store-grid-item">
+        <i class="ph ph-storefront"></i>
+        <h3>AURA Flagship - Mumbai</h3>
+        <p style="color: var(--ed-text-muted); margin-bottom: 1.5rem;">Ground Floor, Palladium Mall, Lower Parel<br>Mumbai, Maharashtra 400013</p>
+        <p style="font-weight: 500;"><i class="ph ph-phone"></i> +91 22 1234 5678</p>
+        <a href="#" class="ed-btn ed-btn-dark" style="margin-top: 1.5rem; width: 100%;">Book Visit</a>
+    </div>
+    <div class="store-grid-item">
+        <i class="ph ph-storefront"></i>
+        <h3>AURA Boutique - Delhi</h3>
+        <p style="color: var(--ed-text-muted); margin-bottom: 1.5rem;">DLF Emporio, Vasant Kunj<br>New Delhi, Delhi 110070</p>
+        <p style="font-weight: 500;"><i class="ph ph-phone"></i> +91 11 9876 5432</p>
+        <a href="#" class="ed-btn ed-btn-dark" style="margin-top: 1.5rem; width: 100%;">Book Visit</a>
+    </div>
+    <div class="store-grid-item">
+        <i class="ph ph-storefront"></i>
+        <h3>AURA Salon - Bangalore</h3>
+        <p style="color: var(--ed-text-muted); margin-bottom: 1.5rem;">UB City, Vittal Mallya Road<br>Bengaluru, Karnataka 560001</p>
+        <p style="font-weight: 500;"><i class="ph ph-phone"></i> +91 80 4567 8901</p>
+        <a href="#" class="ed-btn ed-btn-dark" style="margin-top: 1.5rem; width: 100%;">Book Visit</a>
+    </div>
+</div>
+<style>
+.footer {
+    background-color: #2a2422;
+    color: #fff;
+    padding: 5rem 0 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+.footer h4 {
+    font-family: 'Cinzel', serif !important;
+    color: #C2A878 !important; /* FIXED VISIBILITY */
+    margin-bottom: 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.05em !important;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+.footer-links a {
+    color: #d1cbc7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: #C2A878;
+}
+.footer-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 168, 120, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- NEW COLUMN: Address & Number -->
+            <div class="footer-col">
+                <h4>CONTACT</h4>
+                <p style="color: #d1cbc7; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                    <strong>AURA Flagship Store</strong><br>
+                    Palladium Mall, Lower Parel<br>
+                    Mumbai, Maharashtra 400013
+                </p>
+                <p style="color: #d1cbc7; font-size: 0.95rem; line-height: 1.8;">
+                    <strong>Phone:</strong> +91 98765 43210<br>
+                    <strong>Email:</strong> concierge@aura.com
+                </p>
+            </div>
+
+            <!-- COLUMN 2: SHOP -->
+            <div class="footer-col">
+                <h4>SHOP</h4>
+                <ul class="footer-links">
+                    <li><a href="womens.html">Women's Jewellery</a></li>
+                    <li><a href="mens.html">Men's Jewellery</a></li>
+                    <li><a href="bridal.html">Bridal</a></li>
+                    <li><a href="new_arrivals.html">New Arrivals</a></li>
+                    <li><a href="collections.html">Collections</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 3: CUSTOMER CARE -->
+            <div class="footer-col">
+                <h4>CUSTOMER CARE</h4>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="shipping.html">Shipping & Delivery</a></li>
+                    <li><a href="returns.html">Returns & Exchanges</a></li>
+                    <li><a href="size-guide.html">Size Guide</a></li>
+                    <li><a href="jewellery-care.html">Jewellery Care</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 4: ABOUT AURA & SUBSCRIBE -->
+            <div class="footer-col">
+                <h4>ABOUT AURA</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="stores.html">Store Locator</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem;">
+                    <h4 style="font-size: 0.9rem !important; margin-bottom: 1rem !important;">SUBSCRIBE</h4>
+                    <div style="display: flex;">
+                        <input type="email" placeholder="Email Address" style="padding: 0.8rem; border: none; background: #fff; width: 100%; outline: none; font-family: inherit; font-size: 0.9rem;">
+                        <button style="padding: 0.8rem 1.2rem; background: #C2A878; border: none; color: #fff; cursor: pointer; font-family: inherit; font-weight: 500;">JOIN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>
+                <a href="#" style="color: #999; text-decoration: none; margin-right: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: #999; text-decoration: none; margin-right: 1.5rem;">Terms & Conditions</a>
+                <span>&copy; 2026 Aura Fine Jewellery. All rights reserved.</span>
+            </div>
+            <div style="display: flex; gap: 1.5rem; font-size: 1.2rem; color: #C2A878;">
+                <i class="ph-fill ph-instagram-logo"></i>
+                <i class="ph-fill ph-facebook-logo"></i>
+                <i class="ph-fill ph-pinterest-logo"></i>
+                <i class="ph-fill ph-youtube-logo"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="assets/js/main.js?v=4"></script>
+    <script src="assets/js/cart.js?v=4"></script>
+    <script src="assets/js/wishlist.js?v=4"></script>
+
+<script>
+(function() {
+    var stage = document.querySelector(".col-arc-stage");
+    if (!stage) return;
+
+    var cards       = Array.from(document.querySelectorAll(".col-arc-card"));
+    var dots        = Array.from(document.querySelectorAll(".col-arc-dot"));
+    var prevBtn     = document.querySelector(".col-arc-prev");
+    var nextBtn     = document.querySelector(".col-arc-next");
+    var total       = cards.length;
+    var current     = 0;
+    var autoTimer   = null;
+    var isAnimating = false;
+    var touchStartX = 0;
+
+    function mod(n, m) { return ((n % m) + m) % m; }
+
+    function apply(idx) {
+        var prev2 = mod(idx - 2, total);
+        var prev1 = mod(idx - 1, total);
+        var next1 = mod(idx + 1, total);
+        var next2 = mod(idx + 2, total);
+
+        cards.forEach(function(card, i) {
+            card.classList.remove("arc-active","arc-prev","arc-next","arc-prev2","arc-next2","arc-hidden");
+            if      (i === idx)   card.classList.add("arc-active");
+            else if (i === prev1) card.classList.add("arc-prev");
+            else if (i === next1) card.classList.add("arc-next");
+            else if (i === prev2) card.classList.add("arc-prev2");
+            else if (i === next2) card.classList.add("arc-next2");
+            else                  card.classList.add("arc-hidden");
+        });
+
+        dots.forEach(function(d, i) {
+            d.classList.toggle("active", i === idx);
+        });
+    }
+
+    function goTo(n, skipAnim) {
+        if (isAnimating && !skipAnim) return;
+        isAnimating = true;
+        current = mod(n, total);
+        apply(current);
+        setTimeout(function() { isAnimating = false; }, 820);
+    }
+
+    function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(function() { goTo(current + 1); }, 5000);
+    }
+
+    function stopAuto() {
+        clearInterval(autoTimer);
+    }
+
+    // Init
+    goTo(0, true);
+    startAuto();
+
+    prevBtn && prevBtn.addEventListener("click", function() { goTo(current - 1); startAuto(); });
+    nextBtn && nextBtn.addEventListener("click", function() { goTo(current + 1); startAuto(); });
+
+    dots.forEach(function(d) {
+        d.addEventListener("click", function() { goTo(+this.dataset.goto); startAuto(); });
+    });
+
+    // Pause on hover
+    stage.addEventListener("mouseenter", stopAuto);
+    stage.addEventListener("mouseleave", startAuto);
+
+    // Touch swipe
+    stage.addEventListener("touchstart", function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener("touchend", function(e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) {
+            diff > 0 ? goTo(current + 1) : goTo(current - 1);
+            startAuto();
+        }
+    }, { passive: true });
+
+    // Click on side cards
+    cards.forEach(function(card, i) {
+        card.addEventListener("click", function() {
+            if (i !== current) { goTo(i); startAuto(); }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+
+

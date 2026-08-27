@@ -1,0 +1,26 @@
+[
+  {
+    "id": "bridal-edit",
+    "name": "The Bridal Edit",
+    "description": "Exquisite pieces designed for the most important day of your life.",
+    "image": "assets/images/bridal/bridal_main.jpg"
+  },
+  {
+    "id": "everyday-elegance",
+    "name": "Everyday Elegance",
+    "description": "Subtle, sophisticated jewellery designed to be worn and loved daily.",
+    "image": "assets/images/hero/hero_main.jpg"
+  },
+  {
+    "id": "diamond-classics",
+    "name": "Diamond Classics",
+    "description": "Timeless diamond designs that will never go out of style.",
+    "image": "assets/images/categories/rings.jpg"
+  },
+  {
+    "id": "festive-collection",
+    "name": "Festive Collection",
+    "description": "Bold, intricate traditional designs to light up your celebrations.",
+    "image": "assets/images/categories/necklaces.jpg"
+  }
+]

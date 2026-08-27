@@ -1,0 +1,393 @@
+/* =====================================================
+   CUSTOM ARC / CENTER-FOCUSED CIRCULAR CAROUSEL
+   ===================================================== */
+
+.collections-arc-wrap {
+    background: #fcfbf9; /* Very light ivory to make circles pop */
+    padding: 4rem 0 3rem;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.col-arc-header {
+    margin-bottom: 2rem;
+}
+
+.col-arc-eyebrow {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c0a062;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+.col-arc-eyebrow::before,
+.col-arc-eyebrow::after {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: #c0a062;
+}
+
+.col-arc-title {
+    font-family: "Cinzel", serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400;
+    color: #1a1814;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.8rem;
+    line-height: 1.2;
+}
+
+.col-arc-subtitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.05rem;
+    color: #7a7068;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.col-arc-stage-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.col-arc-stage {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 520px;
+    overflow: visible;
+}
+
+/* =====================================================
+   INDIVIDUAL CARD
+   ===================================================== */
+.col-arc-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 340px;
+    border-radius: 24px;
+    cursor: pointer;
+    will-change: transform, opacity;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity   0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    transform: translate(-50%, -50%) translateX(0) scale(0.4);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* The actual circle that holds the image and background */
+.col-arc-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+}
+
+.col-arc-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: transform 0.4s ease;
+}
+
+/* Base colored overlay for non-active cards */
+.col-arc-img-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: rgba(0,0,0,0.4); /* Fallback */
+    transition: background 0.4s ease, opacity 0.4s ease;
+}
+
+/* The text content container */
+.col-arc-card-content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.col-arc-card-name {
+    font-family: "Cinzel", serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 0.5rem;
+}
+.col-arc-card-tag {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 0.5rem;
+}
+.col-arc-card-desc {
+    display: none; /* Hide desc on non-active cards to keep it clean */
+}
+.col-arc-card-btn {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 30px;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    transition: background 0.3s, color 0.3s;
+}
+.col-arc-card-btn:hover {
+    background: #fff;
+    color: #333;
+}
+
+/* =====================================================
+   THEME COLORS FOR SIDE CARDS
+   ===================================================== */
+/* Color overlays removed as per user request to match the clear side cards in the first image */
+.theme-pink .col-arc-img-overlay { opacity: 0; }
+.theme-purple .col-arc-img-overlay { opacity: 0; }
+.theme-blue .col-arc-img-overlay { opacity: 0; }
+.theme-olive .col-arc-img-overlay { opacity: 0; }
+.theme-sage .col-arc-img-overlay { opacity: 0; }
+.theme-peach .col-arc-img-overlay { opacity: 0; }
+
+/* =====================================================
+   ACTIVE (CENTER) STATE - THE BIG REVEAL
+   ===================================================== */
+.col-arc-card.arc-active {
+    transform: translate(-50%, -50%) translateX(0) scale(1.25); /* Make it huge */
+    opacity: 1;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+
+
+.col-arc-card.arc-active .col-arc-inner {
+    background: #fdf6f2; /* Light peach background */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.col-arc-card.arc-active img {
+    object-position: center;
+    mask-image: none;
+    -webkit-mask-image: none;
+}
+
+.col-arc-card.arc-active .col-arc-img-overlay {
+    opacity: 0; /* Remove the heavy color overlay */
+}
+
+/* Adjust text for active state */
+.col-arc-card.arc-active .col-arc-card-content {
+    align-items: flex-start;
+    justify-content: flex-end;
+    text-align: left;
+    padding: 0 0 12% 12%; /* Push text to the bottom left directly over the image */
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%);
+}
+
+.col-arc-card.arc-active .col-arc-card-name {
+    color: #fff;
+    font-size: 2.8rem;
+    margin-bottom: 0.2rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.col-arc-card.arc-active .col-arc-card-tag {
+    color: #fff;
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.col-arc-card.arc-active .col-arc-card-desc {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.55rem;
+    color: #f0f0f0;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.col-arc-card.arc-active .col-arc-card-btn {
+    border-color: #fff;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 0 0 rgba(255,255,255,0);
+}
+
+.col-arc-card.arc-active .col-arc-card-btn:hover {
+    background: #fff;
+    color: #222;
+    text-shadow: none;
+}
+
+/* =====================================================
+   PREV & NEXT (SIDE CARDS)
+   ===================================================== */
+.col-arc-card.arc-prev {
+    transform: translate(-50%, -50%) translateX(-450px) scale(0.8);
+    opacity: 0.9;
+    z-index: 5;
+    pointer-events: auto;
+}
+.col-arc-card.arc-next {
+    transform: translate(-50%, -50%) translateX(450px) scale(0.8);
+    opacity: 0.9;
+    z-index: 5;
+    pointer-events: auto;
+}
+
+/* =====================================================
+   PREV-2 AND NEXT-2 (OUTER CARDS)
+   ===================================================== */
+.col-arc-card.arc-prev2 {
+    transform: translate(-50%, -50%) translateX(-800px) scale(0.65);
+    opacity: 0.6;
+    z-index: 2;
+    pointer-events: none;
+}
+.col-arc-card.arc-next2 {
+    transform: translate(-50%, -50%) translateX(800px) scale(0.65);
+    opacity: 0.6;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* =====================================================
+   HIDDEN
+   ===================================================== */
+.col-arc-card.arc-hidden {
+    transform: translate(-50%, -50%) translateX(0) scale(0.3);
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* =====================================================
+   ARROWS
+   ===================================================== */
+.col-arc-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid #e2d9cc;
+    background: #fff;
+    color: #4a3f35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+.col-arc-arrow:hover {
+    background: #c0a062;
+    border-color: #c0a062;
+    color: #fff;
+}
+.col-arc-prev { left: clamp(10px, 4vw, 50px); }
+.col-arc-next { right: clamp(10px, 4vw, 50px); }
+
+/* =====================================================
+   PAGINATION DOTS
+   ===================================================== */
+.col-arc-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 1rem;
+}
+.col-arc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: #e2d9cc;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+.col-arc-dot.active {
+    background: #c0a062;
+    transform: scale(1.1);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 1100px) {
+    .col-arc-stage { height: 450px; }
+    .col-arc-card { width: 300px; height: 300px; }
+    .col-arc-card.arc-prev  { transform: translate(-50%, -50%) translateX(-280px) scale(0.8); }
+    .col-arc-card.arc-next  { transform: translate(-50%, -50%) translateX(280px) scale(0.8); }
+    .col-arc-card.arc-prev2 { transform: translate(-50%, -50%) translateX(-480px) scale(0.65); }
+    .col-arc-card.arc-next2 { transform: translate(-50%, -50%) translateX(480px) scale(0.65); }
+    .col-arc-card.arc-active .col-arc-card-name { font-size: 2.2rem; }
+}
+
+@media (max-width: 768px) {
+    .col-arc-stage { height: 380px; }
+    .col-arc-card { width: 240px; height: 240px; }
+    .col-arc-card.arc-prev  { transform: translate(-50%, -50%) translateX(-200px) scale(0.8); opacity: 0.7; }
+    .col-arc-card.arc-next  { transform: translate(-50%, -50%) translateX(200px) scale(0.8); opacity: 0.7; }
+    .col-arc-card.arc-prev2,
+    .col-arc-card.arc-next2 { opacity: 0; }
+    .col-arc-card.arc-active { transform: translate(-50%, -50%) scale(1.2); }
+    .col-arc-arrow { width: 38px; height: 38px; }
+    
+    /* On mobile, center the text on the active card */
+    .col-arc-card.arc-active .col-arc-card-content {
+        align-items: center;
+        text-align: center;
+        padding: 1rem;
+        background: rgba(253, 246, 242, 0.85); /* Solid overlay for legibility */
+    }
+    .col-arc-card.arc-active img {
+        mask-image: none;
+        -webkit-mask-image: none;
+        object-position: center;
+    }
+}

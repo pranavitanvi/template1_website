@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | Aura Fine Jewellery</title>
+    <meta name="description" content="Complete your purchase securely at Aura Fine Jewellery.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/bold/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
+    <link rel="stylesheet" href="assets/css/components_v4.css?v=1787381408">
+    <link rel="stylesheet" href="assets/css/arc_carousel.css?v=1787380891">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #faf8f4;
+            font-family: 'Montserrat', sans-serif;
+            color: #2c2a29;
+            min-height: 100vh;
+        }
+
+        /* ---- Checkout Header ---- */
+        .co-header {
+            background: #fff;
+            border-bottom: 1px solid #f0ece4;
+            padding: 1.2rem 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .co-header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .co-brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: #1a1814;
+            text-decoration: none;
+        }
+        .co-secure-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            color: #6a8f5a;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        /* ---- Main Layout ---- */
+        .co-layout {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 3rem 2rem 5rem;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* ---- Step Indicator ---- */
+        .co-steps {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 2.5rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .co-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #bbb;
+        }
+        .co-step.active { color: #c0a062; }
+        .co-step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1.5px solid currentColor;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .co-step-divider {
+            width: 30px;
+            height: 1px;
+            background: #ddd;
+            margin: 0 8px;
+        }
+
+        /* ---- Section Cards ---- */
+        .co-section {
+            background: #fff;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #f0ece4;
+        }
+        .co-section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            color: #1a1814;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #f0ece4;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .co-section-title svg { color: #c0a062; }
+
+        /* ---- Form Fields ---- */
+        .co-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .co-form-row.full { grid-template-columns: 1fr; }
+        .co-form-row.three { grid-template-columns: 1fr 1fr 1fr; }
+
+        .co-field {
+            position: relative;
+        }
+        .co-field label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 6px;
+        }
+        .co-field input,
+        .co-field select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1.5px solid #e8e2d8;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: #2c2a29;
+            background: #faf8f4;
+            outline: none;
+            transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+            -webkit-appearance: none;
+        }
+        .co-field input:focus,
+        .co-field select:focus {
+            border-color: #c0a062;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(192&#8377;60,98,0.12);
+        }
+        .co-field input::placeholder { color: #bbb; }
+
+        /* ---- Checkbox ---- */
+        .co-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.8rem;
+        }
+        .co-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #c0a062;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        /* ---- Payment Methods ---- */
+        .co-payment-opts {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border: 1.5px solid #e8e2d8;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .co-pay-opt {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            border-bottom: 1px solid #f0ece4;
+            transition: background 0.2s;
+        }
+        .co-pay-opt:last-child { border-bottom: none; }
+        .co-pay-opt:hover { background: #faf8f4; }
+        .co-pay-opt input[type="radio"] {
+            accent-color: #c0a062;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+        .co-pay-opt-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2c2a29;
+            flex: 1;
+        }
+        .co-pay-opt-icons {
+            display: flex;
+            gap: 6px;
+        }
+        .co-card-icon {
+            height: 22px;
+            width: auto;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 1px 4px;
+            background: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.02em;
+        }
+        .co-card-detail {
+            padding: 1rem 1.2rem 1.4rem;
+            background: #faf8f4;
+            display: none;
+        }
+        .co-card-detail.show { display: block; }
+
+        /* Security note */
+        .co-security-note {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            color: #6a8f5a;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* ---- Submit Button ---- */
+        .co-submit-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, #c0a062 0%, #a8873a 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(192&#8377;60,98,0.3);
+            margin-top: 0.5rem;
+        }
+        .co-submit-btn:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 28px rgba(192&#8377;60,98,0.4);
+        }
+        .co-submit-btn:active { transform: translateY(0); }
+
+        /* ---- Order Summary Panel ---- */
+        .co-summary {
+            position: sticky;
+            top: 90px;
+        }
+        .co-summary-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.8rem;
+            border: 1px solid #f0ece4;
+        }
+        .co-summary-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #f0ece4;
+            color: #1a1814;
+        }
+
+        /* Cart items in summary */
+        .co-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+        }
+        .co-item-img-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .co-item-img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+            border: 1px solid #f0ece4;
+        }
+        .co-item-qty {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #c0a062;
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .co-item-info { flex: 1; }
+        .co-item-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #1a1814;
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+        .co-item-cat {
+            font-size: 0.75rem;
+            color: #c0a062;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .co-item-price {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1814;
+            white-space: nowrap;
+        }
+
+        /* Promo code */
+        .co-promo-row {
+            display: flex;
+            gap: 0;
+            margin-bottom: 1.5rem;
+        }
+        .co-promo-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid #e8e2d8;
+            border-right: none;
+            border-radius: 10px 0 0 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            background: #faf8f4;
+            color: #2c2a29;
+        }
+        .co-promo-input:focus { border-color: #c0a062; background: #fff; }
+        .co-promo-btn {
+            padding: 0.75rem 1.2rem;
+            background: #2c2a29;
+            color: #fff;
+            border: none;
+            border-radius: 0 10px 10px 0;
+            font-family: 'Cinzel', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .co-promo-btn:hover { background: #c0a062; }
+
+        /* Totals */
+        .co-totals { border-top: 1px solid #f0ece4; padding-top: 1.2rem; }
+        .co-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.88rem;
+            color: #666;
+        }
+        .co-total-row.grand {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1a1814;
+            border-top: 1px solid #f0ece4;
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+        }
+        .co-total-row .label { font-weight: 500; }
+        .co-total-row .value { font-weight: 600; color: #1a1814; }
+        .co-total-row.grand .value { color: #c0a062; font-size: 1.2rem; }
+
+        /* Shipping free badge */
+        .badge-free {
+            background: #eaf4e6;
+            color: #5a8a4e;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        /* Trust badges at bottom */
+        .co-trust {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #f0ece4;
+        }
+        .co-trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.68rem;
+            color: #999;
+            text-align: center;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .co-trust-item svg { color: #c0a062; }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 900px) {
+            .co-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 1.5rem;
+            }
+            .co-summary { position: static; order: -1; }
+            .co-form-row.three { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 540px) {
+            .co-form-row { grid-template-columns: 1fr; }
+            .co-form-row.three { grid-template-columns: 1fr; }
+            .co-section { padding: 1.4rem; }
+            .co-summary-card { padding: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ====  HEADER ==== -->
+<header class="co-header">
+    <div class="co-header-inner">
+        <a href="index.html" class="co-brand">AURA</a>
+        <div class="co-secure-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            SECURE CHECKOUT
+        </div>
+    </div>
+</header>
+
+<!-- ==== MAIN ==== -->
+<main class="co-layout">
+
+    <!-- ==== LEFT: FORM ==== -->
+    <div class="co-form-side">
+
+        <a href="cart.html" style="color: #c0a062; font-size: 0.85rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; margin-bottom: 1.5rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            Return to Cart
+        </a>
+
+        <!-- Step Indicator -->
+        <div class="co-steps">
+            <div class="co-step active">
+                <div class="co-step-num">1</div>
+                Information
+            </div>
+            <div class="co-step-divider"></div>
+            <div class="co-step">
+                <div class="co-step-num">2</div>
+                Shipping
+            </div>
+            <div class="co-step-divider"></div>
+            <div class="co-step">
+                <div class="co-step-num">3</div>
+                Payment
+            </div>
+        </div>
+
+        <form id="checkout-form" novalidate>
+
+            <!-- Contact Info -->
+            <div class="co-section">
+                <div class="co-section-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    Contact Information
+                </div>
+                <div class="co-form-row full">
+                    <div class="co-field">
+                        <label>Email Address</label>
+                        <input type="email" id="co-email" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+                </div>
+                <label class="co-checkbox">
+                    <input type="checkbox" id="co-newsletter">
+                    Keep me updated with exclusive offers and new collections
+                </label>
+            </div>
+
+            <!-- Shipping Address -->
+            <div class="co-section">
+                <div class="co-section-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Shipping Address
+                </div>
+
+                <div class="co-form-row">
+                    <div class="co-field">
+                        <label>First Name</label>
+                        <input type="text" id="co-fname" placeholder="Priya" required autocomplete="given-name">
+                    </div>
+                    <div class="co-field">
+                        <label>Last Name</label>
+                        <input type="text" id="co-lname" placeholder="Sharma" required autocomplete="family-name">
+                    </div>
+                </div>
+
+                <div class="co-form-row full" style="margin-bottom:1rem">
+                    <div class="co-field">
+                        <label>Address</label>
+                        <input type="text" id="co-addr" placeholder="Flat / House No., Street Name" required autocomplete="address-line1">
+                    </div>
+                </div>
+
+                <div class="co-form-row full" style="margin-bottom:1rem">
+                    <div class="co-field">
+                        <label>Apartment, Suite, Landmark <span style="color:#bbb;font-weight:400">(optional)</span></label>
+                        <input type="text" id="co-addr2" placeholder="Building, Floor, Wing, etc." autocomplete="address-line2">
+                    </div>
+                </div>
+
+                <div class="co-form-row three">
+                    <div class="co-field">
+                        <label>City</label>
+                        <input type="text" id="co-city" placeholder="Mumbai" required autocomplete="address-level2">
+                    </div>
+                    <div class="co-field">
+                        <label>State</label>
+                        <select id="co-state" required autocomplete="address-level1">
+                            <option value="">Select State</option>
+                            <option>Maharashtra</option>
+                            <option>Delhi</option>
+                            <option>Karnataka</option>
+                            <option>Tamil Nadu</option>
+                            <option>Gujarat</option>
+                            <option>Rajasthan</option>
+                            <option>West Bengal</option>
+                            <option>Telangana</option>
+                            <option>Uttar Pradesh</option>
+                            <option>Punjab</option>
+                            <option>Haryana</option>
+                            <option>Kerala</option>
+                        </select>
+                    </div>
+                    <div class="co-field">
+                        <label>PIN Code</label>
+                        <input type="text" id="co-pin" placeholder="400001" required autocomplete="postal-code" maxlength="6">
+                    </div>
+                </div>
+
+                <div class="co-form-row full" style="margin-top:1rem;margin-bottom:0">
+                    <div class="co-field">
+                        <label>Phone Number</label>
+                        <input type="tel" id="co-phone" placeholder="+91 98765 43210" required autocomplete="tel">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment -->
+            <div class="co-section">
+                <div class="co-section-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    Payment Method
+                </div>
+
+                <div class="co-security-note">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    256-bit SSL encrypted &amp; 100% secure
+                </div>
+
+                <div class="co-payment-opts">
+
+                    <!-- Credit / Debit Card -->
+                    <label class="co-pay-opt" onclick="toggleCardForm(true)">
+                        <input type="radio" name="payment" value="card" checked>
+                        <span class="co-pay-opt-label">Credit / Debit Card</span>
+                        <div class="co-pay-opt-icons">
+                            <span class="co-card-icon" style="color:#1a1f71">VISA</span>
+                            <span class="co-card-icon" style="color:#eb001b">MC</span>
+                            <span class="co-card-icon" style="color:#2e77bc">AMEX</span>
+                        </div>
+                    </label>
+                    <div class="co-card-detail show" id="card-form">
+                        <div class="co-form-row full" style="margin-bottom:1rem">
+                            <div class="co-field">
+                                <label>Card Number</label>
+                                <input type="text" placeholder="0000  0000  0000  0000" maxlength="19" id="co-card-num" oninput="formatCard(this)">
+                            </div>
+                        </div>
+                        <div class="co-form-row">
+                            <div class="co-field">
+                                <label>Expiry Date</label>
+                                <input type="text" placeholder="MM / YY" maxlength="7" id="co-expiry" oninput="formatExpiry(this)">
+                            </div>
+                            <div class="co-field">
+                                <label>CVV</label>
+                                <input type="password" placeholder="•••" maxlength="4" id="co-cvv">
+                            </div>
+                        </div>
+                        <div class="co-form-row full" style="margin-bottom:0">
+                            <div class="co-field">
+                                <label>Cardholder Name</label>
+                                <input type="text" placeholder="Name on card" id="co-card-name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- UPI -->
+                    <label class="co-pay-opt" onclick="toggleCardForm(false)">
+                        <input type="radio" name="payment" value="upi">
+                        <span class="co-pay-opt-label">UPI</span>
+                        <span class="co-card-icon" style="color:#5f259f">UPI</span>
+                    </label>
+                    <div class="co-card-detail" id="upi-form" style="display:none">
+                        <div class="co-field">
+                            <label>UPI ID</label>
+                            <input type="text" placeholder="yourname@upi">
+                        </div>
+                    </div>
+
+                    <!-- Net Banking -->
+                    <label class="co-pay-opt" onclick="toggleCardForm(false)">
+                        <input type="radio" name="payment" value="netbanking">
+                        <span class="co-pay-opt-label">Net Banking</span>
+                    </label>
+
+                    <!-- COD -->
+                    <label class="co-pay-opt" onclick="toggleCardForm(false)">
+                        <input type="radio" name="payment" value="cod">
+                        <span class="co-pay-opt-label">Cash on Delivery</span>
+                        <span style="font-size:0.72rem;color:#c0a062;font-weight:600">Available</span>
+                    </label>
+
+                </div><!-- /.co-payment-opts -->
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="submit" class="co-submit-btn" style="width: auto; padding: 1.1rem 2.5rem; margin-top: 0; min-width: 250px;">
+                    Place Order &nbsp;&rarr;
+                </button>
+            </div>
+
+            <p style="text-align:center;font-size:0.78rem;color:#aaa;margin-top:1rem;line-height:1.6">
+                By placing your order, you agree to our
+                <a href="#" style="color:#c0a062;text-decoration:none">Terms &amp; Conditions</a> and
+                <a href="#" style="color:#c0a062;text-decoration:none">Privacy Policy</a>
+            </p>
+
+        </form>
+    </div><!-- /.co-form-side -->
+
+
+    <!-- ==== RIGHT: ORDER SUMMARY ==== -->
+    <aside class="co-summary">
+        <div class="co-summary-card">
+            <div class="co-summary-title">Order Summary</div>
+
+            <!-- Cart Items -->
+            <div id="checkout-items">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Promo Code -->
+            <div class="co-promo-row">
+                <input class="co-promo-input" type="text" placeholder="Gift card or discount code">
+                <button type="button" class="co-promo-btn">Apply</button>
+            </div>
+
+            <!-- Totals -->
+            <div class="co-totals">
+                <div class="co-total-row">
+                    <span class="label">Subtotal</span>
+                    <span class="value" id="co-subtotal">&#8377;0</span>
+                </div>
+                <div class="co-total-row">
+                    <span class="label">Shipping</span>
+                    <span class="badge-free">FREE</span>
+                </div>
+                <div class="co-total-row">
+                    <span class="label">Tax (GST 3%)</span>
+                    <span class="value" id="co-tax">&#8377;0</span>
+                </div>
+                <div class="co-total-row grand">
+                    <span class="label">Total</span>
+                    <span class="value" id="co-total">&#8377;0</span>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="co-trust">
+                <div class="co-trust-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Secure
+                </div>
+                <div class="co-trust-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    Free Returns
+                </div>
+                <div class="co-trust-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8zM1.5 18.5a2.5 2.5 0 105 0 2.5 2.5 0 00-5 0z"/><path d="M18.5 18.5a2.5 2.5 0 105 0 2.5 2.5 0 00-5 0z"/></svg>
+                    Express Ship
+                </div>
+                <div class="co-trust-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+                    24/7 Support
+                </div>
+            </div>
+        </div>
+    </aside>
+
+</main>
+
+
+<script src="assets/js/main.js"></script>
+
+<script>
+    function fmt(n) { return '&#8377;' + Math.round(n).toLocaleString("en-IN"); }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Redirect if not logged in
+        
+
+        renderOrderSummary();
+
+        // Bind step navigation
+        const btnContinueToShipping = document.getElementById("btn-continue-to-shipping");
+        if (btnContinueToShipping) btnContinueToShipping.addEventListener("click", () => changeStep(2));
+        
+        const btnBackToInfo = document.getElementById("btn-back-to-info");
+        if (btnBackToInfo) btnBackToInfo.addEventListener("click", () => changeStep(1));
+        
+        const btnContinueToPayment = document.getElementById("btn-continue-to-payment");
+        if (btnContinueToPayment) btnContinueToPayment.addEventListener("click", () => changeStep(3));
+        
+        const btnBackToShipping = document.getElementById("btn-back-to-shipping");
+        if (btnBackToShipping) btnBackToShipping.addEventListener("click", () => changeStep(2));
+        
+        // Handle payment method toggles
+        document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+            radio.addEventListener("change", (e) => {
+                document.getElementById("card-form").style.display = e.target.value === "card" ? "block" : "none";
+                document.getElementById("upi-form").style.display = e.target.value === "upi" ? "block" : "none";
+            });
+        });
+
+        // Place Order button
+        const btnPlaceOrder = document.getElementById("btn-place-order");
+        if (btnPlaceOrder) {
+            btnPlaceOrder.addEventListener("click", placeOrder);
+        }
+    });
+
+    function changeStep(stepNum) {
+        document.querySelectorAll(".co-step-content").forEach((el, i) => {
+            el.style.display = (i + 1) === stepNum ? "block" : "none";
+        });
+        document.querySelectorAll(".co-step").forEach((el, i) => {
+            if ((i + 1) === stepNum) el.classList.add("active");
+            else el.classList.remove("active");
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderOrderSummary() {
+        const cart = JSON.parse(localStorage.getItem("jewellery_cart") || "[]");
+        
+
+        const listContainer = document.getElementById("checkout-items");
+        if (!listContainer) return;
+
+        let html = "";
+        let total = 0;
+        cart.forEach(item => {
+            total += item.price * item.quantity;
+            html += `
+            <div style="display:flex; gap:1rem; margin-bottom:1.5rem;">
+                <div style="position:relative;">
+                    <img src="${item.image}" alt="${item.name}" style="width:70px; height:85px; object-fit:cover; border-radius:10px; border:1px solid #f0ece4; background:#faf8f4;">
+                    <div style="position:absolute; top:-8px; right:-8px; background:rgba(26,24,20,0.8); color:#fff; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:600; font-family:'Montserrat',sans-serif;">${item.quantity}</div>
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+                    <div style="font-family:'Cinzel',serif; font-size:0.95rem; font-weight:500; color:#1a1814;">${item.name}</div>
+                    <div style="font-size:0.75rem; color:#aaa; font-family:'Montserrat',sans-serif; text-transform:uppercase; letter-spacing:0.08em; margin-top:2px;">${item.category || ""}</div>
+                </div>
+                <div style="font-family:'Montserrat',sans-serif; font-weight:600; color:#1a1814; font-size:0.95rem; align-self:center;">${fmt(item.price * item.quantity)}</div>
+            </div>`;
+        });
+        listContainer.innerHTML = html;
+
+        const tax = Math.round(total * 0.03);
+        const stEl = document.getElementById("co-subtotal");
+        if(stEl) stEl.innerHTML = fmt(total);
+        const txEl = document.getElementById("co-tax");
+        if(txEl) txEl.innerHTML = fmt(tax);
+        const totEl = document.getElementById("co-total");
+        if(totEl) totEl.innerHTML = fmt(total + tax);
+    }
+
+    function placeOrder(e) {
+        e.preventDefault();
+        const cart = JSON.parse(localStorage.getItem("jewellery_cart") || "[]");
+        if (cart.length === 0) return;
+
+        let total = 0;
+        cart.forEach(item => total += item.price * item.quantity);
+        const tax = Math.round(total * 0.03);
+        const grandTotal = total + tax;
+
+        // Collect dummy order data
+        const orderId = "AURA-" + new Date().toISOString().replace(/\D/g, "").substring(0,8) + "-" + Math.floor(Math.random()*1000).toString().padStart(3,"0");
+        
+        const order = {
+            orderId: orderId,
+            timestamp: Date.now(),
+            items: cart,
+            total: grandTotal,
+            subtotal: total,
+            tax: tax
+        };
+
+        const orders = JSON.parse(localStorage.getItem("aura_orders") || "[]");
+        orders.push(order);
+        localStorage.setItem("aura_orders", JSON.stringify(orders));
+
+        // Clear cart ONLY after order is saved
+        localStorage.removeItem("jewellery_cart");
+
+        // Show overlay animation
+        const overlay = document.createElement("div");
+        overlay.style.cssText = "position:fixed; inset:0; background:rgba(255,255,255,0.95); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(5px);";
+        overlay.innerHTML = `
+            <svg class="co-success-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6a8f5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:2rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <h2 style="font-family:'Cinzel',serif; font-size:2rem; color:#1a1814; font-weight:400; margin-bottom:1rem; text-align:center;">Processing Order...</h2>
+        `;
+        document.body.appendChild(overlay);
+
+        setTimeout(() => {
+            window.location.href = "order-success.html?order=" + orderId;
+        }, 1500);
+    }
+</script>
+</body>
+</html>

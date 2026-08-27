@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="description" content="Discover timeless luxury jewellery pieces crafted to celebrate every moment. Explore our elegant collections.">
+    <title>Aura Fine Jewellery | Luxury E-Commerce</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
+    <link rel="stylesheet" href="assets/css/components_v4.css">
+    <link rel="stylesheet" href="assets/css/arc_carousel.css?v=1787380891">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=4">
+    
+    <!-- Icons (Phosphor Icons or FontAwesome placeholder) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+        <!-- HEADER -->
+    <header class="header">
+        <div class="promo-bar">
+            Complimentary Shipping on Orders Above &#8377;50,000 | Book a Virtual Consultation
+        </div>
+        <div class="container main-nav">
+            <div class="nav-container">
+                <button class="mobile-menu-btn" aria-label="Open Menu">
+                    <i class="ph ph-list"></i>
+                </button>
+                
+                <a href="index.html" class="brand-logo">AURA</a>
+                
+                                                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    
+                    <div class="nav-item-dropdown">
+                        <a href="shop.html" class="nav-link" style="display: flex; align-items: center; gap: 5px;">Shop <i class="ph ph-caret-down" style="font-size: 0.8rem;"></i></a>
+                        
+                                                <div class="bluestone-mega-menu" style="width: 800px; grid-template-columns: 1fr 1fr 250px;">
+                            <!-- Column 1 -->
+                            <div class="mega-column">
+                                <div class="mega-group">
+                                    <h4>Shop By Category</h4>
+                                    <ul class="mega-list">
+                                        <li><a href="rings.html">Rings <span class="badge-new-orange">New</span></a></li>
+                                        <li><a href="earrings.html">Earrings</a></li>
+                                        <li><a href="necklaces.html">Necklaces</a></li>
+                                        <li><a href="bracelets.html">Bracelets</a></li>
+                                        <li><a href="bangles.html">Bangles</a></li>
+                                        <li><a href="mangalsutras.html">Mangalsutras</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 2 -->
+                            <div class="mega-column">
+                                <div class="mega-group">
+                                    <h4>By Collection</h4>
+                                    <ul class="mega-list">
+                                        <li><a href="shop.html?collection=everyday">Everyday Elegance</a></li>
+                                        <li><a href="shop.html?collection=bridal">The Bridal Edit</a></li>
+                                        <li><a href="shop.html?collection=festive">Festive Collection</a></li>
+                                        <li><a href="mens.html">Men's Jewellery</a></li>
+                                        <li><a href="shop.html?collection=gifting">The Gifting Hub</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 3 Image -->
+                            <div class="mega-column" style="padding-left: 1rem;">
+                                <img src="assets/images/categories/RING.png" alt="Featured Ring" class="mega-promo-img" style="border-radius: 8px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="collections.html" class="nav-link">Collections</a>
+                    <a href="new_arrivals.html" class="nav-link">New Arrivals</a>
+                    <a href="bridal.html" class="nav-link">Bridal</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                
+                <div class="nav-icons">
+                    <!-- Static Search Bar -->
+                    <form action="shop.html" method="GET" style="display: flex; align-items: center; background: #f5f5f5; border-radius: 20px; padding: 6px 15px; margin-right: 10px; border: 1px solid #e0e0e0; transition: all 0.3s ease;">
+                        <input type="text" name="q" placeholder="Search jewellery..." style="border: none; outline: none; background: transparent; font-size: 0.85rem; width: 180px; color: var(--text-primary);">
+                        <button type="submit" style="background: none; border: none; cursor: pointer; color: var(--text-secondary); padding: 0; display: flex; align-items: center; justify-content: center;"><i class="ph ph-magnifying-glass" style="font-size: 1.2rem;"></i></button>
+                    </form>
+                    <a href="login.html" class="icon-btn" aria-label="Account"><i class="ph ph-user"></i></a>
+                                        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+                        <i class="ph ph-heart"></i>
+                        <span class="wishlist-count" style="display: none;">0</span>
+                    </a>
+                    <a href="cart.html" class="icon-btn" aria-label="Shopping Bag">
+                        <i class="ph ph-handbag"></i>
+                        <span class="cart-count" style="display: none;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <!-- MEN'S HERO -->
+        <section class="hero-slider" style="height: 70vh;">
+            <div class="hero-slide active" style="background-image: url('assets/images/products/mens_herobenner.png'); background-position: center; background-size: cover;">
+                <!-- Dark charcoal overlay -->
+                <div class="hero-slide-overlay" style="background: linear-gradient(to right, rgba(20,20,20,0.85) 0%, rgba(20,20,20,0.4) 100%);"></div>
+                <div class="container hero-slide-content">
+                    <div style="max-width: 600px; color: var(--white);">
+                        <h1 class="slide-title" style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem; color: #f2f2f2; font-family: var(--font-secondary);">THE MODERN MAN</h1>
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #d0d0d0; font-family: var(--font-primary);">Jewellery that defines your everyday style.</p>
+                        <div class="slide-buttons">
+                            <a href="#mens-new" class="btn btn-primary" style="background-color: #222; border-color: #333; color: #f0f0f0;">SHOP MEN'S JEWELLERY</a>
+                            <a href="#mens-collections" class="btn btn-outline-light" style="border-color: #666; color: #e0e0e0;">EXPLORE COLLECTIONS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOP MEN'S JEWELLERY (8 CATEGORIES) -->
+        <section id="mens-collections" class="section container" style="padding-top: 5rem; padding-bottom: 3rem;">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <h2 class="section-title" style="font-size: 2.5rem; text-transform: uppercase;">SHOP MEN'S JEWELLERY</h2>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 1.1rem;">Designed for confidence. Crafted for every occasion.</p>
+            </div>
+            
+            <div class="grid responsive-product-grid">
+                <!-- Category 1 -->
+                <a href="necklaces.html?gender=him" class="clean-cat-card" style="background-color: #f8f7f5;">
+                    <div class="clean-cat-img"><img src="assets/images/products/mens_chain.jpg" alt="Chains"></div>
+                    <div class="clean-cat-title">CHAINS</div>
+                </a>
+                <!-- Category 2 -->
+                <a href="pendants.html?gender=him" class="clean-cat-card" style="background-color: #f8f7f5;">
+                    <div class="clean-cat-img"><img src="assets/images/products/earringmen.jpg" alt="Pendants"></div>
+                    <div class="clean-cat-title">PENDANTS</div>
+                </a>
+                <!-- Category 3 -->
+                <a href="bracelets.html?gender=him" class="clean-cat-card" style="background-color: #f8f7f5;">
+                    <div class="clean-cat-img"><img src="assets/images/products/mens_braclet.jpg" alt="Bracelets"></div>
+                    <div class="clean-cat-title">BRACELETS</div>
+                </a>
+                <!-- Category 4 -->
+                <a href="rings.html?gender=him" class="clean-cat-card" style="background-color: #f8f7f5;">
+                    <div class="clean-cat-img"><img src="assets/images/products/mens_ring.jpg" alt="Rings"></div>
+                    <div class="clean-cat-title">RINGS</div>
+                </a>
+                <!-- Category 5 -->
+                <a href="earrings.html?gender=him" class="clean-cat-card" style="background-color: #f8f7f5;">
+                    <div class="clean-cat-img"><img src="assets/images/products/earringmen_hover.jpg" alt="Earrings"></div>
+                    <div class="clean-cat-title">EARRINGS</div>
+                </a>
+                <!-- Category 6 -->
+                <a href="shop.html?category=kadas&gender=him" class="clean-cat-card" style="background-color: #f8f7f5;">
+                    <div class="clean-cat-img"><img src="assets/images/products/mens_bracslet1.jpg" alt="Kadas"></div>
+                    <div class="clean-cat-title">KADAS</div>
+                </a>
+                <!-- Category 7 -->
+                <a href="shop.html?category=cufflinks&gender=him" class="clean-cat-card" style="background-color: #f8f7f5;">
+                    <div class="clean-cat-img"><img src="assets/images/products/mens_ring.jpg" alt="Cufflinks"></div>
+                    <div class="clean-cat-title">CUFFLINKS</div>
+                </a>
+                <!-- Category 8 -->
+                <a href="shop.html?category=sets&gender=him" class="clean-cat-card" style="background-color: #f8f7f5;">
+                    <div class="clean-cat-img"><img src="assets/images/products/mens_chian2.jpg" alt="Jewellery Sets"></div>
+                    <div class="clean-cat-title">JEWELLERY SETS</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- NEW FOR HIM -->
+        <section id="mens-new" class="section container" style="background-color: #fcfcfc; padding: 4rem 5%; border-top: 1px solid #eee;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                <div>
+                    <h2 class="section-title" style="margin-bottom: 0.5rem; font-size: 2rem;">NEW FOR HIM</h2>
+                    <p style="color: var(--text-secondary);">Fresh designs for a modern wardrobe.</p>
+                </div>
+                <a href="shop.html?category=new&gender=him" style="color: var(--text-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem; letter-spacing: 1px;">VIEW ALL &rarr;</a>
+            </div>
+            
+            <div class="grid responsive-product-grid" id="mens-new-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- EVERYDAY, REDEFINED -->
+        <section class="section container" style="margin-top: 3rem;">
+            <div style="border-radius: 12px; overflow: hidden; background-color: #1a1a1a; display: flex; flex-wrap: wrap; min-height: 350px;">
+                <div style="flex: 1 1 300px; padding: 4rem; display: flex; flex-direction: column; justify-content: center; color: white;">
+                    <h2 style="font-family: var(--font-secondary); font-size: 2.5rem; margin-bottom: 1rem;">EVERYDAY, REDEFINED</h2>
+                    <p style="color: #bbb; font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; max-width: 400px;">Minimal pieces. Strong details. Effortless style.</p>
+                    <a href="shop.html?collection=everyday&gender=him" class="btn btn-primary" style="align-self: flex-start; background-color: white; color: #1a1a1a; border-color: white;">SHOP EVERYDAY</a>
+                </div>
+                <div style="flex: 1 1 300px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background-color: #333; min-height: 300px;">
+                    <div style="background-image: url('assets/images/products/mens_chain.jpg'); background-size: cover; background-position: center; position: relative;">
+                        <span style="position: absolute; bottom: 10px; left: 10px; color: white; font-weight: bold; font-size: 0.8rem; background: rgba(0,0,0,0.5); padding: 2px 6px;">CHAINS</span>
+                    </div>
+                    <div style="background-image: url('assets/images/products/mens_braclet.jpg'); background-size: cover; background-position: center; position: relative;">
+                        <span style="position: absolute; bottom: 10px; left: 10px; color: white; font-weight: bold; font-size: 0.8rem; background: rgba(0,0,0,0.5); padding: 2px 6px;">BRACELETS</span>
+                    </div>
+                    <div style="background-image: url('assets/images/products/earringmen.jpg'); background-size: cover; background-position: center; position: relative;">
+                        <span style="position: absolute; bottom: 10px; left: 10px; color: white; font-weight: bold; font-size: 0.8rem; background: rgba(0,0,0,0.5); padding: 2px 6px;">PENDANTS</span>
+                    </div>
+                    <div style="background-image: url('assets/images/products/mens_ring.jpg'); background-size: cover; background-position: center; position: relative;">
+                        <span style="position: absolute; bottom: 10px; left: 10px; color: white; font-weight: bold; font-size: 0.8rem; background: rgba(0,0,0,0.5); padding: 2px 6px;">RINGS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+        <!-- THE GENTLEMEN'S EDIT -->
+        <section class="section container" style="margin-top: 5rem; background-color: #f7f6f4; padding: 4rem; border-radius: 12px;">
+            <div style="margin-bottom: 3rem;">
+                <h2 style="font-family: var(--font-secondary); font-size: 2rem; margin-bottom: 0.5rem; color: var(--text-primary);">THE GENTLEMEN'S EDIT</h2>
+                <p style="color: var(--text-secondary);">Distinctive jewellery for those who appreciate the details.</p>
+                <a href="shop.html?gender=him" style="color: var(--text-primary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; margin-top: 1rem; display: inline-block;">VIEW COLLECTIONS &rarr;</a>
+            </div>
+            
+            <div class="grid responsive-product-grid">
+                <div style="background-image: url('assets/images/products/mens_chian2.jpg'); height: 300px; background-size: cover; background-position: center; border-radius: 8px; position: relative;">
+                    <span style="position: absolute; bottom: 20px; width: 100%; text-align: center; color: white; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">CLASSIC</span>
+                </div>
+                <div style="background-image: url('assets/images/products/mens_bracslet1.jpg'); height: 300px; background-size: cover; background-position: center; border-radius: 8px; position: relative;">
+                    <span style="position: absolute; bottom: 20px; width: 100%; text-align: center; color: white; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">CONTEMPORARY</span>
+                </div>
+                <div style="background-image: url('assets/images/products/earringmen_hover.jpg'); height: 300px; background-size: cover; background-position: center; border-radius: 8px; position: relative;">
+                    <span style="position: absolute; bottom: 20px; width: 100%; text-align: center; color: white; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">BOLD</span>
+                </div>
+                <div style="background-image: url('assets/images/products/mens_chain.jpg'); height: 300px; background-size: cover; background-position: center; border-radius: 8px; position: relative;">
+                    <span style="position: absolute; bottom: 20px; width: 100%; text-align: center; color: white; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">MINIMAL</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- MOST LOVED BY HIM -->
+        <section class="section container" style="margin-top: 5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                <div>
+                    <h2 class="section-title" style="margin-bottom: 0.5rem; font-size: 2rem;">MOST LOVED BY HIM</h2>
+                    <p style="color: var(--text-secondary);">The pieces men are choosing right now.</p>
+                </div>
+                <a href="shop.html?gender=him" style="color: var(--text-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem; letter-spacing: 1px;">VIEW ALL &rarr;</a>
+            </div>
+            
+            <div class="grid responsive-product-grid" id="mens-bestsellers-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- BOLD BY DESIGN (DARK BANNER) -->
+        <section class="section container" style="margin-top: 5rem;">
+            <div style="border-radius: 12px; overflow: hidden; background-color: #121212; display: flex; flex-wrap: wrap; min-height: 400px;">
+                <div style="flex: 1 1 300px; padding: 5rem 2rem; display: flex; flex-direction: column; justify-content: center; color: white;">
+                    <h2 style="font-family: var(--font-secondary); font-size: 3rem; margin-bottom: 1.5rem; letter-spacing: 1px;">BOLD BY DESIGN</h2>
+                    <p style="color: #bbb; font-size: 1.1rem; line-height: 1.6; margin-bottom: 2.5rem; max-width: 400px;">Confident forms. Refined finishes. Made to stand apart.</p>
+                    <a href="shop.html?gender=him" class="btn btn-primary" style="align-self: flex-start; background-color: white; color: #121212; border-color: white;">EXPLORE THE COLLECTION</a>
+                </div>
+                <div style="flex: 1 1 300px; min-height: 300px; background-image: url('assets/images/products/mens_braclet.jpg'); background-size: cover; background-position: center;">
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL THREE CARDS -->
+        <section class="section container" style="margin-top: 5rem; padding-bottom: 4rem;">
+            <div class="grid responsive-product-grid">
+                
+                <!-- Gifting -->
+                <a href="shop.html?collection=gifting&gender=him" style="text-decoration: none; border-radius: 12px; overflow: hidden; background-color: #f7f6f4; display: flex; flex-direction: column; height: 100%;">
+                    <div style="padding: 2rem; flex: 1;">
+                        <h3 style="font-family: var(--font-secondary); font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.5rem;">FIND SOMETHING HE'LL KEEP</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; margin-top: 1rem;">
+                            <li style="margin-bottom: 0.5rem;"><b>For Him:</b> Timeless pieces for his everyday style.</li>
+                            <li style="margin-bottom: 0.5rem;"><b>For Husband:</b> A meaningful gift for your forever person.</li>
+                            <li><b>For Dad:</b> Something special for the man who gave you everything.</li>
+                        </ul>
+                        <span style="color: var(--text-primary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">EXPLORE GIFTS &rarr;</span>
+                    </div>
+                    <div style="height: 180px; background-image: url('assets/images/hero/Gifting.png'); background-size: cover; background-position: center; filter: grayscale(50%);"></div>
+                </a>
+
+                <!-- Personalisation -->
+                <a href="#" style="text-decoration: none; border-radius: 12px; overflow: hidden; background-color: #f0ebe1; display: flex; flex-direction: column; height: 100%;">
+                    <div style="padding: 2rem; flex: 1;">
+                        <h3 style="font-family: var(--font-secondary); font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.5rem;">MAKE IT HIS</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">Add a personal touch to something timeless.</p>
+                        <ul style="list-style: none; padding: 0; color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">
+                            <li>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Initials</li>
+                            <li>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Name</li>
+                            <li>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Date</li>
+                            <li>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Engraving</li>
+                        </ul>
+                        <span style="color: var(--text-primary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">PERSONALISE NOW &rarr;</span>
+                    </div>
+                    <div style="height: 180px; background-image: url('assets/images/products/earringmen.jpg'); background-size: cover; background-position: center;"></div>
+                </a>
+
+                <!-- Sets -->
+                <a href="shop.html?category=sets&gender=him" style="text-decoration: none; border-radius: 12px; overflow: hidden; background-color: #e5e5e5; display: flex; flex-direction: column; height: 100%;">
+                    <div style="padding: 2rem; flex: 1;">
+                        <h3 style="font-family: var(--font-secondary); font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.5rem;">THE COMPLETE LOOK</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">Confident combinations that complete his style.</p>
+                        <span style="color: var(--text-primary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">SHOP SETS &rarr;</span>
+                    </div>
+                    <div style="height: 180px; background-image: url('assets/images/products/mens_chain.jpg'); background-size: cover; background-position: center;"></div>
+                </a>
+
+            </div>
+        </section>
+    </main>
+
+<!-- FOOTER -->
+        <style>
+.footer {
+    background-color: #2a2422;
+    color: #fff;
+    padding: 5rem 0 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+.footer h4 {
+    font-family: 'Cinzel', serif;
+    color: #C2A878;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+.footer-links a {
+    color: #d1cbc7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: #C2A878;
+}
+.footer-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 168, 120, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+<style>
+.footer {
+    background-color: #2a2422;
+    color: #fff;
+    padding: 5rem 0 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+.footer h4 {
+    font-family: 'Cinzel', serif !important;
+    color: #C2A878 !important; /* FIXED VISIBILITY */
+    margin-bottom: 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.05em !important;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+.footer-links a {
+    color: #d1cbc7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: #C2A878;
+}
+.footer-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 168, 120, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+<style>
+.footer {
+    background-color: #2a2422;
+    color: #fff;
+    padding: 5rem 0 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+.footer h4 {
+    font-family: 'Cinzel', serif !important;
+    color: #C2A878 !important; /* FIXED VISIBILITY */
+    margin-bottom: 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.05em !important;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+.footer-links a {
+    color: #d1cbc7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: #C2A878;
+}
+.footer-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 168, 120, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- NEW COLUMN: Address & Number -->
+            <div class="footer-col">
+                <h4>CONTACT</h4>
+                <p style="color: #d1cbc7; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                    <strong>AURA Flagship Store</strong><br>
+                    Palladium Mall, Lower Parel<br>
+                    Mumbai, Maharashtra 400013
+                </p>
+                <p style="color: #d1cbc7; font-size: 0.95rem; line-height: 1.8;">
+                    <strong>Phone:</strong> +91 98765 43210<br>
+                    <strong>Email:</strong> concierge@aura.com
+                </p>
+            </div>
+
+            <!-- COLUMN 2: SHOP -->
+            <div class="footer-col">
+                <h4>SHOP</h4>
+                <ul class="footer-links">
+                    <li><a href="womens.html">Women's Jewellery</a></li>
+                    <li><a href="mens.html">Men's Jewellery</a></li>
+                    <li><a href="bridal.html">Bridal</a></li>
+                    <li><a href="new_arrivals.html">New Arrivals</a></li>
+                    <li><a href="collections.html">Collections</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 3: CUSTOMER CARE -->
+            <div class="footer-col">
+                <h4>CUSTOMER CARE</h4>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="shipping.html">Shipping & Delivery</a></li>
+                    <li><a href="returns.html">Returns & Exchanges</a></li>
+                    <li><a href="size-guide.html">Size Guide</a></li>
+                    <li><a href="jewellery-care.html">Jewellery Care</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 4: ABOUT AURA & SUBSCRIBE -->
+            <div class="footer-col">
+                <h4>ABOUT AURA</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="stores.html">Store Locator</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem;">
+                    <h4 style="font-size: 0.9rem !important; margin-bottom: 1rem !important;">SUBSCRIBE</h4>
+                    <div style="display: flex;">
+                        <input type="email" placeholder="Email Address" style="padding: 0.8rem; border: none; background: #fff; width: 100%; outline: none; font-family: inherit; font-size: 0.9rem;">
+                        <button style="padding: 0.8rem 1.2rem; background: #C2A878; border: none; color: #fff; cursor: pointer; font-family: inherit; font-weight: 500;">JOIN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>
+                <a href="#" style="color: #999; text-decoration: none; margin-right: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: #999; text-decoration: none; margin-right: 1.5rem;">Terms & Conditions</a>
+                <span>&copy; 2026 Aura Fine Jewellery. All rights reserved.</span>
+            </div>
+            <div style="display: flex; gap: 1.5rem; font-size: 1.2rem; color: #C2A878;">
+                <i class="ph-fill ph-instagram-logo"></i>
+                <i class="ph-fill ph-facebook-logo"></i>
+                <i class="ph-fill ph-pinterest-logo"></i>
+                <i class="ph-fill ph-youtube-logo"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- JS -->
+    <script src="assets/js/main.js?v=4"></script>
+    <script src="assets/js/products_v4.js"></script>
+    <script src="assets/js/cart.js?v=4"></script>
+    <script src="assets/js/wishlist.js?v=4"></script>
+
+<script>
+(function() {
+    var stage = document.querySelector(".col-arc-stage");
+    if (!stage) return;
+
+    var cards       = Array.from(document.querySelectorAll(".col-arc-card"));
+    var dots        = Array.from(document.querySelectorAll(".col-arc-dot"));
+    var prevBtn     = document.querySelector(".col-arc-prev");
+    var nextBtn     = document.querySelector(".col-arc-next");
+    var total       = cards.length;
+    var current     = 0;
+    var autoTimer   = null;
+    var isAnimating = false;
+    var touchStartX = 0;
+
+    function mod(n, m) { return ((n % m) + m) % m; }
+
+    function apply(idx) {
+        var prev2 = mod(idx - 2, total);
+        var prev1 = mod(idx - 1, total);
+        var next1 = mod(idx + 1, total);
+        var next2 = mod(idx + 2, total);
+
+        cards.forEach(function(card, i) {
+            card.classList.remove("arc-active","arc-prev","arc-next","arc-prev2","arc-next2","arc-hidden");
+            if      (i === idx)   card.classList.add("arc-active");
+            else if (i === prev1) card.classList.add("arc-prev");
+            else if (i === next1) card.classList.add("arc-next");
+            else if (i === prev2) card.classList.add("arc-prev2");
+            else if (i === next2) card.classList.add("arc-next2");
+            else                  card.classList.add("arc-hidden");
+        });
+
+        dots.forEach(function(d, i) {
+            d.classList.toggle("active", i === idx);
+        });
+    }
+
+    function goTo(n, skipAnim) {
+        if (isAnimating && !skipAnim) return;
+        isAnimating = true;
+        current = mod(n, total);
+        apply(current);
+        setTimeout(function() { isAnimating = false; }, 820);
+    }
+
+    function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(function() { goTo(current + 1); }, 5000);
+    }
+
+    function stopAuto() {
+        clearInterval(autoTimer);
+    }
+
+    // Init
+    goTo(0, true);
+    startAuto();
+
+    prevBtn && prevBtn.addEventListener("click", function() { goTo(current - 1); startAuto(); });
+    nextBtn && nextBtn.addEventListener("click", function() { goTo(current + 1); startAuto(); });
+
+    dots.forEach(function(d) {
+        d.addEventListener("click", function() { goTo(+this.dataset.goto); startAuto(); });
+    });
+
+    // Pause on hover
+    stage.addEventListener("mouseenter", stopAuto);
+    stage.addEventListener("mouseleave", startAuto);
+
+    // Touch swipe
+    stage.addEventListener("touchstart", function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener("touchend", function(e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) {
+            diff > 0 ? goTo(current + 1) : goTo(current - 1);
+            startAuto();
+        }
+    }, { passive: true });
+
+    // Click on side cards
+    cards.forEach(function(card, i) {
+        card.addEventListener("click", function() {
+            if (i !== current) { goTo(i); startAuto(); }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

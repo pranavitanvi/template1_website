@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - Aura Fine Jewellery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
+    <link rel="stylesheet" href="assets/css/components_v4.css?v=1787381408">
+    <link rel="stylesheet" href="assets/css/arc_carousel.css?v=1787380891">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=4">
+    <link rel="stylesheet" href="assets/css/editorial_pages.css">
+    <style>
+.faq-layout {
+    display: flex;
+    max-width: 1200px;
+    margin: 120px auto 6rem auto;
+    gap: 6rem;
+    padding: 0 2rem;
+}
+.faq-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+}
+.faq-sidebar-inner {
+    position: sticky;
+    top: 120px;
+}
+.faq-nav-link {
+    display: block;
+    padding: 1rem 0;
+    color: var(--ed-text-muted);
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-light);
+    transition: color 0.3s ease;
+}
+.faq-nav-link:hover, .faq-nav-link.active {
+    color: var(--ed-accent-gold);
+    font-family: 'Cinzel', serif;
+}
+.faq-content-area {
+    flex: 1;
+}
+.faq-section-target {
+    padding-top: 120px;
+    margin-top: -120px;
+}
+@media (max-width: 900px) {
+    .faq-layout { flex-direction: column; gap: 3rem; }
+    .faq-sidebar { width: 100%; }
+    .faq-sidebar-inner { position: static; }
+}
+</style>
+    <style>
+        /* Customer Care Unified Layout */
+        .aura-cc-page {
+            background-color: #FAF8F4;
+            color: #1a1814;
+        }
+        .cc-serif { font-family: 'Cinzel', serif; }
+        .cc-sans { font-family: 'Montserrat', sans-serif; }
+        .cc-gold { color: #9c7f4c; }
+
+        .cc-hero {
+            margin-top: 115px;
+            padding: 5rem 2rem;
+            text-align: center;
+            background-color: var(--ed-bg-champagne);
+            border-bottom: 1px solid rgba(156, 127, 76, 0.2);
+        }
+        .cc-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #1a1814;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        .cc-hero p {
+            color: #666;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .cc-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            padding: 80px 5%;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        /* Sticky Sidebar */
+        .cc-sidebar {
+            flex: 0 0 280px;
+            position: sticky;
+            top: 150px;
+        }
+        .cc-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-left: 1px solid rgba(156, 127, 76, 0.2);
+        }
+        .cc-nav-link {
+            display: block;
+            padding: 1rem 0 1rem 1.5rem;
+            text-decoration: none;
+            color: #555;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .cc-nav-link:hover {
+            color: #9c7f4c;
+        }
+        .cc-nav-link.active {
+            color: #9c7f4c;
+            font-weight: 500;
+        }
+        .cc-nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #9c7f4c;
+        }
+
+        /* Content Area */
+        .cc-content {
+            flex: 1;
+            background: #fff;
+            padding: 4rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            min-height: 600px;
+        }
+        .cc-content h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #1a1814;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(156, 127, 76, 0.2);
+        }
+
+        /* Specific Page Styles */
+        
+        /* Shipping Grid */
+        .ship-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        .ship-card {
+            padding: 2rem;
+            border: 1px solid #f0f0f0;
+            background: #fafafa;
+            transition: transform 0.3s ease;
+        }
+        .ship-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(156, 127, 76, 0.3);
+        }
+        .ship-card i {
+            font-size: 2rem;
+            color: #9c7f4c;
+            margin-bottom: 1rem;
+        }
+        .ship-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #1a1814;
+        }
+        .ship-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Returns Steps */
+        .ret-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .ret-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: #fafafa;
+            border-left: 3px solid #9c7f4c;
+        }
+        .ret-step-num {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #d8c397;
+            line-height: 1;
+        }
+        .ret-step-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #1a1814;
+        }
+        .ret-step-content p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            border-bottom: 1px solid #eee;
+        }
+        .faq-question {
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1a1814;
+            transition: color 0.3s ease;
+        }
+        .faq-question:hover {
+            color: #9c7f4c;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .faq-answer-inner {
+            padding-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        .faq-question i {
+            color: #9c7f4c;
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 900px) {
+            .cc-container {
+                flex-direction: column;
+            }
+            .cc-sidebar {
+                flex: none;
+                width: 100%;
+                position: static;
+            }
+            .cc-nav {
+                border-left: none;
+                border-top: 1px solid rgba(156, 127, 76, 0.2);
+                border-bottom: 1px solid rgba(156, 127, 76, 0.2);
+                padding: 1rem 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .cc-nav-link {
+                padding: 0.5rem 1rem;
+                border: 1px solid #eee;
+                font-size: 0.8rem;
+            }
+            .cc-nav-link.active::before {
+                display: none;
+            }
+            .cc-nav-link.active {
+                background: #9c7f4c;
+                color: #fff;
+            }
+            .cc-content {
+                padding: 2rem;
+            }
+            .ship-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="editorial-layout ">
+<header class="header">
+        <div class="promo-bar">
+            Complimentary Shipping on Orders Above &#8377;50,000 | Book a Virtual Consultation
+        </div>
+        <div class="container main-nav">
+            <div class="nav-container">
+                <button class="mobile-menu-btn" aria-label="Open Menu">
+                    <i class="ph ph-list"></i>
+                </button>
+                
+                <a href="index.html" class="brand-logo">AURA</a>
+                
+                                                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    
+                    <div class="nav-item-dropdown">
+                        <a href="shop.html" class="nav-link" style="display: flex; align-items: center; gap: 5px;">Shop <i class="ph ph-caret-down" style="font-size: 0.8rem;"></i></a>
+                        
+                                                <div class="bluestone-mega-menu" style="width: 800px; grid-template-columns: 1fr 1fr 250px;">
+                            <!-- Column 1 -->
+                            <div class="mega-column">
+                                <div class="mega-group">
+                                    <h4>Shop By Category</h4>
+                                    <ul class="mega-list">
+                                        <li><a href="rings.html">Rings <span class="badge-new-orange">New</span></a></li>
+                                        <li><a href="earrings.html">Earrings</a></li>
+                                        <li><a href="necklaces.html">Necklaces</a></li>
+                                        <li><a href="bracelets.html">Bracelets</a></li>
+                                        <li><a href="bangles.html">Bangles</a></li>
+                                        <li><a href="mangalsutras.html">Mangalsutras</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 2 -->
+                            <div class="mega-column">
+                                <div class="mega-group">
+                                    <h4>By Collection</h4>
+                                    <ul class="mega-list">
+                                        <li><a href="shop.html?collection=everyday">Everyday Elegance</a></li>
+                                        <li><a href="shop.html?collection=bridal">The Bridal Edit</a></li>
+                                        <li><a href="shop.html?collection=festive">Festive Collection</a></li>
+                                        <li><a href="mens.html">Men's Jewellery</a></li>
+                                        <li><a href="shop.html?collection=gifting">The Gifting Hub</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 3 Image -->
+                            <div class="mega-column" style="padding-left: 1rem;">
+                                <img src="assets/images/categories/RING.png" alt="Featured Ring" class="mega-promo-img" style="border-radius: 8px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="collections.html" class="nav-link">Collections</a>
+                    <a href="new_arrivals.html" class="nav-link">New Arrivals</a>
+                    <a href="bridal.html" class="nav-link">Bridal</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                
+                <div class="nav-icons">
+                    <!-- Static Search Bar -->
+                    <form action="shop.html" method="GET" style="display: flex; align-items: center; background: #f5f5f5; border-radius: 20px; padding: 6px 15px; margin-right: 10px; border: 1px solid #e0e0e0; transition: all 0.3s ease;">
+                        <input type="text" name="q" placeholder="Search jewellery..." style="border: none; outline: none; background: transparent; font-size: 0.85rem; width: 180px; color: var(--text-primary);">
+                        <button type="submit" style="background: none; border: none; cursor: pointer; color: var(--text-secondary); padding: 0; display: flex; align-items: center; justify-content: center;"><i class="ph ph-magnifying-glass" style="font-size: 1.2rem;"></i></button>
+                    </form>
+                    <a href="login.html" class="icon-btn" aria-label="Account"><i class="ph ph-user"></i></a>
+                                        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+                        <i class="ph ph-heart"></i>
+                        <span class="wishlist-count" style="display: none;">0</span>
+                    </a>
+                    <a href="cart.html" class="icon-btn" aria-label="Shopping Bag">
+                        <i class="ph ph-handbag"></i>
+                        <span class="cart-count" style="display: none;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="aura-cc-page">
+        <div class="cc-hero">
+            <h1 class="cc-serif">Customer Care</h1>
+            <p class="cc-sans">We are here to assist you with every detail.</p>
+        </div>
+        
+        <div class="cc-container">
+        <aside class="cc-sidebar">
+            <ul class="cc-nav cc-sans">
+                <li><a href="shipping.html" class="cc-nav-link ">Shipping & Delivery</a></li>
+                <li><a href="returns.html" class="cc-nav-link ">Returns & Exchanges</a></li>
+                <li><a href="size-guide.html" class="cc-nav-link ">Size Guide</a></li>
+                <li><a href="jewellery-care.html" class="cc-nav-link ">Jewellery Care</a></li>
+                <li><a href="faqs.html" class="cc-nav-link active">FAQs</a></li>
+            </ul>
+        </aside>
+        <section class="cc-content">
+            <h2 class="cc-serif">Frequently Asked Questions</h2>
+            
+            <div class="faq-container cc-sans">
+                <div class="faq-item">
+                    <div class="faq-question cc-serif">Do you offer custom designs? <i class="ph ph-caret-down"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Yes, we offer bespoke design services. You can collaborate with our master designers to create a truly one-of-a-kind piece. Please book a consultation to begin the process.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question cc-serif">Are your diamonds ethically sourced? <i class="ph ph-caret-down"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Absolutely. We adhere strictly to the Kimberley Process and only source diamonds from trusted suppliers who guarantee conflict-free stones.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question cc-serif">Can I upgrade my diamond later? <i class="ph ph-caret-down"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Yes, we offer a lifetime diamond upgrade program for solitaire rings purchased from Aura. You can upgrade to a larger stone by paying the price difference.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question cc-serif">Do you provide certificates of authenticity? <i class="ph ph-caret-down"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Every purchase includes an Aura Certificate of Authenticity. Diamonds over 0.50 carats are accompanied by a grading report from internationally recognized laboratories like GIA or IGI.</div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.addEventListener('click', () => {
+                        const item = q.parentElement;
+                        item.classList.toggle('active');
+                    });
+                });
+            </script>
+        </section>
+        </div>
+    </main>
+<style>
+.footer {
+    background-color: #2a2422;
+    color: #fff;
+    padding: 5rem 0 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+.footer h4 {
+    font-family: 'Cinzel', serif !important;
+    color: #C2A878 !important; /* FIXED VISIBILITY */
+    margin-bottom: 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.05em !important;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+.footer-links a {
+    color: #d1cbc7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: #C2A878;
+}
+.footer-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 168, 120, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- NEW COLUMN: Address & Number -->
+            <div class="footer-col">
+                <h4>CONTACT</h4>
+                <p style="color: #d1cbc7; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                    <strong>AURA Flagship Store</strong><br>
+                    Palladium Mall, Lower Parel<br>
+                    Mumbai, Maharashtra 400013
+                </p>
+                <p style="color: #d1cbc7; font-size: 0.95rem; line-height: 1.8;">
+                    <strong>Phone:</strong> +91 98765 43210<br>
+                    <strong>Email:</strong> concierge@aura.com
+                </p>
+            </div>
+
+            <!-- COLUMN 2: SHOP -->
+            <div class="footer-col">
+                <h4>SHOP</h4>
+                <ul class="footer-links">
+                    <li><a href="womens.html">Women's Jewellery</a></li>
+                    <li><a href="mens.html">Men's Jewellery</a></li>
+                    <li><a href="bridal.html">Bridal</a></li>
+                    <li><a href="new_arrivals.html">New Arrivals</a></li>
+                    <li><a href="collections.html">Collections</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 3: CUSTOMER CARE -->
+            <div class="footer-col">
+                <h4>CUSTOMER CARE</h4>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="shipping.html">Shipping & Delivery</a></li>
+                    <li><a href="returns.html">Returns & Exchanges</a></li>
+                    <li><a href="size-guide.html">Size Guide</a></li>
+                    <li><a href="jewellery-care.html">Jewellery Care</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMN 4: ABOUT AURA & SUBSCRIBE -->
+            <div class="footer-col">
+                <h4>ABOUT AURA</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="stores.html">Store Locator</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem;">
+                    <h4 style="font-size: 0.9rem !important; margin-bottom: 1rem !important;">SUBSCRIBE</h4>
+                    <div style="display: flex;">
+                        <input type="email" placeholder="Email Address" style="padding: 0.8rem; border: none; background: #fff; width: 100%; outline: none; font-family: inherit; font-size: 0.9rem;">
+                        <button style="padding: 0.8rem 1.2rem; background: #C2A878; border: none; color: #fff; cursor: pointer; font-family: inherit; font-weight: 500;">JOIN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>
+                <a href="#" style="color: #999; text-decoration: none; margin-right: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: #999; text-decoration: none; margin-right: 1.5rem;">Terms & Conditions</a>
+                <span>&copy; 2026 Aura Fine Jewellery. All rights reserved.</span>
+            </div>
+            <div style="display: flex; gap: 1.5rem; font-size: 1.2rem; color: #C2A878;">
+                <i class="ph-fill ph-instagram-logo"></i>
+                <i class="ph-fill ph-facebook-logo"></i>
+                <i class="ph-fill ph-pinterest-logo"></i>
+                <i class="ph-fill ph-youtube-logo"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="assets/js/main.js?v=4"></script>
+    <script src="assets/js/cart.js?v=4"></script>
+    <script src="assets/js/wishlist.js?v=4"></script>
+    <script>
+    document.querySelectorAll('.ed-acc-title').forEach(item => {
+        item.addEventListener('click', () => {
+            const content = item.nextElementSibling;
+            const icon = item.querySelector('i');
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                icon.classList.remove('ph-caret-up');
+                icon.classList.add('ph-caret-down');
+            } else {
+                content.style.display = 'block';
+                icon.classList.remove('ph-caret-down');
+                icon.classList.add('ph-caret-up');
+            }
+        });
+    });
+</script>
+
+<script>
+(function() {
+    var stage = document.querySelector(".col-arc-stage");
+    if (!stage) return;
+
+    var cards       = Array.from(document.querySelectorAll(".col-arc-card"));
+    var dots        = Array.from(document.querySelectorAll(".col-arc-dot"));
+    var prevBtn     = document.querySelector(".col-arc-prev");
+    var nextBtn     = document.querySelector(".col-arc-next");
+    var total       = cards.length;
+    var current     = 0;
+    var autoTimer   = null;
+    var isAnimating = false;
+    var touchStartX = 0;
+
+    function mod(n, m) { return ((n % m) + m) % m; }
+
+    function apply(idx) {
+        var prev2 = mod(idx - 2, total);
+        var prev1 = mod(idx - 1, total);
+        var next1 = mod(idx + 1, total);
+        var next2 = mod(idx + 2, total);
+
+        cards.forEach(function(card, i) {
+            card.classList.remove("arc-active","arc-prev","arc-next","arc-prev2","arc-next2","arc-hidden");
+            if      (i === idx)   card.classList.add("arc-active");
+            else if (i === prev1) card.classList.add("arc-prev");
+            else if (i === next1) card.classList.add("arc-next");
+            else if (i === prev2) card.classList.add("arc-prev2");
+            else if (i === next2) card.classList.add("arc-next2");
+            else                  card.classList.add("arc-hidden");
+        });
+
+        dots.forEach(function(d, i) {
+            d.classList.toggle("active", i === idx);
+        });
+    }
+
+    function goTo(n, skipAnim) {
+        if (isAnimating && !skipAnim) return;
+        isAnimating = true;
+        current = mod(n, total);
+        apply(current);
+        setTimeout(function() { isAnimating = false; }, 820);
+    }
+
+    function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(function() { goTo(current + 1); }, 5000);
+    }
+
+    function stopAuto() {
+        clearInterval(autoTimer);
+    }
+
+    // Init
+    goTo(0, true);
+    startAuto();
+
+    prevBtn && prevBtn.addEventListener("click", function() { goTo(current - 1); startAuto(); });
+    nextBtn && nextBtn.addEventListener("click", function() { goTo(current + 1); startAuto(); });
+
+    dots.forEach(function(d) {
+        d.addEventListener("click", function() { goTo(+this.dataset.goto); startAuto(); });
+    });
+
+    // Pause on hover
+    stage.addEventListener("mouseenter", stopAuto);
+    stage.addEventListener("mouseleave", startAuto);
+
+    // Touch swipe
+    stage.addEventListener("touchstart", function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener("touchend", function(e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) {
+            diff > 0 ? goTo(current + 1) : goTo(current - 1);
+            startAuto();
+        }
+    }, { passive: true });
+
+    // Click on side cards
+    cards.forEach(function(card, i) {
+        card.addEventListener("click", function() {
+            if (i !== current) { goTo(i); startAuto(); }
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
+
+
+
