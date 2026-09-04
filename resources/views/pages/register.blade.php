@@ -25,6 +25,7 @@
 
     <form id="registerForm" method="POST" action="{{ route('register.submit') }}" style="text-align: left;" onsubmit="handleCustomerRegister(event)">
         @csrf
+        <input type="hidden" name="redirect" value="{{ request('redirect') }}">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
             <div>
                 <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 6px; font-weight: 600;">First Name <span style="color: red;">*</span></label>
@@ -95,6 +96,25 @@
                        style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none;"
                        onfocus="this.style.borderColor='#c0a062'" onblur="this.style.borderColor='#ddd'">
             </div>
+        <!-- Security Captcha Verification -->
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 6px; font-weight: 600;">
+                Security Captcha <span style="color: red;">*</span>
+            </label>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <div style="border-radius: 6px; overflow: hidden; border: 1px solid #ddd; background: #faf7f2; display: flex; align-items: center; justify-content: center; height: 46px; flex-shrink: 0; box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);">
+                    <img id="regCaptchaImg" src="{{ route('captcha.generate') }}" alt="Security Captcha" style="display: block; height: 44px; width: 160px; user-select: none;">
+                </div>
+                <button type="button" onclick="refreshRegCaptcha()" title="Refresh Captcha"
+                        style="width: 44px; height: 44px; border: 1px solid #ddd; border-radius: 6px; background: #faf8f5; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; transition: all 0.2s;"
+                        onmouseover="this.style.borderColor='#c0a062'; this.style.color='#c0a062';"
+                        onmouseout="this.style.borderColor='#ddd'; this.style.color='#555';">
+                    <i class="ph ph-arrows-clockwise" id="regRefreshIcon"></i>
+                </button>
+            </div>
+            <input type="text" name="captcha" id="regCaptcha" class="input-field" placeholder="Enter the 5 characters above" required maxlength="6" autocomplete="off"
+                   style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none; letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase; transition: border-color 0.2s;"
+                   onfocus="this.style.borderColor='#c0a062'" onblur="this.style.borderColor='#ddd'">
         </div>
 
         <button type="submit" id="regSubmitBtn" class="btn btn-primary" 
@@ -122,6 +142,26 @@ function togglePass(id, btn) {
     }
 }
 
+function refreshRegCaptcha() {
+    var img = document.getElementById('regCaptchaImg');
+    var icon = document.getElementById('regRefreshIcon');
+    if (icon) {
+        icon.style.transform = 'rotate(360deg)';
+        icon.style.transition = 'transform 0.5s ease';
+    }
+    if (img) {
+        img.src = "{{ route('captcha.generate') }}?t=" + Date.now();
+    }
+    var input = document.getElementById('regCaptcha');
+    if (input) input.value = '';
+    setTimeout(function() {
+        if (icon) {
+            icon.style.transform = 'none';
+            icon.style.transition = 'none';
+        }
+    }, 550);
+}
+
 function handleCustomerRegister(e) {
     e.preventDefault();
     var form = document.getElementById('registerForm');
@@ -136,6 +176,7 @@ function handleCustomerRegister(e) {
         alertBox.style.color = '#b91c1c';
         alertBox.style.border = '1px solid #fecaca';
         alertBox.innerText = 'Passwords do not match. Please ensure both passwords match.';
+        refreshRegCaptcha();
         return;
     }
 
@@ -180,13 +221,20 @@ function handleCustomerRegister(e) {
             }
 
             setTimeout(function() {
-                window.location.href = resObj.data.redirect || "{{ route('home') }}";
+                var urlParams = new URLSearchParams(window.location.search);
+                var redirect = urlParams.get("redirect") || resObj.data.redirect || "{{ route('home') }}";
+                window.location.href = redirect;
             }, 1000);
         } else {
+            refreshRegCaptcha();
             var msg = resObj.data.message || 'Registration failed.';
             if (resObj.data.errors) {
-                var firstErr = Object.values(resObj.data.errors)[0];
-                if (Array.isArray(firstErr)) msg = firstErr[0];
+                if (resObj.data.errors.captcha) {
+                    msg = resObj.data.errors.captcha[0];
+                } else {
+                    var firstErr = Object.values(resObj.data.errors)[0];
+                    if (Array.isArray(firstErr)) msg = firstErr[0];
+                }
             }
             alertBox.style.display = 'block';
             alertBox.style.background = '#fdf2f2';
@@ -196,6 +244,7 @@ function handleCustomerRegister(e) {
         }
     })
     .catch(function(err) {
+        refreshRegCaptcha();
         btn.disabled = false;
         btn.innerText = 'CREATE ACCOUNT';
         alertBox.style.display = 'block';

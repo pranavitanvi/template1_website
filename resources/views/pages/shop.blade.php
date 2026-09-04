@@ -13,8 +13,20 @@
 
     <!-- Header -->
     <div style="text-align: center; margin-bottom: 3rem; margin-top: 1rem;">
-        <h1 style="font-family: var(--font-secondary); font-size: 3rem; margin-bottom: 1rem; text-transform: uppercase;">Shop Jewellery</h1>
-        <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Discover our exquisite collections crafted for timeless elegance.</p>
+        <h1 id="shop-page-title" style="font-family: var(--font-secondary); font-size: 3rem; margin-bottom: 1rem; text-transform: uppercase;">
+            @if(!empty($search))
+                Search: "{{ $search }}"
+            @else
+                Shop Jewellery
+            @endif
+        </h1>
+        <p id="shop-page-subtitle" style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+            @if(!empty($search))
+                Showing matching jewellery designs from our collection.
+            @else
+                Discover our exquisite collections crafted for timeless elegance.
+            @endif
+        </p>
         <div style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;"><span id="product-count">0</span> Products</div>
     </div>
 
@@ -22,6 +34,26 @@
     <div class="horizontal-filter-bar">
         <div class="filter-controls">
             <span class="filter-label">FILTER BY</span>
+
+            <div class="filter-dropdown">
+                <button class="filter-btn">Category <i class="ph ph-caret-down"></i></button>
+                <div class="filter-popover">
+                    <ul class="filter-list">
+                        <li><label><input type="checkbox" class="cat-filter-cb" data-filter="category" value="rings"> Rings</label></li>
+                        <li><label><input type="checkbox" class="cat-filter-cb" data-filter="category" value="earrings"> Earrings</label></li>
+                        <li><label><input type="checkbox" class="cat-filter-cb" data-filter="category" value="necklaces"> Necklaces</label></li>
+                        <li><label><input type="checkbox" class="cat-filter-cb" data-filter="category" value="bracelets"> Bracelets</label></li>
+                        <li><label><input type="checkbox" class="cat-filter-cb" data-filter="category" value="bangles"> Bangles</label></li>
+                        <li><label><input type="checkbox" class="cat-filter-cb" data-filter="category" value="mangalsutras"> Mangalsutras</label></li>
+                        <li><label><input type="checkbox" class="cat-filter-cb" data-filter="category" value="pendants"> Pendants</label></li>
+                        <li><label><input type="checkbox" class="cat-filter-cb" data-filter="category" value="chains"> Chains</label></li>
+                    </ul>
+                    <div class="filter-popover-footer">
+                        <button class="btn-clear-dropdown">Clear</button>
+                        <button class="btn-apply-dropdown">Apply</button>
+                    </div>
+                </div>
+            </div>
             
             <div class="filter-dropdown">
                 <button class="filter-btn">Price <i class="ph ph-caret-down"></i></button>
@@ -119,13 +151,16 @@
     <div class="active-filters-container"></div>
 
     <!-- Product Grid -->
-    <div id="shop-product-grid" class="grid responsive-product-grid" style="margin-top: 2rem; margin-bottom: 4rem;">
+    <div id="shop-product-grid" class="grid responsive-product-grid" style="margin-top: 2rem; margin-bottom: 2rem;">
         <!-- Products injected via JS -->
     </div>
+
+    <!-- Pagination -->
+    <div id="shop-pagination" class="pagination-wrap"></div>
 </div>
 @endsection
 
 @push('scripts')
-<script src="{{ asset('assets/js/products_v4.js') }}?v=11"></script>
-<script src="{{ asset('assets/js/category_products.js') }}?v=4"></script>
+<script src="{{ asset('assets/js/products_v4.js') }}?v=17"></script>
+<script src="{{ asset('assets/js/category_products.js') }}?v=8"></script>
 @endpush

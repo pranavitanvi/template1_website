@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\CmsApiService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ShopController extends Controller
@@ -95,6 +96,57 @@ class ShopController extends Controller
     }
 
     /**
+     * Collection page.
+     */
+    public function collection(string $collection): View
+    {
+        $slug = strtolower(trim($collection));
+        $collectionsPage = CmsApiService::getCollections();
+        $allCols = $collectionsPage['collections'] ?? [];
+
+        $matched = null;
+        if (is_array($allCols)) {
+            foreach ($allCols as $col) {
+                if (strtolower($col['slug'] ?? '') === $slug || strtolower(Str::slug($col['name'] ?? '')) === $slug) {
+                    $matched = $col;
+                    break;
+                }
+            }
+        }
+
+        $fallbackTitles = [
+            'everyday' => 'Everyday Elegance',
+            'festive' => 'Festive Collection',
+            'wedding' => 'The Bridal & Wedding Edit',
+            'bridal' => 'The Bridal Edit',
+            'mens' => "Men's Jewellery",
+            'gifting' => 'The Gifting Hub',
+            'heritage' => 'Heritage & Traditional',
+            'modern' => 'Modern Luxury',
+            'engagement' => 'Engagement Rings & Jewellery',
+            'new' => 'New Arrivals',
+            'bestsellers' => 'Bestsellers',
+        ];
+
+        $title = $matched['name'] ?? ($fallbackTitles[$slug] ?? ucwords(str_replace(['-', '_'], ' ', $slug)));
+        $occasion = $matched['occasion'] ?? null;
+        $tagline = $matched['description'] ?? ($occasion ? ($occasion . ' Collection.') : 'Explore our distinctive handcrafted jewellery collection.');
+
+        $collectionInfo = [
+            'slug' => $slug,
+            'title' => $title,
+            'tagline' => $tagline,
+            'image_url' => $matched['image_url'] ?? null,
+            'occasion' => $matched['occasion'] ?? null,
+        ];
+
+        return view('pages.collection', [
+            'collectionSlug' => $slug,
+            'collectionInfo' => $collectionInfo,
+        ]);
+    }
+
+    /**
      * Bridal Collection page.
      */
     public function bridal(): View
@@ -117,10 +169,11 @@ class ShopController extends Controller
     /**
      * Product details page.
      */
-    public function productDetails(Request $request, ?int $id = null): View
+    public function productDetails(Request $request, string|int|null $id = null): View
     {
-        $productId = $id ?? $request->query('id');
+        $productId = $id ?? $request->query('id') ?? $request->query('slug');
+        $product = $productId ? CmsApiService::getProduct($productId) : null;
 
-        return view('pages.product-details', compact('productId'));
+        return view('pages.product-details', compact('productId', 'product'));
     }
 }

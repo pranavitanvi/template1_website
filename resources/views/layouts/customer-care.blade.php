@@ -166,8 +166,13 @@
 @section('content')
 <main class="aura-cc-page">
     <div class="cc-hero">
-        <h1>Customer Care</h1>
-        <p>We are here to assist you with every detail.</p>
+        @if(!empty($careData['hero']['eyebrow']))
+            <div style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #c0a062; margin-bottom: 0.5rem; font-weight: 600;">
+                {{ $careData['hero']['eyebrow'] }}
+            </div>
+        @endif
+        <h1>{{ $careData['hero']['title'] ?? 'Customer Care' }}</h1>
+        <p>{{ $careData['hero']['subtitle'] ?? 'We are here to assist you with every detail.' }}</p>
     </div>
     
     <div class="cc-container">

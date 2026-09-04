@@ -1,26 +1,67 @@
 // Product fetching and rendering logic
 
-async function fetchProducts() {
+async function fetchProducts(params = {}) {
   try {
-    const response = await fetch('data/products.json?v=' + new Date().getTime());
+    const searchParams = new URLSearchParams(params);
+    searchParams.set('_t', Date.now());
+    const url = '/api/products?' + searchParams.toString();
+    const response = await fetch(url, {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
+      }
+    });
     if (!response.ok) throw new Error('Failed to fetch products');
-    return await response.json();
+    const data = await response.json();
+    const items = Array.isArray(data) ? data : (data.data || []);
+    return items.filter(p => !p.is_sold_out && p.product_sold_out_status !== 1 && p.product_sold_out_status !== true && p.availability !== 'sold_out' && p.availability !== 'out_of_stock');
   } catch (error) {
     console.error('Error fetching products:', error);
     return [];
   }
 }
 
+async function fetchProduct(idOrSlug) {
+  try {
+    const response = await fetch('/api/products/' + encodeURIComponent(idOrSlug) + '?_t=' + Date.now(), {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
+      }
+    });
+    if (!response.ok) {
+      if (response.status === 404) {
+        const errData = await response.json().catch(() => ({}));
+        if (errData && errData.is_sold_out) {
+          return { ...(errData.data || {}), is_sold_out: true, availability: 'sold_out' };
+        }
+      }
+      return null;
+    }
+    const json = await response.json();
+    const prod = json.data || json;
+    if (prod && (prod.is_sold_out || prod.availability === 'sold_out' || prod.availability === 'out_of_stock')) {
+      return { ...prod, is_sold_out: true, availability: 'sold_out' };
+    }
+    return prod;
+  } catch (error) {
+    console.error('Error fetching product details:', error);
+    return null;
+  }
+}
+
 // Function to get category-specific placeholder image
 function getPlaceholderImage(category) {
   const cat = (category || '').toLowerCase();
-  if (cat.includes('earring') || cat.includes('ear ') || cat.includes('studs') || cat.includes('jhumka')) return 'assets/images/placeholders/earring.jpg';
-  if (cat.includes('mangalsutra')) return 'assets/images/placeholders/mangalsutra.jpg';
-  if (cat.includes('ring') || cat.includes('engagement')) return 'assets/images/placeholders/ring.jpg';
-  if (cat.includes('bangle') || cat.includes('bracelet') || cat.includes('kada')) return 'assets/images/placeholders/bangle.jpg';
-  if (cat.includes('necklace') || cat.includes('chain') || cat.includes('choker')) return 'assets/images/placeholders/necklace.jpg';
-  if (cat.includes('pendant')) return 'assets/images/placeholders/pendant.jpg';
-  return 'assets/images/placeholders/default.jpg';
+  if (cat.includes('earring') || cat.includes('ear ') || cat.includes('studs') || cat.includes('jhumka')) return '/assets/images/placeholders/earring.jpg';
+  if (cat.includes('mangalsutra')) return '/assets/images/placeholders/mangalsutra.jpg';
+  if (cat.includes('ring') || cat.includes('engagement')) return '/assets/images/placeholders/ring.jpg';
+  if (cat.includes('bangle') || cat.includes('bracelet') || cat.includes('kada')) return '/assets/images/placeholders/bangle.jpg';
+  if (cat.includes('necklace') || cat.includes('chain') || cat.includes('choker')) return '/assets/images/placeholders/necklace.jpg';
+  if (cat.includes('pendant')) return '/assets/images/placeholders/pendant.jpg';
+  return '/assets/images/placeholders/default.jpg';
 }
 
 // Function to render product cards
@@ -44,7 +85,7 @@ function renderProductCard(product) {
   }
 
   const placeholder = getPlaceholderImage(product.category);
-  const imgSrc = product.image || placeholder;
+  const imgSrc = product.image ? (product.image.startsWith('/') || product.image.startsWith('http') ? product.image : '/' + product.image) : placeholder;
 
   const hasSecondary = (product.images && product.images.length > 1);
 
@@ -55,9 +96,9 @@ function renderProductCard(product) {
             <button class="wishlist-btn" onclick="toggleWishlist(${product.id})" aria-label="Add to Wishlist">
                 <i class="ph ph-heart"></i>
             </button>
-            <a href="product-details.html?id=${product.id}">
+            <a href="/product-details?id=${product.id}">
                 <img src="${imgSrc}" alt="${product.name}" class="product-image primary-img" onerror="this.onerror=null; this.src='${placeholder}';">
-                ${hasSecondary ? `<img src="${product.images[1]}" alt="${product.name} worn" class="product-image secondary-img" onerror="this.onerror=null; this.src='${placeholder}';">` : ''}
+                ${hasSecondary ? `<img src="${product.images[1].startsWith('/') || product.images[1].startsWith('http') ? product.images[1] : '/' + product.images[1]}" alt="${product.name} worn" class="product-image secondary-img" onerror="this.onerror=null; this.src='${placeholder}';">` : ''}
             </a>
             <div class="product-actions">
                 <button class="btn add-to-cart-btn" onclick="addToCart(${product.id})">Add to Bag</button>
@@ -65,7 +106,7 @@ function renderProductCard(product) {
         </div>
         <div class="product-info">
             <div class="product-category">${product.category}</div>
-            <h3 class="product-title"><a href="product-details.html?id=${product.id}">${product.name}</a></h3>
+            <h3 class="product-title"><a href="/product-details?id=${product.id}">${product.name}</a></h3>
             <div class="product-price">${priceDisplay}</div>
             <div class="product-rating">
                 ${starsHtml}
@@ -157,7 +198,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const products = await fetchProducts();
     let allProducts = products;
     
-    if (shopGrid) {
+    if (shopGrid && !document.querySelector('.horizontal-filter-bar')) {
       // 1. Initialize Checkboxes from URL or Pathname
       const urlParams = new URLSearchParams(window.location.search);
       let categoryParam = urlParams.get('category');
@@ -322,8 +363,69 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const newArrivalsPageGrid = document.getElementById('new-arrivals-page-grid');
     if (newArrivalsPageGrid) {
-      const newProducts = products.filter(p => p.isNew);
-      renderPaginatedGrid(newProducts, newArrivalsPageGrid, 12);
+      const isNewProducts = products.filter(p => p.isNew);
+      const basePool = isNewProducts.length > 0 ? isNewProducts : products;
+
+      function getFilteredForTab(tabKey) {
+        if (tabKey === 'women') {
+          let res = basePool.filter(p => (p.gender || '').toLowerCase() !== 'him' && (p.gender || '').toLowerCase() !== 'men');
+          if (res.length === 0) res = products.filter(p => (p.gender || '').toLowerCase() !== 'him' && (p.gender || '').toLowerCase() !== 'men');
+          return res;
+        }
+        if (tabKey === 'men') {
+          let res = basePool.filter(p => (p.gender || '').toLowerCase() === 'him' || (p.gender || '').toLowerCase() === 'men');
+          if (res.length === 0) res = products.filter(p => (p.gender || '').toLowerCase() === 'him' || (p.gender || '').toLowerCase() === 'men');
+          return res;
+        }
+        if (tabKey === 'diamonds') {
+          const matchDiamond = p => {
+            const stone = (p.stone || '').toLowerCase();
+            const mat = (p.material || p.metal || '').toLowerCase();
+            const name = (p.name || '').toLowerCase();
+            const stones = Array.isArray(p.stones) ? p.stones.map(s => (s.stone_name || '').toLowerCase()).join(' ') : '';
+            return stone.includes('diamond') || mat.includes('diamond') || stones.includes('diamond') || name.includes('diamond') || name.includes('solitaire');
+          };
+          let res = basePool.filter(matchDiamond);
+          if (res.length === 0) res = products.filter(matchDiamond);
+          return res;
+        }
+        if (tabKey === 'bridal') {
+          const matchBridal = p => {
+            const col = (p.collection || '').toLowerCase();
+            const occ = (p.occasion || '').toLowerCase();
+            const cat = (p.categoryId || p.category || '').toLowerCase();
+            return col.includes('bridal') || col.includes('wedding') || occ.includes('wedding') || occ.includes('bridal') || cat.includes('mangalsutra');
+          };
+          let res = basePool.filter(matchBridal);
+          if (res.length === 0) res = products.filter(matchBridal);
+          return res;
+        }
+        return basePool;
+      }
+
+      function applyArrivalTab(tabKey) {
+        const filtered = getFilteredForTab(tabKey);
+        if (filtered.length === 0) {
+          newArrivalsPageGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--text-secondary); font-size: 1rem;">No new arrivals found matching this category.</div>';
+        } else {
+          renderPaginatedGrid(filtered, newArrivalsPageGrid, 12);
+        }
+      }
+
+      // Initial render for 'all'
+      applyArrivalTab('all');
+
+      // Click handlers for new arrival tabs to filter on same page without redirect
+      const arrivalTabs = document.querySelectorAll('.new-arrivals-tab');
+      arrivalTabs.forEach(tab => {
+        tab.addEventListener('click', function(e) {
+          e.preventDefault();
+          arrivalTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          const selectedTab = this.getAttribute('data-tab') || 'all';
+          applyArrivalTab(selectedTab);
+        });
+      });
     }
   }
 });

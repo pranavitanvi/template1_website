@@ -279,7 +279,13 @@
                             @endif
                             <h3 class="col-arc-card-name">{{ $card['name'] }}</h3>
                             <p class="col-arc-card-desc">{{ $card['description'] ?: ($card['occasion'] ? ($card['occasion'] . ' Collection') : '') }}</p>
-                            <a href="{{ $card['link'] ?: route('shop', ['collection' => $card['slug']]) }}" class="col-arc-card-btn">Explore Collection &rarr;</a>
+                            @php
+                                $cSlug = !empty($card['slug']) ? $card['slug'] : \Illuminate\Support\Str::slug($card['name'] ?? '');
+                                $cUrl = (!empty($card['link']) && !in_array($card['link'], ['#', '', 'shop.html', '/shop', 'shop']))
+                                    ? $card['link']
+                                    : route('collection', $cSlug ?: 'all');
+                            @endphp
+                            <a href="{{ $cUrl }}" class="col-arc-card-btn">Explore Collection &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -364,7 +370,7 @@
             @endforeach
         @else
             <!-- Fallback Default Cards -->
-            <a href="{{ route('shop', ['collection' => 'engagement']) }}" class="occasion-card">
+            <a href="{{ route('collection', 'engagement') }}" class="occasion-card">
                 <div class="occasion-card-img-wrap">
                     <img src="{{ asset('assets/images/hero/Engagement.png') }}" alt="Engagement Jewellery">
                 </div>
@@ -386,7 +392,7 @@
                 </div>
             </a>
             
-            <a href="{{ route('shop', ['collection' => 'gifting']) }}" class="occasion-card">
+            <a href="{{ route('collection', 'gifting') }}" class="occasion-card">
                 <div class="occasion-card-img-wrap">
                     <img src="{{ asset('assets/images/hero/Gifting.png') }}" alt="Gifting">
                 </div>
@@ -397,7 +403,7 @@
                 </div>
             </a>
             
-            <a href="{{ route('shop', ['collection' => 'everyday']) }}" class="occasion-card">
+            <a href="{{ route('collection', 'everyday') }}" class="occasion-card">
                 <div class="occasion-card-img-wrap">
                     <img src="{{ asset('assets/images/hero/everyday.png') }}" alt="Everyday Jewellery">
                 </div>
@@ -408,7 +414,7 @@
                 </div>
             </a>
             
-            <a href="{{ route('shop', ['collection' => 'festive']) }}" class="occasion-card">
+            <a href="{{ route('collection', 'festive') }}" class="occasion-card">
                 <div class="occasion-card-img-wrap">
                     <img src="{{ asset('assets/images/hero/festive.png') }}" alt="Festive Jewellery">
                 </div>

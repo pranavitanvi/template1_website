@@ -10,6 +10,35 @@
 @section('meta_description', !empty($seo['meta_description']) ? $seo['meta_description'] : 'Meet the latest jewellery designs from Aura - crafted with precious metals and radiant diamonds.')
 @section('main_style', 'margin-top: 110px;')
 
+@push('styles')
+<style>
+    .new-arrivals-tab {
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--text-secondary, #777);
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-bottom: 2px solid transparent;
+        padding-bottom: 1rem;
+        margin-bottom: -1rem;
+        transition: all 0.25s ease;
+        font-family: inherit;
+    }
+    .new-arrivals-tab:hover {
+        color: var(--accent-gold, #c0a062);
+    }
+    .new-arrivals-tab.active {
+        color: var(--accent-gold, #c0a062);
+        border-bottom: 2px solid var(--accent-gold, #c0a062);
+    }
+</style>
+@endpush
+
 @section('content')
 <div style="background-color: #fbf9f6; padding-bottom: 5rem;">
     <!-- EDITORIAL OVERLAP HERO -->
@@ -58,13 +87,13 @@
                 {{ $sec['subtitle'] ?? 'Fresh designs, timeless character.' }}
             </p>
             
-            <!-- Category Tabs -->
-            <div style="display: flex; justify-content: center; gap: 3rem; margin-bottom: 3rem; border-bottom: 1px solid #eaeaea; padding-bottom: 1rem;">
-                <a href="{{ route('shop', ['category' => 'all']) }}" style="text-decoration: none; color: var(--accent-gold); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid var(--accent-gold); padding-bottom: 1rem; margin-bottom: -1rem;">ALL</a>
-                <a href="{{ route('category', 'womens') }}" style="text-decoration: none; color: var(--text-secondary); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">WOMEN</a>
-                <a href="{{ route('category', 'mens') }}" style="text-decoration: none; color: var(--text-secondary); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">MEN</a>
-                <a href="{{ route('shop', ['collection' => 'diamonds']) }}" style="text-decoration: none; color: var(--text-secondary); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">DIAMONDS</a>
-                <a href="{{ route('bridal') }}" style="text-decoration: none; color: var(--text-secondary); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">BRIDAL</a>
+            <!-- Category Tabs (Filter on same page without redirect) -->
+            <div class="new-arrivals-tabs" style="display: flex; justify-content: center; gap: 3rem; margin-bottom: 3rem; border-bottom: 1px solid #eaeaea; padding-bottom: 1rem; flex-wrap: wrap;">
+                <button type="button" class="new-arrivals-tab active" data-tab="all">ALL</button>
+                <button type="button" class="new-arrivals-tab" data-tab="women">WOMEN</button>
+                <button type="button" class="new-arrivals-tab" data-tab="men">MEN</button>
+                <button type="button" class="new-arrivals-tab" data-tab="diamonds">DIAMONDS</button>
+                <button type="button" class="new-arrivals-tab" data-tab="bridal">BRIDAL</button>
             </div>
 
             <!-- Product Grid -->
@@ -83,5 +112,5 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('assets/js/products_v4.js') }}"></script>
+<script src="{{ asset('assets/js/products_v4.js') }}?v=16"></script>
 @endpush

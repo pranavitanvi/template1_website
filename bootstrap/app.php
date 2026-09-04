@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'register',
             'register/*',
             'logout',
+            'api/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

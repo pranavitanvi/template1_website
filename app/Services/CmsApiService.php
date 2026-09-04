@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class CmsApiService
 {
@@ -35,10 +36,19 @@ class CmsApiService
 
         $sessionKey = 'cms_session_' . str_replace(['/', '-', '?'], '_', $endpoint);
 
-        // 2. Fetch live data from API
+        $isProductOrCart = str_starts_with($endpoint, 'products') || str_starts_with($endpoint, 'cart');
+
+        // 2. Fetch live data from API with real-time cache busting
         try {
             $url = self::getBaseUrl() . '/' . ltrim($endpoint, '/');
-            $response = Http::timeout(6)->get($url);
+            $cacheBust = (str_contains($url, '?') ? '&' : '?') . '_t=' . round(microtime(true) * 1000);
+            $response = Http::timeout(6)
+                ->withHeaders([
+                    'Cache-Control' => 'no-cache, no-store, must-revalidate',
+                    'Pragma' => 'no-cache',
+                    'Expires' => '0',
+                ])
+                ->get($url . $cacheBust);
 
             if ($response->successful()) {
                 $json = $response->json();
@@ -55,13 +65,15 @@ class CmsApiService
                 // Cache in memory for this request
                 self::$requestCache[$endpoint] = $data;
 
-                // Save to session as fallback
-                try {
-                    if (function_exists('session') && session()->isStarted()) {
-                        session([$sessionKey => $data]);
+                // Save to session as fallback (only for static layout endpoints)
+                if (!$isProductOrCart) {
+                    try {
+                        if (function_exists('session') && session()->isStarted()) {
+                            session([$sessionKey => $data]);
+                        }
+                    } catch (\Throwable $se) {
+                        // Ignore session error in CLI / unstarted contexts
                     }
-                } catch (\Throwable $se) {
-                    // Ignore session error in CLI / unstarted contexts
                 }
 
                 return $data;
@@ -72,15 +84,17 @@ class CmsApiService
             Log::error('CMS API exception for ' . $endpoint . ': ' . $e->getMessage());
         }
 
-        // 3. Fallback to session if API is temporarily unavailable
-        try {
-            if (function_exists('session') && session()->isStarted() && session()->has($sessionKey)) {
-                $fallbackData = session($sessionKey);
-                self::$requestCache[$endpoint] = $fallbackData;
-                return $fallbackData;
+        // 3. Fallback to session only for static layout endpoints if API is temporarily unreachable
+        if (!$isProductOrCart) {
+            try {
+                if (function_exists('session') && session()->isStarted() && session()->has($sessionKey)) {
+                    $fallbackData = session($sessionKey);
+                    self::$requestCache[$endpoint] = $fallbackData;
+                    return $fallbackData;
+                }
+            } catch (\Throwable $se) {
+                // Ignore
             }
-        } catch (\Throwable $se) {
-            // Ignore
         }
 
         return null;
@@ -117,6 +131,15 @@ class CmsApiService
             }
             if (!isset($data['shop_menu']['promo_image_url']) && isset($data['shop_menu']['featured_image_url'])) {
                 $data['shop_menu']['promo_image_url'] = $data['shop_menu']['featured_image_url'];
+            }
+
+            // Automatically create / resolve collection URLs if not created or empty
+            if (isset($data['shop_menu']['collections']) && is_array($data['shop_menu']['collections'])) {
+                foreach ($data['shop_menu']['collections'] as &$col) {
+                    $slug = !empty($col['slug']) ? $col['slug'] : Str::slug($col['name'] ?? '');
+                    $col['slug'] = $slug;
+                    $col['url'] = self::resolveCollectionUrl($col['url'] ?? null, $slug);
+                }
             }
         }
 
@@ -317,11 +340,82 @@ class CmsApiService
     }
 
     /**
+     * Get Footer & Social Links Data.
+     */
+    public static function getFooter(): ?array
+    {
+        return self::fetch('footer');
+    }
+
+    /**
+     * Get Storefront Theme & Colors Data.
+     */
+    public static function getTheme(): ?array
+    {
+        return self::fetch('theme');
+    }
+
+    /**
+     * Get Customer Care & Policies Page Data.
+     */
+    public static function getCustomerCare(): ?array
+    {
+        return self::fetch('pages/customer-care');
+    }
+
+    /**
+     * Helper to resolve or automatically create a proper URL for a collection.
+     */
+    public static function resolveCollectionUrl(?string $existingUrl, string $slug): string
+    {
+        $cleanSlug = strtolower(trim($slug));
+        if (empty($existingUrl) || in_array(trim($existingUrl), ['#', 'shop.html', '/shop', 'shop', ''])) {
+            return route('collection', $cleanSlug);
+        }
+
+        // If it's a legacy shop.html?collection=... or shop?collection=... link, convert it to clean collection route
+        if (str_contains($existingUrl, 'collection=')) {
+            $parsed = parse_url($existingUrl);
+            if (!empty($parsed['query'])) {
+                parse_str($parsed['query'], $queryParams);
+                if (!empty($queryParams['collection'])) {
+                    return route('collection', strtolower(trim($queryParams['collection'])));
+                }
+            }
+        }
+
+        return $existingUrl;
+    }
+
+    /**
      * Get Collections Page Data.
      */
     public static function getCollections(): ?array
     {
-        return self::fetch('pages/collections');
+        $data = self::fetch('pages/collections');
+        if (!$data) {
+            return null;
+        }
+
+        if (isset($data['collections']) && is_array($data['collections'])) {
+            foreach ($data['collections'] as &$col) {
+                $slug = !empty($col['slug']) ? $col['slug'] : Str::slug($col['name'] ?? '');
+                $col['slug'] = $slug;
+                $col['link'] = self::resolveCollectionUrl($col['link'] ?? ($col['url'] ?? null), $slug);
+                $col['url'] = $col['link'];
+            }
+        }
+
+        if (isset($data['home_carousel']['items']) && is_array($data['home_carousel']['items'])) {
+            foreach ($data['home_carousel']['items'] as &$item) {
+                $slug = !empty($item['slug']) ? $item['slug'] : Str::slug($item['name'] ?? '');
+                $item['slug'] = $slug;
+                $item['link'] = self::resolveCollectionUrl($item['link'] ?? ($item['url'] ?? null), $slug);
+                $item['url'] = $item['link'];
+            }
+        }
+
+        return $data;
     }
 
     /**
@@ -475,5 +569,176 @@ class CmsApiService
             return ['success' => false];
         }
     }
-}
 
+    /**
+     * Get Products Catalog from Jewellerysoft ERP.
+     */
+    public static function getProducts(array $params = []): array
+    {
+        $params['_t'] = round(microtime(true) * 1000);
+        $queryStr = '?' . http_build_query($params);
+        $res = self::fetch('products' . $queryStr);
+        $products = [];
+        if (is_array($res)) {
+            if (isset($res[0])) {
+                $products = $res;
+            } elseif (isset($res['data']) && is_array($res['data'])) {
+                $products = $res['data'];
+            }
+        }
+
+        // Strict filter: Never return sold-out items to storefront
+        return array_values(array_filter($products, function($p) {
+            if (!empty($p['is_sold_out'])) return false;
+            if (isset($p['product_sold_out_status']) && ($p['product_sold_out_status'] === true || $p['product_sold_out_status'] === 1 || $p['product_sold_out_status'] === '1')) return false;
+            if (isset($p['availability']) && in_array(strtolower((string)$p['availability']), ['sold_out', 'out_of_stock'])) return false;
+            return true;
+        }));
+    }
+
+    /**
+     * Get Single Product Details from Jewellerysoft ERP.
+     */
+    public static function getProduct(string|int $idOrSlug): ?array
+    {
+        $res = self::fetch('products/' . $idOrSlug . '?_t=' . round(microtime(true) * 1000));
+        if (is_array($res)) {
+            if (!empty($res['is_sold_out'])) {
+                return null;
+            }
+            if (isset($res['data']) && is_array($res['data'])) {
+                if (!empty($res['data']['is_sold_out']) || in_array(strtolower((string)($res['data']['availability'] ?? '')), ['sold_out', 'out_of_stock'])) {
+                    return null;
+                }
+                return $res['data'];
+            }
+            if (isset($res['id'])) {
+                if (in_array(strtolower((string)($res['availability'] ?? '')), ['sold_out', 'out_of_stock'])) {
+                    return null;
+                }
+                return $res;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get Customer Shopping Cart from ERP.
+     */
+    public static function getCart(array $params = [], ?string $token = null): array
+    {
+        try {
+            $apiUrl = rtrim(config('cms.api_url', 'http://Jewellerysoft.test/api/v1/cms'), '/');
+            $storeId = config('cms.store_id', 2);
+            $url = $apiUrl . '/' . $storeId . '/cart' . (!empty($params) ? '?' . http_build_query($params) : '');
+
+            $http = Http::timeout(6);
+            if ($token) $http = $http->withToken($token);
+
+            $response = $http->get($url);
+            return $response->json() ?? ['success' => false];
+        } catch (\Throwable $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    /**
+     * Add Product to Cart in ERP.
+     */
+    public static function addToCart(array $data, ?string $token = null): array
+    {
+        try {
+            $apiUrl = rtrim(config('cms.api_url', 'http://Jewellerysoft.test/api/v1/cms'), '/');
+            $storeId = config('cms.store_id', 2);
+            $url = $apiUrl . '/' . $storeId . '/cart/add';
+
+            $http = Http::timeout(6);
+            if ($token) $http = $http->withToken($token);
+
+            $response = $http->post($url, $data);
+            return $response->json() ?? ['success' => false];
+        } catch (\Throwable $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    /**
+     * Update Cart Item Quantity in ERP.
+     */
+    public static function updateCartItem(string|int $itemId, array $data, ?string $token = null): array
+    {
+        try {
+            $apiUrl = rtrim(config('cms.api_url', 'http://Jewellerysoft.test/api/v1/cms'), '/');
+            $storeId = config('cms.store_id', 2);
+            $url = $apiUrl . '/' . $storeId . '/cart/' . $itemId;
+
+            $http = Http::timeout(6);
+            if ($token) $http = $http->withToken($token);
+
+            $response = $http->put($url, $data);
+            return $response->json() ?? ['success' => false];
+        } catch (\Throwable $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    /**
+     * Remove Item from Cart in ERP.
+     */
+    public static function removeCartItem(string|int $itemId, array $params = [], ?string $token = null): array
+    {
+        try {
+            $apiUrl = rtrim(config('cms.api_url', 'http://Jewellerysoft.test/api/v1/cms'), '/');
+            $storeId = config('cms.store_id', 2);
+            $url = $apiUrl . '/' . $storeId . '/cart/' . $itemId . (!empty($params) ? '?' . http_build_query($params) : '');
+
+            $http = Http::timeout(6);
+            if ($token) $http = $http->withToken($token);
+
+            $response = $http->delete($url);
+            return $response->json() ?? ['success' => false];
+        } catch (\Throwable $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    /**
+     * Clear Cart in ERP.
+     */
+    public static function clearCart(array $params = [], ?string $token = null): array
+    {
+        try {
+            $apiUrl = rtrim(config('cms.api_url', 'http://Jewellerysoft.test/api/v1/cms'), '/');
+            $storeId = config('cms.store_id', 2);
+            $url = $apiUrl . '/' . $storeId . '/cart/clear';
+
+            $http = Http::timeout(6);
+            if ($token) $http = $http->withToken($token);
+
+            $response = $http->post($url, $params);
+            return $response->json() ?? ['success' => false];
+        } catch (\Throwable $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    /**
+     * Bulk Sync Cart to ERP.
+     */
+    public static function syncCart(array $items, array $params = [], ?string $token = null): array
+    {
+        try {
+            $apiUrl = rtrim(config('cms.api_url', 'http://Jewellerysoft.test/api/v1/cms'), '/');
+            $storeId = config('cms.store_id', 2);
+            $url = $apiUrl . '/' . $storeId . '/cart/sync';
+
+            $http = Http::timeout(6);
+            if ($token) $http = $http->withToken($token);
+
+            $response = $http->post($url, array_merge($params, ['items' => $items]));
+            return $response->json() ?? ['success' => false];
+        } catch (\Throwable $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+}

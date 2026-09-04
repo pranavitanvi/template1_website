@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CaptchaService;
 use App\Services\CmsApiService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class PageController extends Controller
@@ -46,6 +48,15 @@ class PageController extends Controller
      */
     public function submitContact(Request $request): JsonResponse
     {
+        if (!CaptchaService::verify($request->input('captcha'))) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid security captcha. Please enter the characters shown.',
+                'errors' => ['captcha' => ['Invalid security captcha. Please enter the characters shown.']],
+                'refresh_captcha' => true
+            ], 422);
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|email|max:150',
@@ -82,7 +93,8 @@ class PageController extends Controller
      */
     public function customerCare(): View
     {
-        return view('pages.customer-care');
+        $careData = CmsApiService::getCustomerCare();
+        return view('pages.customer-care', compact('careData'));
     }
 
     /**
@@ -98,7 +110,8 @@ class PageController extends Controller
      */
     public function faqs(): View
     {
-        return view('pages.faqs');
+        $careData = CmsApiService::getCustomerCare();
+        return view('pages.faqs', compact('careData'));
     }
 
     /**
@@ -106,7 +119,8 @@ class PageController extends Controller
      */
     public function sizeGuide(): View
     {
-        return view('pages.size-guide');
+        $careData = CmsApiService::getCustomerCare();
+        return view('pages.size-guide', compact('careData'));
     }
 
     /**
@@ -114,7 +128,8 @@ class PageController extends Controller
      */
     public function shipping(): View
     {
-        return view('pages.shipping');
+        $careData = CmsApiService::getCustomerCare();
+        return view('pages.shipping', compact('careData'));
     }
 
     /**
@@ -122,7 +137,8 @@ class PageController extends Controller
      */
     public function returns(): View
     {
-        return view('pages.returns');
+        $careData = CmsApiService::getCustomerCare();
+        return view('pages.returns', compact('careData'));
     }
 
     /**
@@ -130,7 +146,41 @@ class PageController extends Controller
      */
     public function jewelleryCare(): View
     {
-        return view('pages.jewellery-care');
+        $careData = CmsApiService::getCustomerCare();
+        return view('pages.jewellery-care', compact('careData'));
+    }
+
+    /**
+     * Privacy Policy.
+     */
+    public function privacyPolicy(): View
+    {
+        $careData = CmsApiService::getCustomerCare();
+        return view('pages.privacy-policy', compact('careData'));
+    }
+
+    /**
+     * Terms & Conditions.
+     */
+    public function termsConditions(): View
+    {
+        $careData = CmsApiService::getCustomerCare();
+        return view('pages.terms-conditions', compact('careData'));
+    }
+
+    /**
+     * Generate custom visual SVG captcha.
+     */
+    public function generateCaptcha(): Response
+    {
+        $svg = CaptchaService::generateSvg();
+
+        return response($svg, 200, [
+            'Content-Type' => 'image/svg+xml',
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
+        ]);
     }
 
     /**
@@ -149,6 +199,18 @@ class PageController extends Controller
      */
     public function submitLogin(Request $request)
     {
+        if (!CaptchaService::verify($request->input('captcha'))) {
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid security captcha. Please enter the characters shown.',
+                    'errors' => ['captcha' => ['Invalid security captcha. Please enter the characters shown.']],
+                    'refresh_captcha' => true
+                ], 422);
+            }
+            return redirect()->back()->withInput()->with('error', 'Invalid security captcha. Please enter the characters shown.');
+        }
+
         $credentials = [
             'login' => $request->input('login') ?: ($request->input('email') ?: $request->input('phone')),
             'password' => $request->input('password'),
@@ -202,6 +264,18 @@ class PageController extends Controller
      */
     public function submitRegister(Request $request)
     {
+        if (!CaptchaService::verify($request->input('captcha'))) {
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid security captcha. Please enter the characters shown.',
+                    'errors' => ['captcha' => ['Invalid security captcha. Please enter the characters shown.']],
+                    'refresh_captcha' => true
+                ], 422);
+            }
+            return redirect()->back()->withInput()->with('error', 'Invalid security captcha. Please enter the characters shown.');
+        }
+
         $data = [
             'name' => $request->input('name') ?: trim($request->input('first_name') . ' ' . $request->input('last_name')),
             'phone' => $request->input('phone'),

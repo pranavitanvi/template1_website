@@ -201,7 +201,13 @@
         <section class="coll-grid-row">
             @if($row1->count() > 0)
                 @foreach($row1 as $card)
-                    <a href="{{ $card['link'] ?: route('shop', ['collection' => $card['slug']]) }}" class="coll-card">
+                    @php
+                        $cSlug = !empty($card['slug']) ? $card['slug'] : \Illuminate\Support\Str::slug($card['name'] ?? '');
+                        $cUrl = (!empty($card['link']) && !in_array($card['link'], ['#', '', 'shop.html', '/shop', 'shop']))
+                            ? $card['link']
+                            : route('collection', $cSlug ?: 'all');
+                    @endphp
+                    <a href="{{ $cUrl }}" class="coll-card">
                         <div class="coll-card-img-wrap">
                             <img src="{{ $card['image_url'] }}" alt="{{ $card['name'] }}" class="coll-card-img">
                         </div>
@@ -219,7 +225,7 @@
                 @endforeach
             @else
                 <!-- Fallback Default 3 Cards -->
-                <a href="{{ route('shop', ['collection' => 'wedding']) }}" class="coll-card">
+                <a href="{{ route('collection', 'wedding') }}" class="coll-card">
                     <div class="coll-card-img-wrap">
                         <img src="{{ asset('assets/images/collections/aekta.jpg') }}" alt="Aekta" class="coll-card-img">
                     </div>
@@ -229,7 +235,7 @@
                         <span class="coll-link coll-sans">EXPLORE COLLECTION <i class="ph ph-arrow-right"></i></span>
                     </div>
                 </a>
-                <a href="{{ route('shop', ['collection' => 'festive']) }}" class="coll-card">
+                <a href="{{ route('collection', 'festive') }}" class="coll-card">
                     <div class="coll-card-img-wrap">
                         <img src="{{ asset('assets/images/collections/rajwada.jpg') }}" alt="Noor" class="coll-card-img">
                     </div>
@@ -239,7 +245,7 @@
                         <span class="coll-link coll-sans">EXPLORE COLLECTION <i class="ph ph-arrow-right"></i></span>
                     </div>
                 </a>
-                <a href="{{ route('shop', ['collection' => 'everyday']) }}" class="coll-card">
+                <a href="{{ route('collection', 'everyday') }}" class="coll-card">
                     <div class="coll-card-img-wrap">
                         <img src="{{ asset('assets/images/collections/circular_everyday.jpg') }}" alt="Ira" class="coll-card-img">
                     </div>
@@ -273,7 +279,13 @@
         <section class="coll-grid-row">
             @if($row2->count() > 0)
                 @foreach($row2 as $card)
-                    <a href="{{ $card['link'] ?: route('shop', ['collection' => $card['slug']]) }}" class="coll-card">
+                    @php
+                        $cSlug = !empty($card['slug']) ? $card['slug'] : \Illuminate\Support\Str::slug($card['name'] ?? '');
+                        $cUrl = (!empty($card['link']) && !in_array($card['link'], ['#', '', 'shop.html', '/shop', 'shop']))
+                            ? $card['link']
+                            : route('collection', $cSlug ?: 'all');
+                    @endphp
+                    <a href="{{ $cUrl }}" class="coll-card">
                         <div class="coll-card-img-wrap">
                             <img src="{{ $card['image_url'] }}" alt="{{ $card['name'] }}" class="coll-card-img">
                         </div>
@@ -291,7 +303,7 @@
                 @endforeach
             @else
                 <!-- Fallback Default Remaining 3 Cards -->
-                <a href="{{ route('shop', ['collection' => 'heritage']) }}" class="coll-card">
+                <a href="{{ route('collection', 'heritage') }}" class="coll-card">
                     <div class="coll-card-img-wrap">
                         <img src="{{ asset('assets/images/collections/circular_heritage.jpg') }}" alt="Viraasat" class="coll-card-img">
                     </div>
@@ -301,7 +313,7 @@
                         <span class="coll-link coll-sans">EXPLORE COLLECTION <i class="ph ph-arrow-right"></i></span>
                     </div>
                 </a>
-                <a href="{{ route('shop', ['collection' => 'modern']) }}" class="coll-card">
+                <a href="{{ route('collection', 'modern') }}" class="coll-card">
                     <div class="coll-card-img-wrap">
                         <img src="{{ asset('assets/images/collections/circular_modern.jpg') }}" alt="Lustre" class="coll-card-img">
                     </div>
@@ -311,7 +323,7 @@
                         <span class="coll-link coll-sans">EXPLORE COLLECTION <i class="ph ph-arrow-right"></i></span>
                     </div>
                 </a>
-                <a href="{{ route('shop', ['collection' => 'engagement']) }}" class="coll-card">
+                <a href="{{ route('collection', 'engagement') }}" class="coll-card">
                     <div class="coll-card-img-wrap">
                         <img src="{{ asset('assets/images/collections/circular_engagement.jpg') }}" alt="Meher" class="coll-card-img">
                     </div>

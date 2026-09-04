@@ -242,6 +242,27 @@
                     <div class="cont-form-group">
                         <textarea name="message" class="cont-textarea" rows="4" placeholder="Your Message *" required></textarea>
                     </div>
+
+                    <!-- Security Captcha Verification -->
+                    <div class="cont-form-group" style="text-align: left; margin-top: 1.5rem; margin-bottom: 2rem;">
+                        <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 6px; font-weight: 600;">
+                            Security Captcha <span style="color: red;">*</span>
+                        </label>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                            <div style="border-radius: 6px; overflow: hidden; border: 1px solid #ddd; background: #faf7f2; display: flex; align-items: center; justify-content: center; height: 46px; flex-shrink: 0; box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);">
+                                <img id="contactCaptchaImg" src="{{ route('captcha.generate') }}" alt="Security Captcha" style="display: block; height: 44px; width: 160px; user-select: none;">
+                            </div>
+                            <button type="button" onclick="refreshContactCaptcha()" title="Refresh Captcha"
+                                    style="width: 44px; height: 44px; border: 1px solid #ddd; border-radius: 6px; background: #faf8f5; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; transition: all 0.2s;"
+                                    onmouseover="this.style.borderColor='#c0a062'; this.style.color='#c0a062';"
+                                    onmouseout="this.style.borderColor='#ddd'; this.style.color='#555';">
+                                <i class="ph ph-arrows-clockwise" id="contactRefreshIcon"></i>
+                            </button>
+                        </div>
+                        <input type="text" name="captcha" id="contactCaptcha" class="cont-input" placeholder="Enter the 5 characters above *" required maxlength="6" autocomplete="off"
+                               style="letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase;">
+                    </div>
+
                     <button type="submit" id="contactSubmitBtn" class="cont-btn">Send Message</button>
                 </form>
             </div>
@@ -264,6 +285,26 @@
 
 @push('scripts')
 <script>
+function refreshContactCaptcha() {
+    var img = document.getElementById('contactCaptchaImg');
+    var icon = document.getElementById('contactRefreshIcon');
+    if (icon) {
+        icon.style.transform = 'rotate(360deg)';
+        icon.style.transition = 'transform 0.5s ease';
+    }
+    if (img) {
+        img.src = "{{ route('captcha.generate') }}?t=" + Date.now();
+    }
+    var input = document.getElementById('contactCaptcha');
+    if (input) input.value = '';
+    setTimeout(function() {
+        if (icon) {
+            icon.style.transform = 'none';
+            icon.style.transition = 'none';
+        }
+    }, 550);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var form = document.getElementById('storeContactForm');
     if (!form) return;
@@ -303,7 +344,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 successMsg.innerText = result.data.message || 'Thank you! Your inquiry has been submitted successfully.';
                 successMsg.style.display = 'block';
                 form.reset();
+                refreshContactCaptcha();
             } else {
+                refreshContactCaptcha();
                 var errText = result.data.message || 'There was an issue submitting your message. Please check the fields and try again.';
                 if (result.data.errors) {
                     var firstErrKey = Object.keys(result.data.errors)[0];
@@ -316,6 +359,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(function(err) {
+            refreshContactCaptcha();
             btn.disabled = false;
             btn.innerText = 'SEND MESSAGE';
             errorMsg.innerText = 'Network error. Please try again in a few moments.';

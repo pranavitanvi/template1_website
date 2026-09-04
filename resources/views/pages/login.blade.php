@@ -12,6 +12,13 @@
     
     <div id="loginAlert" style="display: none; padding: 0.85rem 1rem; border-radius: 6px; margin-bottom: 1.5rem; font-size: 0.9rem; text-align: left;"></div>
 
+    @if(request('redirect'))
+        <div style="background: #faf6ee; color: #855b14; border: 1px solid #eedec3; padding: 0.85rem 1rem; border-radius: 6px; margin-bottom: 1.5rem; font-size: 0.9rem; text-align: left; display: flex; align-items: center; gap: 10px;">
+            <i class="ph ph-lock-key" style="font-size: 1.25rem; flex-shrink: 0; color: #c0a062;"></i>
+            <span>Please sign in to add pieces to your shopping bag.</span>
+        </div>
+    @endif
+
     @if(session('error'))
         <div style="background: #fdf2f2; color: #b91c1c; border: 1px solid #fecaca; padding: 0.85rem 1rem; border-radius: 6px; margin-bottom: 1.5rem; font-size: 0.9rem; text-align: left;">
             {{ session('error') }}
@@ -25,6 +32,7 @@
 
     <form id="loginForm" method="POST" action="{{ route('login.submit') }}" style="text-align: left;" onsubmit="handleCustomerLogin(event)">
         @csrf
+        <input type="hidden" name="redirect" value="{{ request('redirect') }}">
         <div class="form-group" style="margin-bottom: 1.2rem;">
             <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 6px; font-weight: 600;">Email or Mobile Number</label>
             <input type="text" name="login" id="loginIdentifier" class="input-field" placeholder="e.g. priya@example.com or 9876543210" required 
@@ -46,15 +54,34 @@
                     👁️
                 </button>
             </div>
+        <!-- Security Captcha Verification -->
+        <div class="form-group" style="margin-bottom: 1.2rem;">
+            <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 6px; font-weight: 600;">
+                Security Captcha <span style="color: red;">*</span>
+            </label>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <div style="border-radius: 6px; overflow: hidden; border: 1px solid #ddd; background: #faf7f2; display: flex; align-items: center; justify-content: center; height: 46px; flex-shrink: 0; box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);">
+                    <img id="loginCaptchaImg" src="{{ route('captcha.generate') }}" alt="Security Captcha" style="display: block; height: 44px; width: 160px; user-select: none;">
+                </div>
+                <button type="button" onclick="refreshLoginCaptcha()" title="Refresh Captcha"
+                        style="width: 44px; height: 44px; border: 1px solid #ddd; border-radius: 6px; background: #faf8f5; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; transition: all 0.2s;"
+                        onmouseover="this.style.borderColor='#c0a062'; this.style.color='#c0a062';"
+                        onmouseout="this.style.borderColor='#ddd'; this.style.color='#555';">
+                    <i class="ph ph-arrows-clockwise" id="loginRefreshIcon"></i>
+                </button>
+            </div>
+            <input type="text" name="captcha" id="loginCaptcha" class="input-field" placeholder="Enter the 5 characters above" required maxlength="6" autocomplete="off"
+                   style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none; letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase; transition: border-color 0.2s;"
+                   onfocus="this.style.borderColor='#c0a062'" onblur="this.style.borderColor='#ddd'">
         </div>
 
         <button type="submit" id="loginSubmitBtn" class="btn btn-primary" 
-                style="width: 100%; margin-top: 1rem; margin-bottom: 1.5rem; padding: 1rem; font-family: 'Cinzel', serif; letter-spacing: 0.12em; background: #c0a062; border: 1px solid #c0a062; color: #fff; border-radius: 6px; cursor: pointer; font-size: 0.95rem; transition: background 0.3s;">
+                style="width: 100%; margin-top: 0.5rem; margin-bottom: 1.5rem; padding: 1rem; font-family: 'Cinzel', serif; letter-spacing: 0.12em; background: #c0a062; border: 1px solid #c0a062; color: #fff; border-radius: 6px; cursor: pointer; font-size: 0.95rem; transition: background 0.3s;">
             SIGN IN
         </button>
 
         <div class="text-center" style="font-size: 0.9rem; color: #666;">
-            New to Aura? <a href="{{ route('register') }}" style="font-weight: 600; text-decoration: none; color: #c0a062;">Create an Account</a>
+            New to Aura? <a href="{{ route('register') }}{{ request('redirect') ? '?redirect=' . urlencode(request('redirect')) : '' }}" style="font-weight: 600; text-decoration: none; color: #c0a062;">Create an Account</a>
         </div>
     </form>
 </div>
@@ -73,13 +100,31 @@ function togglePass(id, btn) {
     }
 }
 
+function refreshLoginCaptcha() {
+    var img = document.getElementById('loginCaptchaImg');
+    var icon = document.getElementById('loginRefreshIcon');
+    if (icon) {
+        icon.style.transform = 'rotate(360deg)';
+        icon.style.transition = 'transform 0.5s ease';
+    }
+    if (img) {
+        img.src = "{{ route('captcha.generate') }}?t=" + Date.now();
+    }
+    var input = document.getElementById('loginCaptcha');
+    if (input) input.value = '';
+    setTimeout(function() {
+        if (icon) {
+            icon.style.transform = 'none';
+            icon.style.transition = 'none';
+        }
+    }, 550);
+}
+
 function handleCustomerLogin(e) {
     e.preventDefault();
     var form = document.getElementById('loginForm');
     var btn = document.getElementById('loginSubmitBtn');
     var alertBox = document.getElementById('loginAlert');
-    var loginVal = document.getElementById('loginIdentifier').value.trim();
-    var passwordVal = document.getElementById('loginPassword').value;
 
     alertBox.style.display = 'none';
     btn.disabled = true;
@@ -127,14 +172,21 @@ function handleCustomerLogin(e) {
                 window.location.href = redirect;
             }, 800);
         } else {
+            // Refresh captcha on failure
+            refreshLoginCaptcha();
+            var errMsg = resObj.data.message || 'Invalid credentials. Please try again.';
+            if (resObj.data.errors && resObj.data.errors.captcha) {
+                errMsg = resObj.data.errors.captcha[0];
+            }
             alertBox.style.display = 'block';
             alertBox.style.background = '#fdf2f2';
             alertBox.style.color = '#b91c1c';
             alertBox.style.border = '1px solid #fecaca';
-            alertBox.innerText = resObj.data.message || 'Invalid credentials. Please try again.';
+            alertBox.innerText = errMsg;
         }
     })
     .catch(function(err) {
+        refreshLoginCaptcha();
         btn.disabled = false;
         btn.innerText = 'SIGN IN';
         alertBox.style.display = 'block';
