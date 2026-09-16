@@ -1,14 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Create Account | Aura Fine Jewellery')
-@section('meta_description', 'Join Aura Fine Jewellery to enjoy personalized curations, order tracking, and exclusive previews.')
+@php
+    $brandName = $cmsHeader['brand_name'] ?? ($cmsHeader['store_name'] ?? 'Aura');
+    $brandFull = $cmsHeader['brand_name'] ?? ($cmsHeader['store_name'] ?? 'Aura Fine Jewellery');
+@endphp
+
+@section('title', 'Create Account | ' . $brandFull)
+@section('meta_description', 'Join ' . $brandName . ' to enjoy personalized curations, order tracking, and exclusive previews.')
 @section('main_style', 'margin-top: 110px; min-height: 70vh; display: flex; align-items: center; justify-content: center; background-color: var(--bg-secondary); padding: 4rem 1rem;')
 
 @section('content')
 <div style="background: var(--white); padding: 3rem 2.5rem; width: 100%; max-width: 520px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); text-align: center; border-radius: 12px; border: 1px solid #f0ece4;">
     <div style="margin-bottom: 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: #c0a062; font-weight: 600;">MEMBERSHIP</div>
     <h2 style="margin-bottom: 0.5rem; font-family: 'Cinzel', serif; font-size: 2rem; color: #1a1a1a;">Create Account</h2>
-    <p style="margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.95rem;">Join Aura to unlock personalized curations, order tracking, and loyalty rewards.</p>
+    <p style="margin-bottom: 2rem; color: var(--text-secondary); font-size: 0.95rem;">Join {{ $brandName }} to unlock personalized curations, order tracking, and loyalty rewards.</p>
     
     <div id="regAlert" style="display: none; padding: 0.85rem 1rem; border-radius: 6px; margin-bottom: 1.5rem; font-size: 0.9rem; text-align: left;"></div>
 
@@ -96,25 +101,27 @@
                        style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none;"
                        onfocus="this.style.borderColor='#c0a062'" onblur="this.style.borderColor='#ddd'">
             </div>
+        </div>
+
         <!-- Security Captcha Verification -->
         <div class="form-group" style="margin-bottom: 1.5rem;">
             <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 6px; font-weight: 600;">
                 Security Captcha <span style="color: red;">*</span>
             </label>
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <div style="border-radius: 6px; overflow: hidden; border: 1px solid #ddd; background: #faf7f2; display: flex; align-items: center; justify-content: center; height: 46px; flex-shrink: 0; box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);">
                     <img id="regCaptchaImg" src="{{ route('captcha.generate') }}" alt="Security Captcha" style="display: block; height: 44px; width: 160px; user-select: none;">
                 </div>
                 <button type="button" onclick="refreshRegCaptcha()" title="Refresh Captcha"
-                        style="width: 44px; height: 44px; border: 1px solid #ddd; border-radius: 6px; background: #faf8f5; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; transition: all 0.2s;"
+                        style="width: 44px; height: 44px; flex-shrink: 0; border: 1px solid #ddd; border-radius: 6px; background: #faf8f5; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; transition: all 0.2s;"
                         onmouseover="this.style.borderColor='#c0a062'; this.style.color='#c0a062';"
                         onmouseout="this.style.borderColor='#ddd'; this.style.color='#555';">
                     <i class="ph ph-arrows-clockwise" id="regRefreshIcon"></i>
                 </button>
+                <input type="text" name="captcha" id="regCaptcha" class="input-field" placeholder="Enter captcha" required maxlength="6" autocomplete="off"
+                       style="flex: 1; min-width: 150px; height: 46px; padding: 0.85rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none; letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase; transition: border-color 0.2s;"
+                       onfocus="this.style.borderColor='#c0a062'" onblur="this.style.borderColor='#ddd'">
             </div>
-            <input type="text" name="captcha" id="regCaptcha" class="input-field" placeholder="Enter the 5 characters above" required maxlength="6" autocomplete="off"
-                   style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none; letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase; transition: border-color 0.2s;"
-                   onfocus="this.style.borderColor='#c0a062'" onblur="this.style.borderColor='#ddd'">
         </div>
 
         <button type="submit" id="regSubmitBtn" class="btn btn-primary" 
@@ -123,7 +130,7 @@
         </button>
 
         <div class="text-center" style="font-size: 0.9rem; color: #666;">
-            Already have an account? <a href="{{ route('login') }}" style="font-weight: 600; text-decoration: none; color: #c0a062;">Sign In</a>
+            Already have an account? <a href="{{ route('login') }}" style="font-weight: 600; text-decoration: none; color: #c0a062;">Log In</a>
         </div>
     </form>
 </div>

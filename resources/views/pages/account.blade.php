@@ -12,7 +12,7 @@
             <h1 style="font-family: 'Cinzel', serif; font-size: 2.2rem; color: #1a1a1a; margin-top: 0.2rem; margin-bottom: 0;">Hello, {{ $customer['name'] ?? 'Valued Customer' }}</h1>
             <p style="color: var(--text-secondary); margin: 0; font-size: 0.95rem;">Customer ID: <span style="font-family: monospace; font-weight: 600; color: #1a1a1a;">{{ $customer['customer_id'] ?? 'C-00000' }}</span></p>
         </div>
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('logout') }}" onsubmit="localStorage.removeItem('jewellery_cart'); localStorage.removeItem('jewellery_wishlist'); localStorage.removeItem('aura_cart_session_id'); localStorage.removeItem('aura_user');">
             @csrf
             <button type="submit" class="btn" style="padding: 0.65rem 1.4rem; font-size: 0.85rem; border: 1px solid #ddd; background: #fff; border-radius: 6px; cursor: pointer; color: #666; font-weight: 600;">
                 Sign Out

@@ -181,7 +181,7 @@
         }
         .wishlist-btn.active,
         .wishlist-btn:hover {
-            color: {{ $accentGold }} !important;
+            color: #e74c3c !important;
         }
         .filter-chip button,
         .clear-all-btn,

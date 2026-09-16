@@ -1,8 +1,11 @@
 // Wishlist logic with localStorage
 
 let wishlist = JSON.parse(localStorage.getItem('jewellery_wishlist')) || [];
+if (!Array.isArray(wishlist)) wishlist = [];
+wishlist = wishlist.map(id => parseInt(id, 10)).filter(id => !isNaN(id));
 
 function toggleWishlist(productId) {
+  productId = parseInt(productId, 10);
   const index = wishlist.indexOf(productId);
   const isAdding = index === -1;
 
@@ -54,13 +57,22 @@ function updateWishlistButtons() {
     }
     
     if(pid) {
-      pid = parseInt(pid);
-      if(wishlist.includes(pid)) {
-        btn.innerHTML = '<i class="ph-fill ph-heart"></i>';
-        btn.style.color = 'var(--error)';
+      pid = parseInt(pid, 10);
+      const isLiked = wishlist.includes(pid);
+      if(isLiked) {
+        btn.innerHTML = '<i class="ph-fill ph-heart" style="color: #e74c3c;"></i>';
+        btn.style.color = '#e74c3c';
+        btn.classList.add('active');
+        if (btn.classList.contains('btn-outline-light')) {
+          btn.style.borderColor = '#e74c3c';
+        }
       } else {
         btn.innerHTML = '<i class="ph ph-heart"></i>';
-        btn.style.color = 'inherit';
+        btn.style.color = '';
+        btn.classList.remove('active');
+        if (btn.classList.contains('btn-outline-light')) {
+          btn.style.borderColor = 'var(--border-light)';
+        }
       }
     }
   });

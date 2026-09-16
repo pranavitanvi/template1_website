@@ -82,9 +82,9 @@ class ShopController extends Controller
      */
     public function category(string $category): View
     {
-        $slug = strtolower($category);
+        $slug = strtolower(preg_replace('/\.html$/i', '', trim($category)));
         $categoryInfo = $this->categories[$slug] ?? [
-            'title' => ucfirst($category),
+            'title' => ucfirst(str_replace(['-', '_'], ' ', $slug)),
             'tagline' => 'Explore our bespoke fine jewellery pieces.',
             'category_key' => $slug,
         ];
@@ -100,7 +100,7 @@ class ShopController extends Controller
      */
     public function collection(string $collection): View
     {
-        $slug = strtolower(trim($collection));
+        $slug = strtolower(preg_replace('/\.html$/i', '', trim($collection)));
         $collectionsPage = CmsApiService::getCollections();
         $allCols = $collectionsPage['collections'] ?? [];
 

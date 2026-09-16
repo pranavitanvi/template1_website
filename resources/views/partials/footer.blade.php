@@ -52,14 +52,18 @@
 </style>
 
 @php
-    $footerStoreName = $cmsFooter['store_name'] ?? $cmsHeader['store_name'] ?? 'Kalbhor Omkar';
-    $footerAddress = $cmsFooter['address'] ?? $cmsContact['contact_info']['address'] ?? 'Mumbai & Pune, India';
-    $footerPhone = $cmsFooter['phone'] ?? $cmsContact['contact_info']['phone'] ?? '+91 98765 43210';
+    $rawFooterName = $cmsFooter['contact_person'] ?? $cmsFooter['jeweller_name'] ?? $cmsFooter['owner_name'] ?? $cmsFooter['store_name'] ?? $cmsHeader['store_name'] ?? null;
+    $footerStoreName = (!empty($rawFooterName) && !in_array(strtolower(trim((string)$rawFooterName)), ['test', 'test store', 'default', 'default store'])) 
+        ? $rawFooterName 
+        : 'Kalbhorer Omkar';
+
+    $footerAddress = $cmsFooter['address'] ?? $cmsContact['contact_info']['address'] ?? 'Mummmmmbai & Pune, India';
+    $footerPhone = $cmsFooter['phone'] ?? $cmsContact['contact_info']['phone'] ?? '+91 99876 54889';
     $footerEmail = $cmsFooter['email'] ?? $cmsContact['contact_info']['email'] ?? 'care@aura.com';
     $footerAboutTitle = $cmsFooter['about_title'] ?? 'ABOUT AURA';
     $footerAboutText = $cmsFooter['about_text'] ?? 'Heirloom-inspired fine jewellery handcrafted with certified natural diamonds and hallmarked gold.';
     $newsletterEnabled = !isset($cmsFooter['newsletter_enabled']) || !empty($cmsFooter['newsletter_enabled']);
-    $footerCopyright = $cmsFooter['copyright'] ?? ('&copy; ' . date('Y') . ' ' . $footerStoreName . '. All rights reserved.');
+    $footerCopyright = str_replace('Test', $footerStoreName, $cmsFooter['copyright'] ?? ('&copy; ' . date('Y') . ' ' . $footerStoreName . '. All rights reserved.'));
     $privacyUrl = !empty($cmsFooter['privacy_policy_url']) && $cmsFooter['privacy_policy_url'] !== '#' ? $cmsFooter['privacy_policy_url'] : route('privacy-policy');
     $termsUrl = !empty($cmsFooter['terms_url']) && $cmsFooter['terms_url'] !== '#' ? $cmsFooter['terms_url'] : route('terms-conditions');
     $socialLinks = $cmsFooter['social_links'] ?? ($cmsHeader['social_links'] ?? []);

@@ -20,13 +20,19 @@ function showToast(message, type = 'cart') {
     banner.className = 'aura-success-banner';
     
     const isAuth = (type === 'auth' || type === 'warning');
+    const isWishlist = (type === 'wishlist' || type === 'remove');
     const icon = isAuth 
         ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>'
         : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
     
-    const actionLink = isAuth
-        ? `<a href="${(window.LOGIN_URL || '/login')}?redirect=${encodeURIComponent(window.location.href)}" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #92400e; text-decoration: underline;">Sign In &rarr;</a>`
-        : `<a href="/cart" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #166534; text-decoration: underline;">View Bag &rarr;</a>`;
+    let actionLink = '';
+    if (isAuth) {
+        actionLink = `<a href="${(window.LOGIN_URL || '/login')}?redirect=${encodeURIComponent(window.location.href)}" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #92400e; text-decoration: underline;">Sign In &rarr;</a>`;
+    } else if (isWishlist) {
+        actionLink = `<a href="/wishlist" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #166534; text-decoration: underline;">View Wishlist &rarr;</a>`;
+    } else {
+        actionLink = `<a href="/cart" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #166534; text-decoration: underline;">View Bag &rarr;</a>`;
+    }
 
     const bgColor = isAuth ? '#fef3c7' : '#dcfce7';
     const textColor = isAuth ? '#92400e' : '#166534';

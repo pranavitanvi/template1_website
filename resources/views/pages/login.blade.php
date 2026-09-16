@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Sign In | Aura Fine Jewellery')
-@section('meta_description', 'Sign in to access your personal Aura fine jewellery account, saved orders, and wishlist.')
+@php
+    $brandName = $cmsHeader['brand_name'] ?? ($cmsHeader['store_name'] ?? 'Aura');
+    $brandFull = $cmsHeader['brand_name'] ?? ($cmsHeader['store_name'] ?? 'Aura Fine Jewellery');
+@endphp
+
+@section('title', 'Sign In | ' . $brandFull)
+@section('meta_description', 'Sign in to access your personal ' . $brandName . ' fine jewellery account, saved orders, and wishlist.')
 @section('main_style', 'margin-top: 110px; min-height: 70vh; display: flex; align-items: center; justify-content: center; background-color: var(--bg-secondary); padding: 4rem 1rem;')
 
 @section('content')
@@ -54,34 +59,36 @@
                     👁️
                 </button>
             </div>
+        </div>
+
         <!-- Security Captcha Verification -->
         <div class="form-group" style="margin-bottom: 1.2rem;">
             <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 6px; font-weight: 600;">
                 Security Captcha <span style="color: red;">*</span>
             </label>
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <div style="border-radius: 6px; overflow: hidden; border: 1px solid #ddd; background: #faf7f2; display: flex; align-items: center; justify-content: center; height: 46px; flex-shrink: 0; box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);">
                     <img id="loginCaptchaImg" src="{{ route('captcha.generate') }}" alt="Security Captcha" style="display: block; height: 44px; width: 160px; user-select: none;">
                 </div>
                 <button type="button" onclick="refreshLoginCaptcha()" title="Refresh Captcha"
-                        style="width: 44px; height: 44px; border: 1px solid #ddd; border-radius: 6px; background: #faf8f5; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; transition: all 0.2s;"
+                        style="width: 44px; height: 44px; flex-shrink: 0; border: 1px solid #ddd; border-radius: 6px; background: #faf8f5; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; transition: all 0.2s;"
                         onmouseover="this.style.borderColor='#c0a062'; this.style.color='#c0a062';"
                         onmouseout="this.style.borderColor='#ddd'; this.style.color='#555';">
                     <i class="ph ph-arrows-clockwise" id="loginRefreshIcon"></i>
                 </button>
+                <input type="text" name="captcha" id="loginCaptcha" class="input-field" placeholder="ENTER CAPTCHA *" required maxlength="6" autocomplete="off"
+                       style="flex: 1; min-width: 150px; height: 46px; padding: 0.85rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none; letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase; transition: border-color 0.2s;"
+                       onfocus="this.style.borderColor='#c0a062'" onblur="this.style.borderColor='#ddd'">
             </div>
-            <input type="text" name="captcha" id="loginCaptcha" class="input-field" placeholder="Enter the 5 characters above" required maxlength="6" autocomplete="off"
-                   style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none; letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase; transition: border-color 0.2s;"
-                   onfocus="this.style.borderColor='#c0a062'" onblur="this.style.borderColor='#ddd'">
         </div>
 
         <button type="submit" id="loginSubmitBtn" class="btn btn-primary" 
                 style="width: 100%; margin-top: 0.5rem; margin-bottom: 1.5rem; padding: 1rem; font-family: 'Cinzel', serif; letter-spacing: 0.12em; background: #c0a062; border: 1px solid #c0a062; color: #fff; border-radius: 6px; cursor: pointer; font-size: 0.95rem; transition: background 0.3s;">
-            SIGN IN
+            LOG IN
         </button>
 
         <div class="text-center" style="font-size: 0.9rem; color: #666;">
-            New to Aura? <a href="{{ route('register') }}{{ request('redirect') ? '?redirect=' . urlencode(request('redirect')) : '' }}" style="font-weight: 600; text-decoration: none; color: #c0a062;">Create an Account</a>
+            New to {{ $brandName }}? <a href="{{ route('register') }}{{ request('redirect') ? '?redirect=' . urlencode(request('redirect')) : '' }}" style="font-weight: 600; text-decoration: none; color: #c0a062;">Create an Account</a>
         </div>
     </form>
 </div>
@@ -147,7 +154,7 @@ function handleCustomerLogin(e) {
     })
     .then(function(resObj) {
         btn.disabled = false;
-        btn.innerText = 'SIGN IN';
+        btn.innerText = 'LOG IN';
 
         if (resObj.data.success) {
             alertBox.style.display = 'block';
@@ -188,7 +195,7 @@ function handleCustomerLogin(e) {
     .catch(function(err) {
         refreshLoginCaptcha();
         btn.disabled = false;
-        btn.innerText = 'SIGN IN';
+        btn.innerText = 'LOG IN';
         alertBox.style.display = 'block';
         alertBox.style.background = '#fdf2f2';
         alertBox.style.color = '#b91c1c';

@@ -64,12 +64,24 @@ function getPlaceholderImage(category) {
   return '/assets/images/placeholders/default.jpg';
 }
 
+function isTruthyFlag(val) {
+  return val === true || val === 1 || val === '1' || val === 'true';
+}
+
 // Function to render product cards
 function renderProductCard(product) {
-  const isSale = product.isSale ? `<span class="badge sale">Sale</span>` : '';
-  const isNew = product.isNew ? `<span class="badge">New</span>` : '';
-  
-  const badges = (isSale || isNew) ? `<div class="product-badges">${isNew}${isSale}</div>` : '';
+  const hasNew = isTruthyFlag(product.isNew) || isTruthyFlag(product.is_new) || isTruthyFlag(product.new_arrival);
+  const hasFeatured = isTruthyFlag(product.isFeatured) || isTruthyFlag(product.is_featured) || isTruthyFlag(product.featured);
+  const hasBestseller = isTruthyFlag(product.isBestseller) || isTruthyFlag(product.is_bestseller) || isTruthyFlag(product.is_best_seller) || isTruthyFlag(product.bestseller);
+  const hasSale = isTruthyFlag(product.isSale) || isTruthyFlag(product.is_sale) || isTruthyFlag(product.sale);
+
+  const badgeNew = hasNew ? `<span class="badge">New</span>` : '';
+  const badgeFeatured = hasFeatured ? `<span class="badge featured">Featured</span>` : '';
+  const badgeBestseller = hasBestseller ? `<span class="badge bestseller">Bestseller</span>` : '';
+  const badgeSale = hasSale ? `<span class="badge sale">Sale</span>` : '';
+
+  const badgesHtml = [badgeNew, badgeFeatured, badgeBestseller, badgeSale].filter(Boolean).join('');
+  const badges = badgesHtml ? `<div class="product-badges">${badgesHtml}</div>` : '';
   
   const priceDisplay = product.isSale 
     ? `${formatPrice(product.price)} <span style="text-decoration: line-through; color: var(--text-secondary); font-size: 0.9em;">${formatPrice(product.salePrice)}</span>` 
@@ -89,12 +101,19 @@ function renderProductCard(product) {
 
   const hasSecondary = (product.images && product.images.length > 1);
 
+  const isWishlisted = (typeof wishlist !== 'undefined' && Array.isArray(wishlist)) 
+    ? wishlist.includes(parseInt(product.id, 10)) 
+    : false;
+  const heartIcon = isWishlisted ? '<i class="ph-fill ph-heart" style="color: #e74c3c;"></i>' : '<i class="ph ph-heart"></i>';
+  const heartClass = isWishlisted ? 'wishlist-btn active' : 'wishlist-btn';
+  const heartStyle = isWishlisted ? ' style="color: #e74c3c;"' : '';
+
   return `
     <div class="product-card" data-id="${product.id}">
         <div class="product-image-wrap ${hasSecondary ? 'has-secondary-image' : ''}">
             ${badges}
-            <button class="wishlist-btn" onclick="toggleWishlist(${product.id})" aria-label="Add to Wishlist">
-                <i class="ph ph-heart"></i>
+            <button class="${heartClass}" data-id="${product.id}"${heartStyle} onclick="toggleWishlist(${product.id})" aria-label="Add to Wishlist">
+                ${heartIcon}
             </button>
             <a href="/product-details?id=${product.id}">
                 <img src="${imgSrc}" alt="${product.name}" class="product-image primary-img" onerror="this.onerror=null; this.src='${placeholder}';">
@@ -222,7 +241,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Update page title dynamically
         const pageTitle = document.getElementById('shop-page-title');
         if (pageTitle) {
-            pageTitle.textContent = categoryParam;
+            const cleanTitle = categoryParam.replace(/\.html$/i, '');
+            pageTitle.textContent = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
         }
       }
       if (genderParam) {
@@ -327,18 +347,41 @@ document.addEventListener('DOMContentLoaded', async () => {
       applyFilters();
     }
     
+    function renderSectionGrid(gridEl, filterFn, maxCount = 4) {
+      if (!gridEl) return;
+      let tagged = products.filter(filterFn);
+      
+      if (tagged.length === 0) {
+        tagged = products.slice(0, maxCount);
+      } else {
+        tagged = tagged.slice(0, maxCount);
+      }
+
+      gridEl.innerHTML = tagged.map(renderProductCard).join('');
+      
+      const count = tagged.length;
+      gridEl.style.display = 'grid';
+      gridEl.style.gridTemplateColumns = `repeat(auto-fill, minmax(260px, 1fr))`;
+      gridEl.style.gap = '2rem';
+      if (count < 4 && count > 0) {
+        gridEl.style.maxWidth = `${count * 340}px`;
+        gridEl.style.margin = '0 auto';
+      } else {
+        gridEl.style.maxWidth = 'none';
+        gridEl.style.margin = '0';
+      }
+    }
+
     if (featuredGrid) {
-      featuredGrid.innerHTML = products.slice(0, 4).map(renderProductCard).join('');
+      renderSectionGrid(featuredGrid, p => isTruthyFlag(p.isFeatured) || isTruthyFlag(p.is_featured) || isTruthyFlag(p.featured));
     }
 
     if (newArrivalsGrid) {
-      const newProducts = products.filter(p => p.isNew).slice(0, 4);
-      newArrivalsGrid.innerHTML = (newProducts.length > 0 ? newProducts : products.slice(0, 4)).map(renderProductCard).join('');
+      renderSectionGrid(newArrivalsGrid, p => isTruthyFlag(p.isNew) || isTruthyFlag(p.is_new) || isTruthyFlag(p.new_arrival));
     }
 
     if (bestsellersGrid) {
-      // Just grab 4 products for bestsellers
-      bestsellersGrid.innerHTML = products.slice(2, 6).map(renderProductCard).join('');
+      renderSectionGrid(bestsellersGrid, p => isTruthyFlag(p.isBestseller) || isTruthyFlag(p.is_bestseller) || isTruthyFlag(p.is_best_seller) || isTruthyFlag(p.bestseller) || p.rating >= 4.5);
     }
 
     if (mensNewGrid) {
@@ -352,12 +395,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (engagementMiniGrid) {
-      const rings = products.filter(p => p.categoryId === 'rings');
-      engagementMiniGrid.innerHTML = rings.slice(0, 2).map(renderProductCard).join('');
+      const engagementProducts = products.filter(p => {
+        const cat = (p.category || p.categoryId || '').toLowerCase();
+        const col = (p.collection || '').toLowerCase();
+        const occ = (p.occasion || '').toLowerCase();
+        const name = (p.name || '').toLowerCase();
+        return col === 'engagement' || occ === 'engagement' || cat.includes('ring') || name.includes('ring') || name.includes('solitaire');
+      });
+      engagementMiniGrid.innerHTML = (engagementProducts.length >= 2 ? engagementProducts : products).slice(0, 2).map(renderProductCard).join('');
     }
 
     if (bridalHeirloomGrid) {
-      const bridalProducts = products.filter(p => p.collection === 'bridal' || p.categoryId === 'mangalsutra');
+      const bridalProducts = products.filter(p => {
+        const col = (p.collection || '').toLowerCase();
+        const occ = (p.occasion || '').toLowerCase();
+        const cat = (p.category || p.categoryId || '').toLowerCase();
+        const name = (p.name || '').toLowerCase();
+        return col === 'bridal' || col === 'wedding' || occ === 'bridal' || occ === 'wedding' || cat.includes('mangalsutra') || cat.includes('necklace') || name.includes('bridal') || name.includes('mangalsutra') || name.includes('trousseau') || name.includes('heirloom') || name.includes('necklace') || name.includes('kada') || name.includes('bangle') || name.includes('jhumka');
+      });
       bridalHeirloomGrid.innerHTML = (bridalProducts.length >= 4 ? bridalProducts : products).slice(0, 4).map(renderProductCard).join('');
     }
 

@@ -5,7 +5,7 @@
 @section('main_style', 'margin-top: 140px; min-height: 55vh;')
 
 @section('content')
-<div class="container section" style="padding-bottom: 5rem;">
+<div class="container section" style="padding: 0 5%; max-width: 1600px; margin: 0 auto; padding-bottom: 5rem;">
     <h1 class="text-center" style="margin-bottom: var(--space-xl); font-family: var(--font-secondary); text-transform: uppercase;">Your Wishlist</h1>
     
     <div id="wishlist-grid" class="grid responsive-product-grid">

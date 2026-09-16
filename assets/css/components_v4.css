@@ -216,8 +216,22 @@
 /* Responsive Product Grid Utility */
 .responsive-product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .responsive-product-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .responsive-product-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -248,6 +262,16 @@
 
 .badge.sale {
   background-color: var(--error);
+  color: var(--white);
+}
+
+.badge.featured {
+  background-color: #dc2626;
+  color: var(--white);
+}
+
+.badge.bestseller {
+  background-color: #dc2626;
   color: var(--white);
 }
 
@@ -1508,7 +1532,7 @@
 .filter-dropdown.active .filter-popover { opacity: 1; visibility: visible; transform: translateY(0); }
 .filter-list { list-style: none; padding: 1rem; margin: 0; display: flex; flex-direction: column; gap: 0.8rem; }
 .filter-list label { display: flex; align-items: center; gap: 0.8rem; cursor: pointer; font-size: 0.95rem; color: var(--text-secondary); }
-.filter-list input[type=" checkbox\] { accent-color: var(--primary); }
+.filter-list input[type="checkbox"] { accent-color: var(--primary); }
 .active-filters-container { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
 .filter-chip { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-alt); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; color: var(--text-primary); }
 .filter-chip button { background: none; border: none; cursor: pointer; font-size: 1rem; display: flex; align-items: center; color: var(--text-secondary); }

@@ -187,6 +187,10 @@
                 `;
             }
 
+            const isLiked = (typeof wishlist !== 'undefined' && Array.isArray(wishlist)) ? wishlist.includes(parseInt(product.id, 10)) : false;
+            const heartIcon = isLiked ? '<i class="ph-fill ph-heart" style="font-size: 1.2rem; color: #e74c3c;"></i>' : '<i class="ph ph-heart" style="font-size: 1.2rem;"></i>';
+            const wishlistBtnStyle = isLiked ? 'color: #e74c3c; border-color: #e74c3c; padding: 0 1.5rem;' : 'color: var(--text-primary); border-color: var(--border-light); padding: 0 1.5rem;';
+
             const html = `
                 <div>
                     <img src="${mainImgSrc}" id="main-img" class="gallery-main" onerror="this.onerror=null; this.src='${placeholder}';" style="width: 100%; border-radius: 8px;">
@@ -230,8 +234,8 @@
                         ` : `
                         <button class="btn btn-primary" style="flex: 1;" onclick="addToCart(${product.id}, 1, this)">Add to Bag</button>
                         `}
-                        <button class="btn btn-outline-light wishlist-btn" data-id="${product.id}" style="color: var(--text-primary); border-color: var(--border-light); padding: 0 1.5rem;" onclick="toggleWishlist(${product.id})">
-                            <i class="ph ph-heart" style="font-size: 1.2rem;"></i>
+                        <button class="btn btn-outline-light wishlist-btn ${isLiked ? 'active' : ''}" data-id="${product.id}" style="${wishlistBtnStyle}" onclick="toggleWishlist(${product.id})">
+                            ${heartIcon}
                         </button>
                     </div>
                     
@@ -252,6 +256,20 @@
                     relatedContainer.innerHTML = related.map(renderProductCard).join('');
                 }
             }
+
+            if (typeof updateWishlistButtons === 'function') {
+                updateWishlistButtons();
+            }
+        } else {
+            document.getElementById('product-container').innerHTML = `
+                <div style="text-align:center; padding: 5rem 1rem; color: var(--text-secondary); width: 100%; grid-column: 1 / -1;">
+                    <i class="ph ph-warning-circle" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1rem; display: block;"></i>
+                    <h2 style="font-family: var(--font-secondary); margin-bottom: 0.5rem; color: var(--text-primary); font-size: 2rem;">Product Not Found</h2>
+                    <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">The product you are looking for is unavailable or does not exist.</p>
+                    <a href="{{ route('shop') }}" class="btn btn-primary">Explore Catalog</a>
+                </div>
+            `;
+            document.getElementById('pd-title-crumb').textContent = 'Product Not Found';
         }
     });
 </script>

@@ -41,14 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function normalizeCategory(str) {
         if (!str) return '';
         const s = str.toLowerCase().trim();
-        if (s === 'necklaces' || s === 'necklace') return 'necklace';
-        if (s === 'rings' || s === 'ring') return 'ring';
-        if (s === 'earrings' || s === 'earring') return 'earring';
-        if (s === 'bracelets' || s === 'bracelet') return 'bracelet';
-        if (s === 'bangles' || s === 'bangle') return 'bangle';
-        if (s === 'mangalsutras' || s === 'mangalsutra') return 'mangalsutra';
-        if (s === 'pendants' || s === 'pendant') return 'pendant';
-        if (s === 'chains' || s === 'chain') return 'chain';
+        if (s === 'earrings' || s === 'earring' || s.includes('earring') || s.includes('jhumka') || s.includes('stud')) return 'earring';
+        if (s === 'necklaces' || s === 'necklace' || s.includes('necklace') || s.includes('choker')) return 'necklace';
+        if (s === 'mangalsutras' || s === 'mangalsutra' || s.includes('mangalsutra')) return 'mangalsutra';
+        if (s === 'bracelets' || s === 'bracelet' || s.includes('bracelet')) return 'bracelet';
+        if (s === 'bangles' || s === 'bangle' || s.includes('bangle') || s.includes('kada')) return 'bangle';
+        if (s === 'pendants' || s === 'pendant' || s.includes('pendant')) return 'pendant';
+        if (s === 'chains' || s === 'chain' || s.includes('chain')) return 'chain';
+        if (s === 'rings' || s === 'ring' || s.includes('ring') || s.includes('solitaire')) return 'ring';
         if (s === 'mens' || s === 'men') return 'men';
         if (s === 'womens' || s === 'women') return 'women';
         return s.replace(/s$/, '');
@@ -277,10 +277,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function getPlaceholderImage(cat) {
         if (!cat) cat = '';
         cat = cat.toLowerCase();
-        if (cat.includes('ring')) return '/assets/images/placeholders/ring.jpg';
-        if (cat.includes('earring')) return '/assets/images/placeholders/earring.jpg';
+        if (cat.includes('earring') || cat.includes('ear ') || cat.includes('stud') || cat.includes('jhumka') || cat.includes('hoop')) return '/assets/images/placeholders/earring.jpg';
+        if (cat.includes('mangalsutra')) return '/assets/images/placeholders/mangalsutra.jpg';
+        if (cat.includes('ring') || cat.includes('engagement') || cat.includes('band')) return '/assets/images/placeholders/ring.jpg';
         if (cat.includes('bangle') || cat.includes('bracelet') || cat.includes('kada')) return '/assets/images/placeholders/bangle.jpg';
-        if (cat.includes('necklace') || cat.includes('chain') || cat.includes('choker')) return '/assets/images/placeholders/necklace.jpg';
+        if (cat.includes('necklace') || cat.includes('chain') || cat.includes('choker') || cat.includes('haar')) return '/assets/images/placeholders/necklace.jpg';
         if (cat.includes('pendant')) return '/assets/images/placeholders/pendant.jpg';
         return '/assets/images/placeholders/default.jpg';
     }
@@ -297,10 +298,21 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const isTruthyFlag = (val) => val === true || val === 1 || val === '1' || val === 'true';
+
         products.forEach(product => {
-            const isSale = product.isSale ? `<span class="badge sale">Sale</span>` : '';
-            const isNew = product.isNew ? `<span class="badge">New</span>` : '';
-            const badges = (isSale || isNew) ? `<div class="product-badges">${isNew}${isSale}</div>` : '';
+            const hasNew = isTruthyFlag(product.isNew) || isTruthyFlag(product.is_new) || isTruthyFlag(product.new_arrival);
+            const hasFeatured = isTruthyFlag(product.isFeatured) || isTruthyFlag(product.is_featured) || isTruthyFlag(product.featured);
+            const hasBestseller = isTruthyFlag(product.isBestseller) || isTruthyFlag(product.is_bestseller) || isTruthyFlag(product.is_best_seller) || isTruthyFlag(product.bestseller);
+            const hasSale = isTruthyFlag(product.isSale) || isTruthyFlag(product.is_sale) || isTruthyFlag(product.sale);
+
+            const badgeNew = hasNew ? `<span class="badge">New</span>` : '';
+            const badgeFeatured = hasFeatured ? `<span class="badge featured">Featured</span>` : '';
+            const badgeBestseller = hasBestseller ? `<span class="badge bestseller">Bestseller</span>` : '';
+            const badgeSale = hasSale ? `<span class="badge sale">Sale</span>` : '';
+
+            const badgesHtml = [badgeNew, badgeFeatured, badgeBestseller, badgeSale].filter(Boolean).join('');
+            const badges = badgesHtml ? `<div class="product-badges">${badgesHtml}</div>` : '';
             
             const priceDisplay = product.isSale 
                 ? `${formatPrice(product.price)} <span style="text-decoration: line-through; color: var(--text-secondary); font-size: 0.9em;">${formatPrice(product.salePrice)}</span>` 
@@ -322,12 +334,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const productLink = product.slug ? `/product/${product.slug}` : `/product-details?id=${product.id}`;
 
+            const isLiked = (typeof wishlist !== 'undefined' && Array.isArray(wishlist)) ? wishlist.includes(parseInt(product.id, 10)) : false;
+            const heartIcon = isLiked ? '<i class="ph-fill ph-heart" style="color: #e74c3c;"></i>' : '<i class="ph ph-heart"></i>';
+            const heartClass = isLiked ? 'wishlist-btn active' : 'wishlist-btn';
+            const heartStyle = isLiked ? ' style="color: #e74c3c;"' : '';
+
             const card = `
                 <div class="product-card" data-id="${product.id}">
                     <div class="product-image-wrap ${hasSecondary ? 'has-secondary-image' : ''}">
                         ${badges}
-                        <button class="wishlist-btn" onclick="toggleWishlist(${product.id})" aria-label="Add to Wishlist">
-                            <i class="ph ph-heart"></i>
+                        <button class="${heartClass}" data-id="${product.id}"${heartStyle} onclick="toggleWishlist(${product.id})" aria-label="Add to Wishlist">
+                            ${heartIcon}
                         </button>
                         <a href="${productLink}">
                             <img src="${imgSrc}" alt="${product.name}" class="product-image primary-img" onerror="this.onerror=null; this.src='${placeholder}';">
@@ -349,6 +366,10 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             shopGrid.insertAdjacentHTML('beforeend', card);
         });
+
+        if (typeof updateWishlistButtons === 'function') {
+            updateWishlistButtons();
+        }
     }
 
     // 6. Pagination UI & Navigation
@@ -472,8 +493,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 filtered = filtered.filter(p => (p.gender || '').toLowerCase() !== 'him' && (p.gender || '').toLowerCase() !== 'men');
             } else {
                 filtered = filtered.filter(p => {
-                    const pCat = normalizeCategory(p.categoryId || p.category);
-                    return pCat === normBase || pCat.includes(normBase) || normBase.includes(pCat);
+                    const pCat = normalizeCategory(p.categoryId || p.category || p.name);
+                    return pCat === normBase;
                 });
             }
         }
@@ -482,8 +503,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkedCategories = Array.from(document.querySelectorAll('.cat-filter-cb[data-filter="category"]:checked')).map(cb => normalizeCategory(cb.value));
         if (checkedCategories.length > 0) {
             filtered = filtered.filter(p => {
-                const pCat = normalizeCategory(p.categoryId || p.category);
-                return checkedCategories.some(target => pCat === target || pCat.includes(target) || target.includes(pCat));
+                const pCat = normalizeCategory(p.categoryId || p.category || p.name);
+                return checkedCategories.includes(pCat);
             });
         }
 

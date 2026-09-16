@@ -223,8 +223,9 @@ function initHeaderSearch() {
       return p.image;
     }
     const cat = (p.categoryId || p.category || '').toLowerCase();
-    if (cat.includes('ring')) return '/assets/images/placeholders/ring.jpg';
-    if (cat.includes('earring')) return '/assets/images/placeholders/earring.jpg';
+    if (cat.includes('earring') || cat.includes('ear ') || cat.includes('stud') || cat.includes('jhumka') || cat.includes('hoop')) return '/assets/images/placeholders/earring.jpg';
+    if (cat.includes('mangalsutra')) return '/assets/images/placeholders/mangalsutra.jpg';
+    if (cat.includes('ring') || cat.includes('engagement') || cat.includes('band')) return '/assets/images/placeholders/ring.jpg';
     if (cat.includes('bangle') || cat.includes('bracelet')) return '/assets/images/placeholders/bangle.jpg';
     if (cat.includes('necklace') || cat.includes('chain')) return '/assets/images/placeholders/necklace.jpg';
     if (cat.includes('pendant')) return '/assets/images/placeholders/pendant.jpg';

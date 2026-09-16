@@ -344,7 +344,16 @@ class CmsApiService
      */
     public static function getFooter(): ?array
     {
-        return self::fetch('footer');
+        $data = self::fetch('footer');
+        if (!$data) {
+            return null;
+        }
+
+        if (isset($data['store_name']) && in_array(strtolower(trim((string)$data['store_name'])), ['test', 'test store', 'default', 'default store'])) {
+            $data['store_name'] = $data['contact_person'] ?? $data['jeweller_name'] ?? $data['owner_name'] ?? 'Kalbhorer Omkar';
+        }
+
+        return $data;
     }
 
     /**

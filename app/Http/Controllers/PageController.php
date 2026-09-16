@@ -326,7 +326,8 @@ class PageController extends Controller
         if ($token) {
             CmsApiService::customerLogout($token);
         }
-        session()->forget(['customer', 'customer_token']);
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json(['success' => true, 'redirect' => route('home')]);
