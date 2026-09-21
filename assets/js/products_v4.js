@@ -395,14 +395,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (engagementMiniGrid) {
-      const engagementProducts = products.filter(p => {
+      let displayProducts = products.filter(p => {
         const cat = (p.category || p.categoryId || '').toLowerCase();
         const col = (p.collection || '').toLowerCase();
-        const occ = (p.occasion || '').toLowerCase();
         const name = (p.name || '').toLowerCase();
-        return col === 'engagement' || occ === 'engagement' || cat.includes('ring') || name.includes('ring') || name.includes('solitaire');
+        return p.id == 11 || p.id == 1 || col === 'engagement' || (cat.includes('ring') && (name.includes('eternity') || name.includes('celeste') || name.includes('diamond')));
       });
-      engagementMiniGrid.innerHTML = (engagementProducts.length >= 2 ? engagementProducts : products).slice(0, 2).map(renderProductCard).join('');
+
+      if (displayProducts.length < 2) {
+        displayProducts = products.filter(p => {
+          const cat = (p.category || p.categoryId || '').toLowerCase();
+          const name = (p.name || '').toLowerCase();
+          return cat.includes('ring') || name.includes('ring');
+        });
+      }
+
+      displayProducts.sort((a, b) => {
+        if (a.id == 11) return -1;
+        if (b.id == 11) return 1;
+        if (a.id == 1) return -1;
+        if (b.id == 1) return 1;
+        return 0;
+      });
+
+      engagementMiniGrid.innerHTML = displayProducts.slice(0, 2).map(renderProductCard).join('');
     }
 
     if (bridalHeirloomGrid) {

@@ -79,26 +79,20 @@
 </section>
 
 <!-- THE ENGAGEMENT EDIT -->
-<section class="section container" style="margin-top: 4rem; background-color: #fbf9f6; padding: 4rem 2rem; border-radius: 12px;">
-    <div style="display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: 3rem; align-items: stretch;">
-        <div style="border-radius: 12px; overflow: hidden; min-height: 480px; width: 100%; position: relative;">
-            <img src="{{ !empty($engagement['image_url']) ? $engagement['image_url'] : asset('assets/images/hero/Engagement.png') }}" alt="{{ $engagement['title'] ?? 'Engagement Rings' }}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0;">
+<section class="section container" style="margin-top: 4rem; background-color: #fbf9f6; padding: 3.5rem 2.5rem; border-radius: 12px;">
+    <div style="display: grid; grid-template-columns: 44% 1fr; gap: 2.5rem; align-items: center;">
+        <div style="border-radius: 12px; overflow: hidden; width: 100%; aspect-ratio: 4/5; max-height: 400px;">
+            <img src="{{ !empty($engagement['image_url']) ? $engagement['image_url'] : asset('assets/images/hero/Engagement.png') }}" alt="{{ $engagement['title'] ?? 'Engagement Rings' }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
         <div style="display: flex; flex-direction: column; justify-content: center;">
-            <h2 style="font-family: var(--font-secondary); font-size: 2.8rem; margin-bottom: 1rem; color: var(--text-primary);">
-                {{ $engagement['title'] ?? 'THE ENGAGEMENT EDIT' }}
+            <h2 style="font-family: var(--font-secondary); font-size: 2.6rem; margin-bottom: 1rem; color: var(--text-primary);">
+                {{ trim(str_ireplace('AGATA', '', $engagement['title'] ?? 'THE ENGAGEMENT EDIT')) }}
             </h2>
-            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; max-width: 650px;">
+            <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
                 {{ $engagement['description'] ?? 'A promise of forever begins with the perfect ring. Explore our curated selection of solitaires and couple bands, crafted with the finest diamonds to catch the light from every angle.' }}
             </p>
             
-            <div id="engagement-mini-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2rem; max-width: 650px;"></div>
-            
-            <div>
-                <a href="{{ !empty($engagement['button']['url']) ? $engagement['button']['url'] : route('category', 'rings') . '?collection=engagement' }}" class="btn btn-outline" style="border-color: #c0a062; color: #c0a062; display: inline-block;">
-                    {{ $engagement['button']['text'] ?? 'SHOP ENGAGEMENT RINGS' }}
-                </a>
-            </div>
+            <div id="engagement-mini-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; width: 100%;"></div>
         </div>
     </div>
 </section>

@@ -2252,3 +2252,160 @@
     max-width: none;
   }
 }
+
+/* Engagement Spotlight Mini Grid Enhancements (Reference Match) */
+#engagement-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: none;
+}
+
+#engagement-mini-grid .product-card {
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#engagement-mini-grid .product-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+#engagement-mini-grid .product-image-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 0.85rem;
+  background-color: #f7f4ee;
+}
+
+#engagement-mini-grid .product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Badges */
+#engagement-mini-grid .product-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+}
+
+#engagement-mini-grid .badge {
+  background-color: #ffffff;
+  color: #222222;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  padding: 4px 8px;
+  border-radius: 0;
+  text-transform: uppercase;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+/* Wishlist Button */
+#engagement-mini-grid .wishlist-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  cursor: pointer;
+  z-index: 3;
+}
+
+/* Add to Bag Bar overlay at bottom of image wrap */
+#engagement-mini-grid .product-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  background-color: #ffffff;
+  z-index: 2;
+  opacity: 1;
+  transform: none;
+}
+
+#engagement-mini-grid .add-to-cart-btn {
+  width: 100%;
+  background-color: #ffffff;
+  color: #333333;
+  border: none;
+  padding: 0.65rem 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#engagement-mini-grid .add-to-cart-btn:hover {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+/* Product Info below image */
+#engagement-mini-grid .product-info {
+  text-align: center;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+
+#engagement-mini-grid .product-category {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: #888888;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+#engagement-mini-grid .product-title {
+  font-family: var(--font-secondary), Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+#engagement-mini-grid .product-title a {
+  color: #111111;
+  text-decoration: none;
+}
+
+#engagement-mini-grid .product-price {
+  font-family: var(--font-primary), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #222222;
+  margin-bottom: 0.35rem;
+}
+
+#engagement-mini-grid .product-rating {
+  color: #c0a062;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
