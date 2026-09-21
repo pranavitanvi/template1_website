@@ -118,8 +118,8 @@
                         onmouseout="this.style.borderColor='#ddd'; this.style.color='#555';">
                     <i class="ph ph-arrows-clockwise" id="regRefreshIcon"></i>
                 </button>
-                <input type="text" name="captcha" id="regCaptcha" class="input-field" placeholder="Enter captcha" required maxlength="6" autocomplete="off"
-                       style="flex: 1; min-width: 150px; height: 46px; padding: 0.85rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; outline: none; letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase; transition: border-color 0.2s;"
+                <input type="text" name="captcha" id="regCaptcha" class="input-field" placeholder="Enter Captcha" required maxlength="6" autocomplete="off"
+                       style="flex: 1; min-width: 140px; height: 46px; padding: 0 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.88rem; outline: none; letter-spacing: 0.1em; font-weight: 600; text-transform: uppercase; transition: border-color 0.2s;"
                        onfocus="this.style.borderColor='#c0a062'" onblur="this.style.borderColor='#ddd'">
             </div>
         </div>
